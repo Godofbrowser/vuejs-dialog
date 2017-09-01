@@ -7,11 +7,17 @@
 
 ## Installation
 
-**Todo:: publish plugin**
+```javascript
+// installation via npm 
+npm install vuejs-dialog
+```
 
 ```javascript
+// import into project
 import Vue from "vue"
-import VuejsDialog from "fill in this space after publishing" // Todo:: Publish plugin
+import VuejsDialog from "vuejs-dialog"
+
+// Tell Vue to install the plugin.
 Vue.use(VuejsDialog)
 ```
 

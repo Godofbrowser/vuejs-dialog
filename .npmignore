@@ -1,0 +1,5 @@
+.idea
+.gitignore
+node_modules
+src
+*.log
