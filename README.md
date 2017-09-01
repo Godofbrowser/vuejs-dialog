@@ -20,7 +20,7 @@ Vue.use(VuejsDialog)
 ```javascript
 // Anywhere in your Vuejs App.
 
-vm.$dialog.confirm('Please confirm to continue')
+this.$dialog.confirm('Please confirm to continue')
 	.then(function () {
 		console.log('Clicked on proceed')
 	})
@@ -34,7 +34,7 @@ vm.$dialog.confirm('Please confirm to continue')
 ```javascript
 // Anywhere in your Vuejs App.
 
-vm.$dialog.confirm("If you delete this record, it'll be gone forever.", {
+this.$dialog.confirm("If you delete this record, it'll be gone forever.", {
     loader: true // default: false - when set to true, the proceed button shows a loader when clicked.
     			// And a dialog object will be passed to the then() callback
 })
@@ -72,7 +72,7 @@ let options = {
     clicks: 3, // for soft confirm, user will be asked to click on "proceed" btn 3 times before actually proceeding
 };
 
-vm.$dialog.confirm(message, options)
+this.$dialog.confirm(message, options)
 	.then(function () {
 	    // This will be triggered when user clicks on proceed
 	})
