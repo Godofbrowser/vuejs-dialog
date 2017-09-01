@@ -100,6 +100,9 @@ const DIST = Object.assign({}, COMMON, {
     name: 'dist',
     entry: './src/plugin/index.js',
     output: {
+        library: ['vuejs-dialog'],
+        libraryTarget: 'umd',
+        umdNamedDefine: true,
         path: path.resolve(__dirname, './dist'),
         publicPath: '/dist/',
         filename: isProduction ? 'vuejs-dialog.min.js' : 'vuejs-dialog.js'

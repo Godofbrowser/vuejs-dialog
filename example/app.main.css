@@ -1,1 +1,9 @@
-*{box-sizing:border-box}body{margin:0;padding:0}
+/* reset */
+* {
+  box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0; }
+
+/* header */
