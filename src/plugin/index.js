@@ -1,16 +1,15 @@
 'use strict'
 
-import Vue from 'vue'
 import DialogComponent from './components/dialog.vue'
 import {TYPES, DEFAULT_OPTIONS} from './js/utilities/constants'
 
 
-let Plugin = function(globalOptions){
+let Plugin = function(Vue, globalOptions){
 	this.globalOptions = globalOptions
-	this.mount()
+    this.mount(Vue)
 }
 
-Plugin.prototype.mount = function(){
+Plugin.prototype.mount = function(Vue){
 	this.Dialog = (() => {
         let AppConstructor = Vue.extend(DialogComponent)
 		let node = document.createElement("div")
@@ -40,7 +39,7 @@ Plugin.prototype.confirm = function(message = 'Are you sure?', localOptions = {}
 }
 
 Plugin.install = function (Vue, options) {
-	Vue.dialog = new Plugin()
+	Vue.dialog = new Plugin(Vue, options)
 
 	Object.defineProperties(Vue.prototype, {
 		$dialog: {
@@ -56,41 +55,3 @@ export default Plugin
 if (typeof window !== 'undefined' && window.Vue) {
     window.Vue.use(Plugin)
 }
-
-
-
-/* BASIC USAGE *
-vm.$dialog.confirm('Please confirm to continue')
-	.then(function () {
-		console.log('Clicked on proceed')
-	})
-	.catch(function () {
-		console.log('Clicked on cancel')
-	})
-*/
-
-/* AJAX LOADER *
-vm.$dialog.confirm("If you delete this record, it'll be gone forever.", {
-    loader: true // default: false - when set to true, the proceed button shows a loader when clicked.
-    			// And a dialog object will be passed to the then() callback
-})
-	.then((dialog) => {
-		// Triggered when proceed button is clicked
-
-		// dialog.loading(false) // stops the proceed button's loader
-		// dialog.loading(true) // starts the proceed button's loader again
-		// dialog.close() // stops the loader and close the dialog
-
-		// do some stuff like ajax request.
-		setTimeout(() => {
-			console.log('Delete action completed ')
-			dialog.close()
-		}, 2500)
-
-	})
-    .catch(() => {
-        // Triggered when cancel button is clicked
-
-        console.log('Delete aborted')
-    })
-*/
