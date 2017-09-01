@@ -7,30 +7,15 @@
 
 ## Installation
 
-Todo:: publish plugin
+**Todo:: publish plugin**
+
+```javascript
+import Vue from "vue"
+import VuejsDialog from "fill in this space after publishing" // Todo:: Publish plugin
+Vue.use(VuejsDialog)
+```
 
 ## Basic Usage
-```javascript
-// Parameters
-
-let message = "Are you sure?";
-
-let options = {
-    html: false, // set to true if your message contains HTML tags. eg: "Delete <b>Foo</b> ?"
-    loader: false, // set to true if you want the dailog to show a loader after click on "proceed"
-    type: 'simple', // coming soon: 'soft', 'hard'
-    verification: 'continue', // for hard confirm, user will be prompted to type this to enable the proceed button
-    clicks: 3, // for soft confirm, user will be asked to click on "proceed" btn 3 times before actually proceeding
-};
-
-vm.$dialog.confirm(message, options)
-	.then(function () {
-	    // This will be triggered when user clicks on proceed
-	})
-	.catch(function () {
-	    // This will be triggered when user clicks on cancel
-	});
-```
 
 ```javascript
 // Anywhere in your Vuejs App.
@@ -72,4 +57,26 @@ vm.$dialog.confirm("If you delete this record, it'll be gone forever.", {
 
         console.log('Delete aborted');
     });
+```
+
+```javascript
+// Parameters and options
+
+let message = "Are you sure?";
+
+let options = {
+    html: false, // set to true if your message contains HTML tags. eg: "Delete <b>Foo</b> ?"
+    loader: false, // set to true if you want the dailog to show a loader after click on "proceed"
+    type: 'simple', // coming soon: 'soft', 'hard'
+    verification: 'continue', // for hard confirm, user will be prompted to type this to enable the proceed button
+    clicks: 3, // for soft confirm, user will be asked to click on "proceed" btn 3 times before actually proceeding
+};
+
+vm.$dialog.confirm(message, options)
+	.then(function () {
+	    // This will be triggered when user clicks on proceed
+	})
+	.catch(function () {
+	    // This will be triggered when user clicks on cancel
+	});
 ```
