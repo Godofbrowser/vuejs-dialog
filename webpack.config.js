@@ -98,14 +98,13 @@ const EXAMPLE = Object.assign({}, COMMON, {
 
 const DIST = Object.assign({}, COMMON, {
     name: 'dist',
-    entry: './src/plugin/index.js',
+    entry: './src/plugin/',
     output: {
-        library: ['vuejs-dialog'],
+        library: 'vuejsDialog',
         libraryTarget: 'umd',
-        umdNamedDefine: true,
         path: path.resolve(__dirname, './dist'),
         publicPath: '/dist/',
-        filename: isProduction ? 'vuejs-dialog.min.js' : 'vuejs-dialog.js'
+        filename: 'vuejs-dialog.min.js'
     }
 })
 

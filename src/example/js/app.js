@@ -1,12 +1,14 @@
 "use strict"
 
 import Vue from "vue"
-import VuejsDialog from "../../plugin/index"
-import Notifivation from 'vue-notification'
+const VuejsDialog = window.vuejsDialog.default
+import Notification from 'vue-notification'
 import AppComponent from '../components/app.vue'
 
+console.log(VuejsDialog, VuejsDialog.default)
+
 Vue.use(VuejsDialog)
-Vue.use(Notifivation)
+Vue.use(Notification)
 
 let App = Vue.extend(AppComponent)
 
