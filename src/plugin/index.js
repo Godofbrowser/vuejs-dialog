@@ -1,40 +1,43 @@
 'use strict'
 
 import DialogComponent from './components/dialog.vue'
-import {TYPES, DEFAULT_OPTIONS} from './js/utilities/constants'
+import {DIALOG_TYPES, DEFAULT_OPTIONS} from './js/constants'
+import {mergeObjs} from './js/utilities'
 
-
-let Plugin = function(Vue, globalOptions){
+let Plugin = function(Vue, globalOptions = {}){
 	this.globalOptions = globalOptions
     this.mount(Vue)
 }
 
 Plugin.prototype.mount = function(Vue){
 	this.Dialog = (() => {
-        let AppConstructor = Vue.extend(DialogComponent)
+        let DialogConstructor = Vue.extend(DialogComponent)
 		let node = document.createElement("div")
 		document.querySelector('body').appendChild(node)
 
-		return (new AppConstructor()).$mount(node)
+		return (new DialogConstructor()).$mount(node)
 	})()
 }
 
-// Plugin.prototype.alert = function(message){
-// 	alert(message)
-// 	return Promise.resolve()
-// }
+Plugin.prototype.alert = function(message = null, options = {}){
+	message && (options.message = message)
+	return this.open(DIALOG_TYPES.ALERT, options)
+}
 
-Plugin.prototype.confirm = function(message = 'Are you sure?', localOptions = {}){
+Plugin.prototype.confirm = function(message = null, options = {}){
+    message && (options.message = message)
+    return this.open(DIALOG_TYPES.CONFIRM, options)
+}
+
+Plugin.prototype.open = function(type, localOptions = {}){
 	return new Promise((resolve, reject) => {
-		let id = 'confirm.' + Date.now()
 
-		localOptions.id = id
-		localOptions.type = TYPES.CONFIRM
-		localOptions.message = message
-		localOptions.promiseResolver = resolve
-		localOptions.promiseRejecter = reject
+        localOptions.id = 'dialog.' + Date.now()
+        localOptions.window = type
+        localOptions.promiseResolver = resolve
+        localOptions.promiseRejecter = reject
 
-		this.Dialog.commit(Object.assign(DEFAULT_OPTIONS, this.globalOptions, localOptions))
+		this.Dialog.commit(mergeObjs(DEFAULT_OPTIONS, this.globalOptions, localOptions))
 	})
 }
 

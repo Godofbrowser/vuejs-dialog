@@ -1,41 +1,65 @@
 <template>
-    <div style="max-width: 350px; margin:auto">
+    <div style="max-width: 350px; margin:auto; font-family: 'Noto Sans', sans-serif; text-align: center">
         <h1>Vuejs Plugin Example</h1>
 
-        <ul>
-            <li>Foo <button @click="remove('foo')">delete</button></li>
-            <li>Bar <button @click="remove('bar')">delete</button></li>
-            <li>Baz <button @click="remove('baz')">delete</button></li>
-        </ul>
+        <h3>
+            <button @click="showAlertDialog()">Alert Dialog - one button</button>
+        </h3>
+
+        <h3>
+            <button @click="showLoadingDialog()">Loading Dialog - Useful with ajax</button>
+        </h3>
+
+        <h3>
+            <button @click="showBasicDialog()">Basic confirm - close instantly</button>
+        </h3>
+
+        <h3>
+            <button @click="showHtmlDialog()">Html Dialog - style/format content</button>
+        </h3>
 
         <notifications position="bottom left"></notifications>
     </div>
 </template>
 
 <script>
+    import trans from '../js/translations'
+
     export default {
         mounted(){
             console.log('mounted app')
         },
         methods: {
-            remove(item){
-                let name = item.toUpperCase()
+            showAlertDialog(){
+                this.$dialog.alert(trans('messages.alert'))
+            },
 
-                this.$dialog.confirm(`If you remove <b style="color: darkorange">${name}</b>, it'll be gone forever.`, {
+            async showBasicDialog(){
+                this.$dialog.confirm(trans('messages.basic'))
+                    .then(() => {
+                        this.$notify({type: 'success', text: trans('messages.click_continue')})
+                    })
+                    .catch(() => {
+                        this.$notify({type: 'success', text: trans('messages.click_cancel')})
+                    })
+            },
+            showHtmlDialog(){
+                this.$dialog.alert(trans('messages.html'), {html: true, okText: 'Dismiss'})
+            },
+
+            showLoadingDialog(item = 'foo'){
+                this.$dialog.confirm(trans('messages.loading'), {
                     html: true,
+                    okText: 'Start',
                     loader: true
                 }).then((dialog) => {
-                    // do some stuff
-
                     setTimeout(() => {
-                        this.$notify({ type: 'success', text: 'delete action: '+name })
-                        console.log('delete action: ', name)
+                        this.$notify({type: 'success', text: trans('messages.loading_ended')})
                         dialog.close()
                     }, 2500)
 
                 }).catch(() => {
-                    this.$notify({text: name +' is safe!' })
-                    console.log(name +' is safe!')
+                    this.$notify({text: trans('messages.loading_canceled')})
                 })
             }
         }
@@ -45,7 +69,7 @@
 <style>
     .vue-notification {
         padding: 10px;
-        margin: 25px;
+        margin: 15px;
 
         font-size: 18px;
         font-family: "Noto Sans", sans-serif;

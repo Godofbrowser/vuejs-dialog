@@ -1,17 +1,15 @@
 <template>
     <div>
-        <component v-for="(dialog, idx) in dialogs"
+        <dialog-window v-for="(dialog, idx) in dialogs"
                    :key="dialog.id"
-                   :is="dialog.type+ '-view'"
                    :options="dialog.options"
                    @close="closeDialog(idx)">
-        </component>
+        </dialog-window>
     </div>
 </template>
 
 <script>
-    import ConfirmDialog from './confirm.vue'
-    import {DEFAULT_OPTIONS, TYPES} from '../js/utilities/constants'
+    import DialogWindow from './dialog-window.vue'
 
     export default {
         data: function () {
@@ -20,9 +18,8 @@
             }
         },
         methods: {
-            commit(data = DEFAULT_OPTIONS){
+            commit(data){
                 this.dialogs.push({
-                    type: data.type,
                     id: data.id || Date.now(),
                     options: data
                 })
@@ -31,6 +28,6 @@
                 this.dialogs.splice(idx, 1)
             }
         },
-        components: {'confirm-view': ConfirmDialog}
+        components: {DialogWindow}
     }
 </script>
