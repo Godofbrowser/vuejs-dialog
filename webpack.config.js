@@ -85,6 +85,10 @@ const EXAMPLE = Object.assign({}, COMMON, {
         compress: true,
         port: 9000
     },
+    externals: {
+        'vue': 'Vue',
+        'vuejs-dialog': 'VuejsDialog'
+    },
     plugins: [
         extractSass,
         new HtmlWebpackPlugin({
@@ -100,7 +104,7 @@ const DIST = Object.assign({}, COMMON, {
     name: 'dist',
     entry: './src/plugin/',
     output: {
-        library: 'vuejsDialog',
+        library: 'VuejsDialog',
         libraryTarget: 'umd',
         path: path.resolve(__dirname, './dist'),
         publicPath: '/dist/',
@@ -128,10 +132,15 @@ if (isProduction) {
         })
     ])
 
-
+    EXAMPLE.devtool = '#none'
     EXAMPLE.plugins = (EXAMPLE.plugins || []).concat([
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: '"production"'
+            }
+        }),
         new webpack.optimize.UglifyJsPlugin({
-            sourceMap: true,
+            sourceMap: false,
             compress: {
                 warnings: false
             }
