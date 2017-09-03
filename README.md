@@ -1,6 +1,6 @@
 # Vuejs Dialog Plugin
 
-> A robost, lightweight, promise based alert and confirm dialog.
+> A lightweight, promise based alert, prompt and confirm dialog.
 
 ![Vuejs Dialog Plugin](./src/docs/img/html-enabled.png?raw=true "Vuejs Dialog Plugin example")
 ![Vuejs Dialog Plugin](./src/docs/img/demo.gif?raw=true "Vuejs Dialog Plugin usage demo")
