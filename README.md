@@ -90,3 +90,19 @@ this.$dialog.confirm(message, options)
 	    // This will be triggered when user clicks on cancel
 	});
 ```
+
+```javascript
+// You can also set all your defaults at the oint of installation.
+// This will be your global configuration
+
+Vue.use(VuejsDialog, {
+    html: true, 
+    loader: true,
+    okText: 'Proceed',
+    cancelText: 'Cancel',
+    animation: 'bounce', 
+})
+
+// Please note that local configurations will be considered before global configurations.
+// This gives you the flexibility of overriding the global config on individual call.
+```
