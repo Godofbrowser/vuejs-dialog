@@ -2,8 +2,8 @@
 
 > A robost, lightweight, promise based alert and confirm dialog.
 
-![Vuejs Dialog Plugin](./src/example/img/html-enabled.png?raw=true "Vuejs Dialog Plugin example")
-![Vuejs Dialog Plugin](./src/example/img/demo.gif?raw=true "Vuejs Dialog Plugin usage demo")
+![Vuejs Dialog Plugin](./src/docs/img/html-enabled.png?raw=true "Vuejs Dialog Plugin example")
+![Vuejs Dialog Plugin](./src/docs/img/demo.gif?raw=true "Vuejs Dialog Plugin usage demo")
 
 
 ## Demo
