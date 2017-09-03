@@ -1,14 +1,14 @@
 /* Transitions */
-.fade-enter-active {
+.fadeTr-enter-active {
 	transition: opacity 0.3s ease-in;
 	transition-delay: 0.1s;
 }
 
-.fade-leave-active {
+.fadeTr-leave-active {
 	transition: opacity 0.1s ease-out;
 }
 
-.fade-enter, .fade-leave-to {
+.fadeTr-enter, .fadeTr-leave-to {
 	opacity: 0;
 }
 
@@ -23,15 +23,31 @@
 	transform: translateX(30px);
 }
 
-
-.zoomIn-enter-active {
-	animation: zoomIn .3s;
-}
-.zoomIn-leave-active {
-	animation: zoomOut .3s;
+.dg-fade-enter-active {
+	animation: dg-fadeIn .6s;
 }
 
-@keyframes zoomIn {
+.dg-fade-leave-active {
+	animation: dg-fadeOut .5s;
+}
+
+@keyframes dg-fadeIn {
+	0% {opacity: 0;}
+	100% {opacity: 1;}
+}
+@keyframes dg-fadeOut {
+	0% {opacity: 1;}
+	100% {opacity: 0;}
+}
+
+.dg-zoom-enter-active {
+	animation: dg-zoomIn .3s;
+}
+.dg-zoom-leave-active {
+	animation: dg-zoomOut .3s;
+}
+
+@keyframes dg-zoomIn {
 	0% {
 		opacity: 0;
 		-webkit-transform: scale3d(.3, .3, .3);
@@ -42,7 +58,7 @@
 		opacity: 1;
 	}
 }
-@keyframes zoomOut {
+@keyframes dg-zoomOut {
 	0% {
 		opacity: 1;
 	}
@@ -59,50 +75,43 @@
 }
 
 
-.bounceIn-enter-active {
-	animation: bounceIn 1.2s;
+.dg-bounce-enter-active {
+	animation: dg-bounceIn .6s;
 }
-.bounceIn-leave-active {
-	animation: bounceIn 1.2s reverse;
+.dg-bounce-leave-active {
+	animation: dg-bounceOut .6s;
 }
 
-@keyframes bounceIn {
-	0%, 20%, 40%, 60%, 80%, 100% {
-		-webkit-transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
-		transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
-	}
-
-	0% {
+@keyframes dg-bounceIn {
+	0%{
 		opacity: 0;
-		-webkit-transform: scale3d(.3, .3, .3);
-		transform: scale3d(.3, .3, .3);
+		transform: scale(.3);
 	}
-
-	20% {
-		-webkit-transform: scale3d(1.1, 1.1, 1.1);
-		transform: scale3d(1.1, 1.1, 1.1);
-	}
-
-	40% {
-		-webkit-transform: scale3d(.9, .9, .9);
-		transform: scale3d(.9, .9, .9);
-	}
-
-	60% {
+	40%{
 		opacity: 1;
-		-webkit-transform: scale3d(1.03, 1.03, 1.03);
-		transform: scale3d(1.03, 1.03, 1.03);
+		transform: scale(1.06);
 	}
-
-	80% {
-		-webkit-transform: scale3d(.97, .97, .97);
-		transform: scale3d(.97, .97, .97);
+	60%{
+		transform: scale(0.92);
 	}
-
+	100%{
+		transform: scale(1.0);
+	}
+}
+@keyframes dg-bounceOut {
+	0% {
+		transform: scale(1);
+	}
+	25% {
+		transform: scale(.95);
+	}
+	50% {
+		opacity: 1;
+		transform: scale(1.1);
+	}
 	100% {
-		opacity: 1;
-		-webkit-transform: scale3d(1, 1, 1);
-		transform: scale3d(1, 1, 1);
+		opacity: 0;
+		transform: scale(.3);
 	}
 }
 

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <transition name="zoomIn" appear="" @after-leave="anmiationEnded">
+        <transition :name="animation" appear="" @after-leave="anmiationEnded">
             <div v-if="show" ref="container" class="dg-container">
                 <div class="dg-content-cont dg-content-cont--floating">
                     <div class="dg-main-content">
@@ -37,7 +37,7 @@
 <script>
     import OkBtn from './ok-btn.vue'
     import CancelBtn from './cancel-btn.vue'
-    import {DIALOG_TYPES} from '../js/constants'
+    import {DIALOG_TYPES, ANIMATION_TYPES} from '../js/constants'
 
     export default {
         data: function () {
@@ -54,6 +54,12 @@
             }
         },
         computed: {
+            animation(){
+                let a = this.options.animation.toUpperCase()
+                return ANIMATION_TYPES.hasOwnProperty(a)
+                    ? ANIMATION_TYPES[a]
+                    : ANIMATION_TYPES.ZOOM
+            },
             loaderEnabled(){
                 return !!this.options.loader
             },

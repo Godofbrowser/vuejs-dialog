@@ -11,6 +11,12 @@ export const CONFIRM_TYPES = {
     HARD: 'hard'    // ex: enter verification, then click to confirm
 }
 
+export const ANIMATION_TYPES = {
+    FADE: 'dg-fade',
+    ZOOM: 'dg-zoom',
+    BOUNCE: 'dg-bounce'
+}
+
 export const DEFAULT_OPTIONS = {
     html            : false,
     loader          : false,
@@ -23,5 +29,6 @@ export const DEFAULT_OPTIONS = {
     message         : "Proceed with the request?",
     helpText        : "Click the proceed button to continue",
     clickCount      : 3,
+    animation       : 'zoomIn',
     verification    : 'continue'
 }

@@ -22,6 +22,14 @@
             <button @click="showReversedDialog()">Reversed Dialog - switch buttons</button>
         </h3>
 
+        <h3>
+            <button @click="showAnimationFadeDialog()">Fade Dialog - Animation</button>
+        </h3>
+
+        <h3>
+            <button @click="showAnimationBounceDialog()">Bounce Dialog - Animation</button>
+        </h3>
+
 
 
         <notifications position="bottom left"></notifications>
@@ -51,6 +59,12 @@
             },
             showHtmlDialog(){
                 this.$dialog.alert(trans('messages.html'), {html: true, okText: 'Dismiss'})
+            },
+            showAnimationBounceDialog(){
+                this.$dialog.alert(trans('messages.html'), {html: true, animation: 'bounce'})
+            },
+            showAnimationFadeDialog(){
+                this.$dialog.alert(trans('messages.html'), {html: true, animation: 'fade'})
             },
 
             showLoadingDialog(item = 'foo'){
