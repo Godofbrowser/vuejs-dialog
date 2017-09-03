@@ -5,6 +5,11 @@
 ![Vuejs Dialog Plugin](./src/example/img/html-enabled.png?raw=true "Vuejs Dialog Plugin example")
 ![Vuejs Dialog Plugin](./src/example/img/demo.gif?raw=true "Vuejs Dialog Plugin usage demo")
 
+
+## Demo
+
+[https://godofbrowser.github.io/vuejs-dialog/](https://godofbrowser.github.io/vuejs-dialog/)
+
 ## Installation
 
 ```javascript
