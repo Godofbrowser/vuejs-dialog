@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div @keydown.esc="close()">
         <transition name="zoomIn" appear="" @after-leave="anmiationEnded">
             <div v-if="show" ref="container" class="dg-container">
                 <div class="dg-content-cont dg-content-cont--floating">
@@ -13,17 +13,14 @@
 
                         <div class="dg-footer">
 
-
-                            <button v-if="cancelBtnEnabled" ref="cancelBtn" class="dg-btn dg-btn--left"
-                                    @click.prevent="clickLeftBtn()">{{ options.cancelText}}
+                            <button @click="clickLeftBtn()" :is="leftBtnComponent" :loading="loading"
+                                       :enabled="leftBtnEnabled" :reverse="options.reverse" :focus="leftBtnFocus">
+                                <span>{{ options.reverse ? options.okText : options.cancelText}}</span>
                             </button>
 
-                            <button @click.prevent="clickRightBtn()"
-                                    ref="okBtn"
-                                    :class="['dg-btn', 'dg-btn--right', {'dg-btn--loading': loading}]">
-
-                                <span class="dg-btn-content">{{ options.okText }}</span>
-                                <span is="btn-loader" v-if="loading"></span>
+                            <button :is="rightBtnComponent" @click="clickRightBtn()" :loading="loading"
+                                       :enabled="rightBtnEnabled" :reverse="options.reverse" :focus="rightBtnFocus">
+                                <span>{{ options.reverse ? options.cancelText : options.okText }}</span>
                             </button>
 
                             <div class="dg-clear"></div>
@@ -38,7 +35,8 @@
 </template>
 
 <script>
-    import BtnLoader from './btn-loader.vue'
+    import OkBtn from './ok-btn.vue'
+    import CancelBtn from './cancel-btn.vue'
     import {DIALOG_TYPES} from '../js/constants'
 
     export default {
@@ -55,27 +53,38 @@
                 required: true
             }
         },
-        mounted(){
-            if (this.cancelBtnEnabled) {
-                this.$refs['cancelBtn'].focus()
-            } else {
-                this.$refs['okBtn'].focus()
-            }
-        },
         computed: {
             loaderEnabled(){
                 return !!this.options.loader
             },
-            cancelBtnEnabled(){
-                return this.options.window !== DIALOG_TYPES.ALERT
+            cancelBtnDisabled(){
+                return (this.options.window === DIALOG_TYPES.ALERT)
+            },
+            leftBtnEnabled(){
+                return (this.cancelBtnDisabled === false) || (this.options.reverse === true)
+            },
+            rightBtnEnabled(){
+                return (this.cancelBtnDisabled === false) || (this.options.reverse === false)
+            },
+            leftBtnComponent(){
+                return (this.options.reverse === false) ? 'cancel-btn' : 'ok-btn'
+            },
+            rightBtnComponent(){
+                return (this.options.reverse === true) ? 'cancel-btn' : 'ok-btn'
+            },
+            leftBtnFocus(){
+                return (this.options.reverse === true)
+            },
+            rightBtnFocus(){
+                return (this.options.reverse === false)
             }
         },
         methods: {
             clickRightBtn(){
-                this.proceed()
+                this.options.reverse ? this.cancel() : this.proceed()
             },
             clickLeftBtn(){
-                this.cancel()
+                this.options.reverse ? this.proceed() : this.cancel()
             },
             proceed(){
                 if (this.loaderEnabled) {
@@ -112,7 +121,7 @@
                 this.$emit('close')
             }
         },
-        components: {BtnLoader}
+        components: {CancelBtn, OkBtn}
     }
 </script>
 

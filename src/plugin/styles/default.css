@@ -74,14 +74,16 @@
 	font-size: 16px;
 	font-weight: 700;
 }
-.dg-btn.dg-btn--left {
+.dg-btn.dg-btn--cancel {
 	color: #fefefe;
 	background-color: #0096D9;
 }
-.dg-btn.dg-btn--right {
+.dg-btn.dg-btn--ok {
 	color: #0096D9;
 	background-color: #fefefe;
 	border-color: #0096D9;
+}
+.dg-pull-right{
 	float: right;
 }
 

@@ -1,13 +1,13 @@
 <template>
     <div style="max-width: 350px; margin:auto; font-family: 'Noto Sans', sans-serif; text-align: center">
-        <h1>Vuejs Plugin Example</h1>
+        <h1>Vuejs-Dialog Plugin Examples</h1>
 
         <h3>
             <button @click="showAlertDialog()">Alert Dialog - one button</button>
         </h3>
 
         <h3>
-            <button @click="showLoadingDialog()">Loading Dialog - Useful with ajax</button>
+            <button @click="showHtmlDialog()">Html Dialog - style/format content</button>
         </h3>
 
         <h3>
@@ -15,8 +15,14 @@
         </h3>
 
         <h3>
-            <button @click="showHtmlDialog()">Html Dialog - style/format content</button>
+            <button @click="showLoadingDialog()">Loading Dialog - Useful with ajax</button>
         </h3>
+
+        <h3>
+            <button @click="showReversedDialog()">Reversed Dialog - switch buttons</button>
+        </h3>
+
+
 
         <notifications position="bottom left"></notifications>
     </div>
@@ -50,11 +56,28 @@
             showLoadingDialog(item = 'foo'){
                 this.$dialog.confirm(trans('messages.loading'), {
                     html: true,
-                    okText: 'Start',
+                    okText: 'Proceed',
                     loader: true
                 }).then((dialog) => {
                     setTimeout(() => {
-                        this.$notify({type: 'success', text: trans('messages.loading_ended')})
+                        this.$notify({type: 'success', text: trans('messages.loading_completed')})
+                        dialog.close()
+                    }, 2500)
+
+                }).catch(() => {
+                    this.$notify({text: trans('messages.loading_canceled')})
+                })
+            },
+
+            showReversedDialog(){
+                this.$dialog.confirm(trans('messages.reverse'), {
+                    html: true,
+                    okText: 'Proceed',
+                    loader: true,
+                    reverse: true
+                }).then((dialog) => {
+                    setTimeout(() => {
+                        this.$notify({type: 'success', text: trans('messages.loading_completed')})
                         dialog.close()
                     }, 2500)
 
