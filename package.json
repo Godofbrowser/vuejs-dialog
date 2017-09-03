@@ -1,6 +1,6 @@
 {
   "name": "vuejs-dialog",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "A robost, promise based confirm and alert dialog.",
   "main": "dist/vuejs-dialog.min.js",
   "directories": {
