@@ -29,6 +29,6 @@ export const DEFAULT_OPTIONS = {
     message         : "Proceed with the request?",
     helpText        : "Click the proceed button to continue",
     clickCount      : 3,
-    animation       : 'zoomIn',
+    animation       : 'zoom',
     verification    : 'continue'
 }

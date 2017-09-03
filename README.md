@@ -73,7 +73,11 @@ let message = "Are you sure?";
 let options = {
     html: false, // set to true if your message contains HTML tags. eg: "Delete <b>Foo</b> ?"
     loader: false, // set to true if you want the dailog to show a loader after click on "proceed"
-    type: 'simple', // coming soon: 'soft', 'hard'
+    reverse: false, // switch the button positions (left to right, and vise versa)
+    okText: 'Continue',
+    cancelText: 'Close',
+    animation: 'zoom', // Available: "zoom", "bounce", "fade"
+    type: 'basic', // coming soon: 'soft', 'hard'
     verification: 'continue', // for hard confirm, user will be prompted to type this to enable the proceed button
     clicks: 3, // for soft confirm, user will be asked to click on "proceed" btn 3 times before actually proceeding
 };
