@@ -4,7 +4,7 @@ import en from './translations/en'
 
 
 const Translator = function(translations, separator = '.'){
-    let lang = window.navigator.languages[1]
+    let lang = window.navigator.languages[1] || window.navigator.userLanguage[1]
     this.lang = typeof translations[lang] !== 'undefined' ? lang : 'en'
     this.separator = '.'
     this.translations = translations

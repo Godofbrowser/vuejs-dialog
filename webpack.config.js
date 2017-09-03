@@ -70,18 +70,18 @@ const COMMON = {
     devtool: '#eval-source-map'
 }
 
-const EXAMPLE = Object.assign({}, COMMON, {
-    name: 'example',
+const DOCS = Object.assign({}, COMMON, {
+    name: 'docs',
     entry: [
-        './src/example/js/app.js',
-        './src/example/scss/app.scss'
+        './src/docs/js/app.js',
+        './src/docs/scss/app.scss'
     ],
     output: {
-        path: path.resolve(__dirname, './example'),
+        path: path.resolve(__dirname, './docs'),
         filename: "app.[name].js",
     },
     devServer: {
-        contentBase: path.join(__dirname, "example"),
+        contentBase: path.join(__dirname, "docs"),
         compress: true,
         port: 9000
     },
@@ -95,7 +95,7 @@ const EXAMPLE = Object.assign({}, COMMON, {
             hash: true,
             catch: true,
             filename: 'index.html',
-            template: 'src/example/index.html'
+            template: 'src/docs/index.html'
         })
     ]
 })
@@ -132,8 +132,8 @@ if (isProduction) {
         })
     ])
 
-    EXAMPLE.devtool = '#none'
-    EXAMPLE.plugins = (EXAMPLE.plugins || []).concat([
+    DOCS.devtool = '#none'
+    DOCS.plugins = (DOCS.plugins || []).concat([
         new webpack.DefinePlugin({
             'process.env': {
                 NODE_ENV: '"production"'
@@ -148,4 +148,4 @@ if (isProduction) {
     ])
 }
 
-module.exports = [EXAMPLE, DIST]
+module.exports = [DOCS, DIST]
