@@ -1,5 +1,5 @@
 <template>
-    <div @keydown.esc="close()">
+    <div>
         <transition name="zoomIn" appear="" @after-leave="anmiationEnded">
             <div v-if="show" ref="container" class="dg-container">
                 <div class="dg-content-cont dg-content-cont--floating">
@@ -119,7 +119,18 @@
                     this.options.promiseRejecter(false)
                 }
                 this.$emit('close')
+            },
+            escapeKeyListener(e) {
+                if (e.keyCode === 27) {
+                    this.cancelBtnDisabled ? this.proceed() : this.cancel()
+                }
             }
+        },
+        created() {
+            document.addEventListener('keydown', this.escapeKeyListener);
+        },
+        destroyed() {
+            document.removeEventListener('keydown', this.escapeKeyListener);
         },
         components: {CancelBtn, OkBtn}
     }

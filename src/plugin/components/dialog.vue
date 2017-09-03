@@ -26,18 +26,7 @@
             },
             closeDialog(idx){
                 this.dialogs.splice(idx, 1)
-            },
-            escapeKeyListener: function(evt) {
-                if (evt.keyCode === 27 && this.dialogs.length) {
-                    this.closeDialog(this.dialogs.length - 1)
-                }
             }
-        },
-        created() {
-            document.addEventListener('keydown', this.escapeKeyListener);
-        },
-        destroyed() {
-            document.removeEventListener('keydown', this.escapeKeyListener);
         },
         components: {DialogWindow}
     }
