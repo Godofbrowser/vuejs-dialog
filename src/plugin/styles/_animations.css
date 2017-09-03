@@ -23,6 +23,14 @@
 	transform: translateX(30px);
 }
 
+.dg-backdrop-enter-active {
+	animation: dg-fadeIn .16s;
+}
+
+.dg-backdrop-leave-active {
+	animation: dg-fadeOut .16s;
+}
+
 .dg-fade-enter-active {
 	animation: dg-fadeIn .6s;
 }

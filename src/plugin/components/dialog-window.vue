@@ -1,7 +1,7 @@
 <template>
     <div>
-        <transition :name="animation" appear="" @after-leave="anmiationEnded">
-            <div v-if="show" ref="container" class="dg-container">
+        <transition :name="animation" appear="" @after-leave="backdrop = false">
+            <div v-if="window" ref="container" class="dg-container">
                 <div class="dg-content-cont dg-content-cont--floating">
                     <div class="dg-main-content">
                         <!--<div class="dg-header">-->
@@ -30,7 +30,9 @@
             </div>
         </transition>
 
-        <div class="dg-backdrop"></div>
+        <transition name="dg-backdrop" appear="" @after-leave="anmiationEnded">
+            <div v-if="backdrop" class="dg-backdrop"></div>
+        </transition>
     </div>
 </template>
 
@@ -42,7 +44,8 @@
     export default {
         data: function () {
             return {
-                show: true,
+                window: true,
+                backdrop: true,
                 canceled: false,
                 loading: false
             }
@@ -118,7 +121,7 @@
                 this.loading = !!loading
             },
             close(){
-                this.show = false
+                this.window = false
             },
             anmiationEnded(){
                 if (this.canceled){

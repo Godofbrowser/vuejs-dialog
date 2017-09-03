@@ -1,9 +1,8 @@
 <template>
-    <div>
+    <div v-if="dialogs.length > 0">
         <dialog-window v-for="(dialog, idx) in dialogs"
-                   :key="dialog.id"
-                   :options="dialog.options"
-                   @close="closeDialog(idx)">
+                       :options="dialog.options"
+                       @close="closeDialog(idx)">
         </dialog-window>
     </div>
 </template>
@@ -20,7 +19,6 @@
         methods: {
             commit(data){
                 this.dialogs.push({
-                    id: data.id || Date.now(),
                     options: data
                 })
             },
