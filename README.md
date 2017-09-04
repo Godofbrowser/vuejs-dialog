@@ -2,6 +2,7 @@
 
 > A lightweight, promise based alert, prompt and confirm dialog.
 
+
 ![Vuejs Dialog Plugin](./src/docs/img/html-enabled.png?raw=true "Vuejs Dialog Plugin example")
 ![Vuejs Dialog Plugin](./src/docs/img/demo.gif?raw=true "Vuejs Dialog Plugin usage demo")
 
@@ -12,12 +13,26 @@
 
 ## Installation
 
+#### HTML
+Include the script:
+
+  ```html
+  // Include vuejs
+ <script type="text/javascript" src="./path/to/vue.min.js"></script>
+ 
+ // Include the vuejs-dialog plugin
+ <script type="text/javascript" src="./path/to/vuejs-dialog.min.js"></script>
+ 
+ <script>
+// Tell Vue to install the plugin.
+window.Vue.use(VuejsDialog)
+</script>
+  ```
+#### NPM
 ```javascript
 // installation via npm 
 npm install vuejs-dialog
-```
 
-```javascript
 // import into project
 import Vue from "vue"
 import VuejsDialog from "vuejs-dialog"
@@ -133,7 +148,7 @@ this.$dialog.confirm(message, options)
 ```
 ### Global Configuration
 ```javascript
-// You can also set all your defaults at the oint of installation.
+// You can also set all your defaults at the point of installation.
 // This will be your global configuration
 
 Vue.use(VuejsDialog, {
@@ -147,3 +162,10 @@ Vue.use(VuejsDialog, {
 // Please note that local configurations will be considered before global configurations.
 // This gives you the flexibility of overriding the global config on individual call.
 ```
+# License
+
+[MIT](http://opensource.org/licenses/MIT)
+
+## Contributing
+
+Let's make it better :)
