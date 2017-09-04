@@ -87,7 +87,7 @@
 	animation: dg-bounceIn .6s;
 }
 .dg-bounce-leave-active {
-	animation: dg-bounceOut .6s;
+	animation: dg-zoomOut .6s;
 }
 
 @keyframes dg-bounceIn {

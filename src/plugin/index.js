@@ -54,7 +54,3 @@ Plugin.install = function (Vue, options) {
 }
 
 export default Plugin
-
-if (typeof window !== 'undefined' && window.Vue) {
-    window.Vue.use(Plugin)
-}
