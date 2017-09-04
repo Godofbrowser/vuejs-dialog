@@ -1,5 +1,7 @@
 // utilities
 
+export const noop = () => {}
+
 export const cloneObj = function (obj) {
     return Object.assign({}, obj)
 }

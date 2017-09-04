@@ -70,6 +70,42 @@ this.$dialog.confirm("If you delete this record, it'll be gone forever.", {
     });
 ```
 
+## Usage as a directive (new)
+
+If you don't pass a message, the global/default message would be used.
+```html
+<button type="submit" v-confirm="">submit</button>
+```
+
+
+```html
+// Callbacks can be provided
+// Note: If "loader" is set to true, the makeAdmin callback will be passed a "dialog" object
+// Which is useful for stoping the loader, or closing the dialog.
+<button v-confirm="{ok: makeAdmin, cancel: doNothing, message: 'User will be given admin privileges. Make user an Admin?'}">Make Admin</button>
+```
+```javascript
+methods: {
+    makeAdmin: function() {
+        // Do stuffs
+        
+    },
+    doNothing: function() {
+        // Do nothing or some other stuffs
+    }
+}
+```
+
+
+For v-confirm directive, if an "OK" callback is not provided, the default event would be triggered.
+
+```html
+// You can use it on links too
+<a href="http://example.com" v-confirm="'This will take you to http://example.com. Proceed with caution'">Go to example.com</a>
+
+```
+
+### Options
 ```javascript
 // Parameters and options
 
@@ -95,7 +131,7 @@ this.$dialog.confirm(message, options)
 	    // This will be triggered when user clicks on cancel
 	});
 ```
-
+### Global Configuration
 ```javascript
 // You can also set all your defaults at the oint of installation.
 // This will be your global configuration

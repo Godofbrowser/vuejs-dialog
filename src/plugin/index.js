@@ -2,6 +2,7 @@
 
 import DialogComponent from './components/dialog.vue'
 import {DIALOG_TYPES, DEFAULT_OPTIONS} from './js/constants'
+import directives from './js/directives'
 import {mergeObjs} from './js/utilities'
 
 let Plugin = function(Vue, globalOptions = {}){
@@ -42,6 +43,8 @@ Plugin.prototype.open = function(type, localOptions = {}){
 }
 
 Plugin.install = function (Vue, options) {
+    directives(Vue)
+
 	Vue.dialog = new Plugin(Vue, options)
 
 	Object.defineProperties(Vue.prototype, {
@@ -51,6 +54,7 @@ Plugin.install = function (Vue, options) {
 			}
 		}
 	})
+
 }
 
 export default Plugin
