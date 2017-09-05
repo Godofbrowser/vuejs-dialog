@@ -2,6 +2,7 @@
 
 > A lightweight, promise based alert, prompt and confirm dialog.
 
+[![npm version](https://badge.fury.io/js/vuejs-dialog.svg)](https://badge.fury.io/js/vuejs-dialog)
 [![Build Status](https://scrutinizer-ci.com/g/Godofbrowser/vuejs-dialog/badges/build.png?b=master)](https://scrutinizer-ci.com/g/Godofbrowser/vuejs-dialog/build-status/master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Godofbrowser/vuejs-dialog/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Godofbrowser/vuejs-dialog/?branch=master)
 

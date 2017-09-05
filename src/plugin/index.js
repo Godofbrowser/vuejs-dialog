@@ -2,22 +2,19 @@
 
 import DialogComponent from './components/dialog.vue'
 import {DIALOG_TYPES, DEFAULT_OPTIONS} from './js/constants'
-import directives from './js/directives'
+import Directives from './js/directives'
 import {mergeObjs} from './js/utilities'
 
 let Plugin = function(Vue, globalOptions = {}){
 	this.globalOptions = globalOptions
-    this.mount(Vue)
-}
 
-Plugin.prototype.mount = function(Vue){
-	this.Dialog = (() => {
+    this.Dialog = (() => {
         let DialogConstructor = Vue.extend(DialogComponent)
-		let node = document.createElement("div")
-		document.querySelector('body').appendChild(node)
+        let node = document.createElement("div")
+        document.querySelector('body').appendChild(node)
 
-		return (new DialogConstructor()).$mount(node)
-	})()
+        return (new DialogConstructor()).$mount(node)
+    })()
 }
 
 Plugin.prototype.alert = function(message = null, options = {}){
@@ -43,7 +40,12 @@ Plugin.prototype.open = function(type, localOptions = {}){
 }
 
 Plugin.install = function (Vue, options) {
-    directives(Vue)
+
+    let DirectivesObj = new Directives(Vue)
+
+	Vue.directive('confirm', DirectivesObj.confirmDefinition)
+
+	//Vue.directive('alert', DirectivesObj.alertDefinition)
 
 	Vue.dialog = new Plugin(Vue, options)
 
