@@ -3,7 +3,9 @@
 import {noop} from './utilities'
 
 export default function (Vue) {
-    let Directives = function (Vue) {
+    let Directives = function () {}
+
+    Directives.prototype.init = function (Vue) {
         this.Vue = Vue
         this.registerConfirm()
     }
@@ -11,7 +13,7 @@ export default function (Vue) {
     Directives.prototype.registerConfirm = function () {
         const _this = this
 
-        const clickHandler = function (event, el, binding, vnode) {
+        const clickHandler = function (event, el, binding) {
             event.preventDefault()
             event.stopImmediatePropagation()
 
@@ -59,12 +61,13 @@ export default function (Vue) {
         }
 
         this.Vue.directive('confirm', {
-            bind (el, binding, vnode) {
-                if (el.VuejsDialog === undefined)
+            bind (el, binding) {
+                if (el.VuejsDialog === undefined) {
                     el.VuejsDialog = {}
+                }
 
                 el.VuejsDialog.confirmHandler = function clickEventHandler(event) {
-                    clickHandler(event, el, binding, vnode)
+                    clickHandler(event, el, binding)
                 }
 
                 el.addEventListener('click', el.VuejsDialog.confirmHandler, true)
@@ -77,5 +80,6 @@ export default function (Vue) {
 
     }
 
-    new Directives(Vue)
+    let D = new Directives()
+    D.init(Vue)
 }

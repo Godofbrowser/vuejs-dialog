@@ -3,29 +3,30 @@
 import en from './translations/en'
 
 
-const Translator = function(translations, separator = '.'){
+const Translator = function (translations, separator = '.') {
     let lang = window.navigator.languages[1] || window.navigator.userLanguage[1]
     this.lang = typeof translations[lang] !== 'undefined' ? lang : 'en'
-    this.separator = '.'
+    this.separator = separator
     this.translations = translations
 }
 
 Translator.prototype.get = function (route) {
     let parts = route.split(this.separator)
     let translation = this.translations[this.lang]
-    parts.forEach(key => {
-        translation = translation[key]
-        if (translation === undefined){
-            translation = 'No Translation'
-            return
-        }
-    })
-    return translation
 
+    for (let i = 0; i < parts.length; i++) {
+        translation = translation[parts[i]]
+        if (translation === undefined) {
+            translation = 'No Translation'
+            break
+        }
+    }
+
+    return translation
 }
 
 let T = new Translator({en})
 
-export default function(n){
+export default function (n) {
     return T.get(n)
 }

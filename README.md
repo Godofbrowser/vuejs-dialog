@@ -2,6 +2,8 @@
 
 > A lightweight, promise based alert, prompt and confirm dialog.
 
+[![Build Status](https://scrutinizer-ci.com/g/Godofbrowser/vuejs-dialog/badges/build.png?b=master)](https://scrutinizer-ci.com/g/Godofbrowser/vuejs-dialog/build-status/master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Godofbrowser/vuejs-dialog/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Godofbrowser/vuejs-dialog/?branch=master)
 
 ![Vuejs Dialog Plugin](./src/docs/img/html-enabled.png?raw=true "Vuejs Dialog Plugin example")
 ![Vuejs Dialog Plugin](./src/docs/img/demo.gif?raw=true "Vuejs Dialog Plugin usage demo")
