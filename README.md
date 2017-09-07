@@ -138,7 +138,7 @@ let options = {
     animation: 'zoom', // Available: "zoom", "bounce", "fade"
     type: 'basic', // coming soon: 'soft', 'hard'
     verification: 'continue', // for hard confirm, user will be prompted to type this to enable the proceed button
-    clicks: 3, // for soft confirm, user will be asked to click on "proceed" btn 3 times before actually proceeding
+    clicksCount: 3, // for soft confirm, user will be asked to click on "proceed" btn 3 times before actually proceeding
 };
 
 this.$dialog.confirm(message, options)
