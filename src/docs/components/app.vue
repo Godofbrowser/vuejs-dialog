@@ -74,6 +74,9 @@
             <h2>Confirmation types</h2>
             <hr/>
 
+            <p>All dialogs used above are BASIC confirmation dialogs. There are more strict dialogs available.</p>
+            <p> SOFT and HARD confirmation dialogs. Examples below:</p>
+
             <h4>
                 <button @click="showSoftConfirmDialog()">Soft confirm - multiple clicks required</button>
             </h4>
@@ -118,7 +121,7 @@
                     })
             },
             showSoftConfirmDialog(){
-                this.$dialog.confirm(trans('messages.basic'), {type: 'soft'})
+                this.$dialog.confirm(trans('messages.soft'), {type: 'soft'})
                     .then(() => {
                         this.$notify({type: 'success', text: trans('messages.click_continue')})
                     })
