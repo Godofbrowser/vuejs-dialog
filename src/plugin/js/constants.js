@@ -28,7 +28,7 @@ export const DEFAULT_OPTIONS = {
     window          : DIALOG_TYPES.CONFIRM,
     message         : "Proceed with the request?",
     helpText        : "Click the proceed button to continue",
-    clickCount      : 3,
+    clicksCount      : 3,
     animation       : 'zoom',
     verification    : 'continue'
 }

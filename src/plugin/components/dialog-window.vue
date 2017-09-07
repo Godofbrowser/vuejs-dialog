@@ -14,12 +14,12 @@
                         <div class="dg-footer">
 
                             <button @click="clickLeftBtn()" :is="leftBtnComponent" :loading="loading"
-                                       :enabled="leftBtnEnabled" :reverse="options.reverse" :focus="leftBtnFocus">
+                                       :enabled="leftBtnEnabled" :options="options" :focus="leftBtnFocus">
                                 <span>{{ options.reverse ? options.okText : options.cancelText}}</span>
                             </button>
 
                             <button :is="rightBtnComponent" @click="clickRightBtn()" :loading="loading"
-                                       :enabled="rightBtnEnabled" :reverse="options.reverse" :focus="rightBtnFocus">
+                                       :enabled="rightBtnEnabled" :options="options" :focus="rightBtnFocus">
                                 <span>{{ options.reverse ? options.cancelText : options.okText }}</span>
                             </button>
 

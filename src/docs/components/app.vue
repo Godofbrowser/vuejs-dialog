@@ -69,6 +69,16 @@
             </h4>
         </section>
 
+
+        <section>
+            <h2>Confirmation types</h2>
+            <hr/>
+
+            <h4>
+                <button @click="showSoftConfirmDialog()">Soft confirm - multiple clicks required</button>
+            </h4>
+        </section>
+
         <notifications position="bottom left"></notifications>
     </div>
 </template>
@@ -98,9 +108,17 @@
             showAlertDialog(){
                 this.$dialog.alert(trans('messages.alert'))
             },
-
-            async showBasicDialog(){
+            showBasicDialog(){
                 this.$dialog.confirm(trans('messages.basic'))
+                    .then(() => {
+                        this.$notify({type: 'success', text: trans('messages.click_continue')})
+                    })
+                    .catch(() => {
+                        this.$notify({type: 'success', text: trans('messages.click_cancel')})
+                    })
+            },
+            showSoftConfirmDialog(){
+                this.$dialog.confirm(trans('messages.basic'), {type: 'soft'})
                     .then(() => {
                         this.$notify({type: 'success', text: trans('messages.click_continue')})
                     })

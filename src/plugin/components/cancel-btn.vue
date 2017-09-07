@@ -1,5 +1,5 @@
 <template>
-    <button v-if="enabled" :class="['dg-btn', 'dg-btn--cancel', {'dg-pull-right': reverse}]"
+    <button v-if="enabled" :class="['dg-btn', 'dg-btn--cancel', {'dg-pull-right': options.reverse}]"
             @click.prevent="$emit('click')" ref="btn">
         <slot></slot>
     </button>
@@ -7,7 +7,7 @@
 
 <script>
     export default {
-        props: ['enabled', 'reverse', 'focus', 'loading'],
+        props: ['enabled', 'options', 'focus', 'loading'],
         mounted(){
             this.focus && this.$refs.btn.focus()
         }
