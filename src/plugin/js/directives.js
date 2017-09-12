@@ -1,12 +1,18 @@
 // Directives
 
-import {noop} from './utilities'
+import {noop, clickNode} from './utilities'
 
 
 let Directives = function (Vue) {
-    this.Vue = Vue
-    this.confirmDefinition = this.defineConfirm()
-    this.alertDefinition = this.defineAlert()
+    Object.defineProperties(this, {
+        Vue: {get: () => Vue},
+        confirmDefinition: {
+            get: this.defineConfirm
+        },
+        alertDefinition: {
+            get: this.defineAlert
+        }
+    })
 }
 
 Directives.prototype.defineConfirm = function () {
@@ -29,23 +35,12 @@ Directives.prototype.defineConfirm = function () {
                 return binding.value.ok
             } else {
                 return () => {
+                    // Unbind to allow original event
                     el.removeEventListener('click', el.VuejsDialog.clickHandler, true)
-
-                    _this.Vue.nextTick(() => {
-                        (function (node) {
-                            if (document.createEvent) {
-                                let evt = document.createEvent('MouseEvents');
-                                evt.initEvent('click', true, false);
-                                node.dispatchEvent(evt);
-                            } else if (document.createEventObject) {
-                                node.fireEvent('onclick');
-                            } else if (typeof node.onclick === 'function') {
-                                node.onclick();
-                            }
-                        })(el)
-
-                        el.addEventListener('click', el.VuejsDialog.clickHandler, true)
-                    })
+                    // Trigger original event
+                    clickNode(el)
+                    // Re-bind listener
+                    el.addEventListener('click', el.VuejsDialog.clickHandler, true)
                 }
             }
         })()
