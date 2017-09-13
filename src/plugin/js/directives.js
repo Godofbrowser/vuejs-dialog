@@ -68,7 +68,7 @@ Directives.prototype.defineConfirm = function () {
             el.VuejsDialog = {}
         }
 
-        el.VuejsDialog.clickHandler = function clickEventHandler(event) {
+        el.VuejsDialog.clickHandler = function (event) {
             clickHandler(event, el, binding)
         }
 

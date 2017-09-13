@@ -2,11 +2,13 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const WebpackNotifierPlugin = require('webpack-notifier');
+const WebpackShellPlugin = require('webpack-shell-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production'
 
 const extractSass = new ExtractTextPlugin({
-    filename: "app.[name].css",
+    filename: "css/app.[name].css",
     disable: false
 });
 
@@ -51,6 +53,13 @@ const COMMON = {
             }
         ]
     },
+    plugins: [
+        new WebpackNotifierPlugin({alwaysNotify: true}),
+        new WebpackShellPlugin({
+            onBuildStart: ['echo "Webpack Start"'],
+            onBuildEnd: ['echo "Webpack End"', 'node src\\docs\\js\\copy-to-docs.js']
+        })
+    ],
     watchOptions: {
         aggregateTimeout: 300,
         ignored: /node_modules/
@@ -78,7 +87,7 @@ const DOCS = Object.assign({}, COMMON, {
     ],
     output: {
         path: path.resolve(__dirname, './docs'),
-        filename: "app.[name].js",
+        filename: "js/app.[name].js",
     },
     devServer: {
         contentBase: path.join(__dirname, "docs"),
