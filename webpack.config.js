@@ -57,7 +57,8 @@ const COMMON = {
         new WebpackNotifierPlugin({alwaysNotify: true}),
         new WebpackShellPlugin({
             onBuildStart: ['echo "Webpack Start"'],
-            onBuildEnd: ['echo "Webpack End"', 'node src\\docs\\js\\copy-to-docs.js']
+            onBuildEnd: ['echo "Webpack End"'],
+            onBuildExit: ['node src\\docs\\js\\copy-to-docs.js']
         })
     ],
     watchOptions: {

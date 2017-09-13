@@ -42,12 +42,14 @@
 	font-size: 16px;
 	padding: 10px 0 10px 0;
 }
+.dg-content-body{
+	border-bottom: 2px solid #E1E6EA;
+	padding-bottom: 15px;
+}
 
-.dg-footer {
+.dg-content-footer {
 	position: relative;
-	margin-top: 15px;
 	padding: 15px 0 0;
-	border-top: 1px solid #E1E6EA
 }
 
 .dg-content-cont--floating {
@@ -74,6 +76,14 @@
 	appearance: none;
 	font-size: 16px;
 	font-weight: 700;
+}
+.dg-btn:focus,
+.dg-btn:active,
+.dg-btn:link {
+	outline: none;
+}
+.dg-btn::-moz-focus-inner{
+	border: 0;
 }
 .dg-btn.dg-btn--cancel {
 	color: #fefefe;

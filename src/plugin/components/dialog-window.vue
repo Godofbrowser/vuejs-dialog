@@ -4,14 +4,23 @@
             <div v-if="show" ref="container" class="dg-container">
                 <div class="dg-content-cont dg-content-cont--floating">
                     <div class="dg-main-content">
-                        <!--<div class="dg-header">-->
+                        <!--<div class="dg-content-header">-->
                         <!---->
                         <!--</div>-->
 
-                        <div v-if="options.html" class="dg-content" v-html="options.message"></div>
-                        <div v-else="" class="dg-content">{{ options.message }}</div>
+                        <div class="dg-content-body">
+                            <div v-if="options.html" class="dg-content" v-html="options.message"></div>
+                            <div v-else="" class="dg-content">{{ options.message }}</div>
 
-                        <div class="dg-footer">
+                            <form style="background-color: ghostwhite; padding: 10px; margin-bottom: -15px">
+                                <label for="dg-confirm-input" style="font-size: 13px">Type "{{ options.verification }}" below to confirm</label>
+                                <input type="text" :placeholder="options.verification" id="dg-confirm-input"
+                                       style="width: 100%;margin-top: 10px;
+                               padding: 5px 15px; font-size: 16px;border-radius: 4px; border: 2px solid #eee"/>
+                            </form>
+                        </div>
+
+                        <div class="dg-content-footer">
 
                             <button @click="clickLeftBtn()" :is="leftBtnComponent" :loading="loading"
                                        :enabled="leftBtnEnabled" :options="options" :focus="leftBtnFocus">
