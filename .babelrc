@@ -3,6 +3,7 @@
     ["env", { "modules": false }]
   ],
   "plugins": [
+    "transform-object-assign",
     ["transform-runtime", {
       "polyfill": false,
       "regenerator": true

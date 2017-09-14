@@ -18,14 +18,18 @@ const COMMON = {
         rules: [
             {
                 test: /\.vue$/,
-                loader: 'vue-loader',
-                options: {
-                    loaders: {
-                        'scss': 'vue-style-loader!css-loader!sass-loader',
-                        'sass': 'vue-style-loader!css-loader!sass-loader?indentedSyntax'
+                use: [{
+                    loader: 'vue-loader',
+                    options: {
+                        loaders: {
+                            'scss': 'vue-style-loader!css-loader!postcss-loader?sourceMap!sass-loader',
+                            'sass': 'vue-style-loader!css-loader!postcss-loader?sourceMap!sass-loader?indentedSyntax',
+                            'css': 'vue-style-loader!css-loader!postcss-loader?sourceMap'
+                        },
+                        // other vue-loader options go here
+                        postcss: [require('postcss-cssnext')()]
                     }
-                    // other vue-loader options go here
-                }
+                }]
             },
             {
                 test: /\.js$/,
@@ -39,6 +43,13 @@ const COMMON = {
                     use: [{
                         loader: "css-loader",
                         options: {minimize: isProduction}
+                    }, {
+                        loader: "postcss-loader",
+                        options: {
+                            plugins: (loader) => [
+                                require('autoprefixer')()
+                            ]
+                        }
                     }, {
                         loader: "sass-loader"
                     }]

@@ -12,12 +12,12 @@
                             <div v-if="options.html" class="dg-content" v-html="options.message"></div>
                             <div v-else="" class="dg-content">{{ options.message }}</div>
 
-                            <form style="background-color: ghostwhite; padding: 10px; margin-bottom: -15px">
-                                <label for="dg-confirm-input" style="font-size: 13px">Type "{{ options.verification }}" below to confirm</label>
-                                <input type="text" :placeholder="options.verification" id="dg-confirm-input"
-                                       style="width: 100%;margin-top: 10px;
-                               padding: 5px 15px; font-size: 16px;border-radius: 4px; border: 2px solid #eee"/>
-                            </form>
+                            <!--<form style="background-color: ghostwhite; padding: 10px; margin-bottom: -15px">-->
+                                <!--<label for="dg-confirm-input" style="font-size: 13px">Type "{{ options.verification }}" below to confirm</label>-->
+                                <!--<input type="text" :placeholder="options.verification" id="dg-confirm-input"-->
+                                       <!--style="width: 100%;margin-top: 10px;-->
+                               <!--padding: 5px 15px; font-size: 16px;border-radius: 4px; border: 2px solid #eee"/>-->
+                            <!--</form>-->
                         </div>
 
                         <div class="dg-content-footer">
@@ -154,7 +154,7 @@
     }
 </script>
 
-<style>
-    @import '../styles/_animations.css';
-    @import '../styles/default.css';
+<style lang="css">
+    @import url('../styles/_animations.css');
+    @import url('../styles/default.css');
 </style>

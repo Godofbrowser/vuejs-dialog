@@ -1,9 +1,11 @@
 'use strict'
 
+import Promise from 'promise-polyfill'
 import DialogComponent from './components/dialog.vue'
 import {DIALOG_TYPES, DEFAULT_OPTIONS} from './js/constants'
 import Directives from './js/directives'
 import {mergeObjs} from './js/utilities'
+
 
 let Plugin = function(Vue, globalOptions = {}){
 	this.globalOptions = globalOptions

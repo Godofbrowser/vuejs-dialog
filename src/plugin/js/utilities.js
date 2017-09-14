@@ -7,7 +7,11 @@ export const cloneObj = function (obj) {
 }
 
 export const mergeObjs = function () {
-    return Object.assign(...(Object.values(arguments).map(cloneObj)))
+    let values = []
+    for (let i = 0; i < arguments.length; i++){
+        values.push(arguments[i])
+    }
+    return Object.assign(...(values.map(cloneObj)))
 }
 
 export const clickNode = function (node) {

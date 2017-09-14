@@ -181,7 +181,7 @@
     }
 </script>
 
-<style>
+<style lang="scss">
     @import "../scss/app.scss";
 
     .vue-notification {

@@ -8,7 +8,7 @@
 </span>
 </template>
 
-<style>
+<style lang="css">
 	.dg-btn-loader{
 		width: 100%;
 		height: 100%;
