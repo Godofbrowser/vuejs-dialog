@@ -83,15 +83,31 @@
         </section>
 
         <notifications position="bottom left"></notifications>
+
+        <a href="https://github.com/godofbrowser/vuejs-dialog"
+           v-confirm:soft="{html: true, message: exitMessage, cancelText: `Stay on Page`, okText: `Source Code`}">
+            <img style="position: absolute; top: 0; right: 0; border: 0;"
+                 src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67"
+                 alt="Fork me on GitHub"
+                 data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png">
+        </a>
     </div>
 </template>
 
 <script>
     import trans from '../js/translations'
 
+    const exitMessage = `
+<p style="text-align: center; margin: 0;">
+    <span style="font-weight: bold; font-size: large; color: lime">Thank You!</span>
+     <br/>
+     I hope you find it useful
+</p>`
+
     export default {
         data(){
             return {
+                exitMessage,
                 forms: {
                     demo1: {
                         name: null

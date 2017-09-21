@@ -1,6 +1,7 @@
 // Directives
 
 import {noop, clickNode} from './utilities'
+import {CONFIRM_TYPES} from './constants'
 
 
 let Directives = function (Vue) {
@@ -24,6 +25,19 @@ Directives.prototype.defineConfirm = function () {
             return binding.value.message
         }
         return typeof binding.value === 'string' ? binding.value : null
+    }
+
+    const getOptions = function(binding) {
+        let options = typeof binding.value === 'object' ? binding.value : {}
+
+        delete options['ok']
+        delete options['cancel']
+
+        if(binding.arg && CONFIRM_TYPES.hasOwnProperty(binding.arg.toUpperCase())){
+            options.type = CONFIRM_TYPES[binding.arg.toUpperCase()]
+        }
+
+        return options
     }
 
     const getCatchCallback = function(binding) {
@@ -52,12 +66,13 @@ Directives.prototype.defineConfirm = function () {
         event.preventDefault()
         event.stopImmediatePropagation()
 
+        let options = getOptions(binding)
         let confirmMessage = getConfirmMessage(binding)
         let thenCallback = getThenCallback(binding, el)
         let catchCallback = getCatchCallback(binding)
 
         _this.Vue.dialog
-            .confirm(confirmMessage)
+            .confirm(confirmMessage, options)
             .then(thenCallback)
             .catch(catchCallback)
     }
@@ -83,7 +98,7 @@ Directives.prototype.defineConfirm = function () {
 }
 
 Directives.prototype.defineAlert = function () {
-    //
+    // Still Considering it uses case.
 }
 
 export default Directives
