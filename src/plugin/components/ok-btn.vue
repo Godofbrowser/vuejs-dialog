@@ -31,7 +31,6 @@
                 return (this.options.type === CONFIRM_TYPES.HARD)
             },
             is_disabled(){
-                console.log((this.$parent.okBtnDisabled))
                 return (this.$parent.okBtnDisabled)
             },
             clicks_remaining(){

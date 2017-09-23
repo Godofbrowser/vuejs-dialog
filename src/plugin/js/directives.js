@@ -1,6 +1,6 @@
 // Directives
 
-import {noop, clickNode} from './utilities'
+import {noop, clickNode, cloneObj} from './utilities'
 import {CONFIRM_TYPES} from './constants'
 
 
@@ -16,48 +16,6 @@ let Directives = function (Vue) {
     })
 }
 
-Directives.prototype.defineConfirm = function () {
-    const _this = this
-    const DirectiveDefinition = {}
-
-    const clickHandler = function (event, el, binding) {
-        event.preventDefault()
-        event.stopImmediatePropagation()
-
-        let options = _this.getOptions(binding)
-        let confirmMessage = _this.getConfirmMessage(binding)
-        let thenCallback = _this.getThenCallback(binding, el)
-        let catchCallback = _this.getCatchCallback(binding)
-
-        _this.Vue.dialog
-            .confirm(confirmMessage, options)
-            .then(thenCallback)
-            .catch(catchCallback)
-    }
-
-    DirectiveDefinition.bind = (el, binding) => {
-        if (el.VuejsDialog === undefined) {
-            el.VuejsDialog = {}
-        }
-
-        el.VuejsDialog.clickHandler = function (event) {
-            clickHandler(event, el, binding)
-        }
-
-        el.addEventListener('click', el.VuejsDialog.clickHandler, true)
-    }
-
-    DirectiveDefinition.unbind = (el) => {
-        el.removeEventListener('click', el.VuejsDialog.clickHandler, true)
-    }
-
-    return DirectiveDefinition
-}
-
-Directives.prototype.defineAlert = function () {
-    // Still Considering it uses case.
-}
-
 Directives.prototype.getConfirmMessage =  function(binding) {
     if (binding.value && binding.value.message) {
         return binding.value.message
@@ -66,7 +24,7 @@ Directives.prototype.getConfirmMessage =  function(binding) {
 }
 
 Directives.prototype.getOptions =  function(binding) {
-    let options = typeof binding.value === 'object' ? binding.value : {}
+    let options = typeof binding.value === 'object' ? cloneObj(binding.value) : {}
 
     delete options['ok']
     delete options['cancel']
@@ -98,6 +56,48 @@ Directives.prototype.getCatchCallback =  function(binding) {
         return binding.value.cancel
     }
     return noop
+}
+
+
+
+Directives.prototype.defineConfirm = function () {
+    const _this = this
+    const DirectiveDefinition = {}
+
+    const clickHandler = function (event, el, binding) {
+        event.preventDefault()
+        event.stopImmediatePropagation()
+
+        let options = _this.getOptions(binding)
+        let confirmMessage = _this.getConfirmMessage(binding)
+
+        _this.Vue.dialog
+            .confirm(confirmMessage, options)
+            .then(_this.getThenCallback(binding, el))
+            .catch(_this.getCatchCallback(binding))
+    }
+
+    DirectiveDefinition.bind = (el, binding) => {
+        if (el.VuejsDialog === undefined) {
+            el.VuejsDialog = {}
+        }
+
+        el.VuejsDialog.clickHandler = function (event) {
+            clickHandler(event, el, binding)
+        }
+
+        el.addEventListener('click', el.VuejsDialog.clickHandler, true)
+    }
+
+    DirectiveDefinition.unbind = (el) => {
+        el.removeEventListener('click', el.VuejsDialog.clickHandler, true)
+    }
+
+    return DirectiveDefinition
+}
+
+Directives.prototype.defineAlert = function () {
+    // Still Considering it uses case.
 }
 
 export default Directives

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="padding-bottom: 25px">
         <header>
             <div class="header-cont centered">
                 <h1 class="title">Vuejs Dialog Plugin</h1>
@@ -50,14 +50,14 @@
             </h4>
 
             <h4>
-                <a href="http://example.com" v-confirm="`This will take you to &quot;http://example.com&quot;. Proceed with caution`">Go to example.com</a>
+                <a href="http://example.com" v-confirm="'This will take you to &quot;http://example.com&quot;. Proceed with caution'">Go to example.com</a>
             </h4>
 
             <h4>
                 <button v-confirm="{
-                message: 'This dialog was also triggered using a v-confirm directive. It has both OK and CANCEL callback',
-                 ok: clickOkHandler,
-                 cancel: clickCancelHandler}"
+                    message: 'This dialog was also triggered using a v-confirm directive. It has both OK and CANCEL callback',
+                    ok: clickOkHandler,
+                    cancel: clickCancelHandler}"
                 >
                     Give it an object v-confirm="messageAndCallback"
                 </button>
@@ -79,8 +79,8 @@
             <h2>Confirmation types</h2>
             <hr/>
 
-            <p>All dialogs used above are BASIC confirmation dialogs. There are more strict dialogs available.</p>
-            <p> SOFT and HARD confirmation dialogs. Examples below:</p>
+            <p>Sometimes, you may want to be more strict by making sure a user really wants to proceed.</p>
+            <p>The SOFT and HARD confirmation dialogs helps with that.</p>
 
             <h4>
                 <button @click="showSoftConfirmDialog()">Soft confirm - multiple clicks required</button>
@@ -173,7 +173,7 @@
                 this.$dialog.alert(trans('messages.html'), {html: true, animation: 'fade'})
             },
 
-            showLoadingDialog(item = 'foo'){
+            showLoadingDialog(){
                 this.$dialog.confirm(trans('messages.loading'), {
                     html: true,
                     okText: 'Proceed',
