@@ -1,17 +1,17 @@
-// translations for English
+// translations for Spanish
 
 export default {
     content: {
         words: {
-            animation: "animation",
-            fade: "fade",
-            bounce: "bounce",
-            submit: "submit",
-            reset: "Reset",
-            continue: "continue",
-            proceed: "continue",
-            dismiss: "dismiss",
-            source_code: "Source Code"
+            animation: "animación",
+            fade: "descolorarse",
+            bounce: "rebotar",
+            submit: "enviar",
+            reset: "Reiniciar",
+            continue: "continuar",
+            proceed: "proceder",
+            dismiss: "despedir",
+            source_code: "Código fuente"
         },
         titles: {
             method_usage: "Usage as a method",
@@ -47,17 +47,17 @@ export default {
     },
 
     messages: {
-        alert: 'This is an alert dialog. Click the button below to close.',
+        alert: 'Este es un cuadro de diálogo de alerta. Haga clic en el botón de abajo para cerrar.',
         html: `This dialog has <b class="dg-highlight-1">HTML</b> enabled. Click the button below to close.`,
-        basic: 'This is a basic confirmation dialog. Clicking on either button dismisses the dialog instantly',
-        soft: 'This is a soft confirmation dialog. Multiple clicks required to proceed.',
+        basic: 'Este es un diálogo de confirmación básico. Al hacer clic en cualquiera de los botones se descarta el cuadro de diálogo al instante',
+        soft: 'Este es un diálogo de confirmación suave. Se necesitan varios clics para continuar.',
         hard: `This is a hard confirmation dialog. User\'s input must match <span class="dg-highlight-1">verification</span> <span class="dg-highlight-1">text</span> in order to proceed.`,
-        loading: `This is a loading dialog. The loader will start once you Click on Proceed button`,
-        reverse: `Left button is the Proceed button in this dialog. Click to have a feel of the reverse buttons`,
-        click_continue: `You clicked continue`,
-        click_cancel: `Closed because cancel was clicked`,
-        loading_completed: `If you see me, then the loader has completed`,
-        loading_canceled: `You clicked cancel, so there was no loading`,
+        loading: `Este es un diálogo de carga. El cargador se iniciará una vez que haga clic en el botón Continuar`,
+        reverse: `El botón izquierdo es el botón Continuar en este cuadro de diálogo. Haga clic para tener una sensación de los botones de reversa`,
+        click_continue: `Has hecho clic en continuar`,
+        click_cancel: `Cerrado porque se hizo clic en cancelar`,
+        loading_completed: `Si me ves, el cargador ha completado`,
+        loading_canceled: `Hizo clic en cancelar, por lo que no hubo carga`,
         directive_object: "This dialog was also triggered using a v-confirm directive. It has both OK and CANCEL callback",
         directive_string: 'This is a message.',
         directive_link: 'This will take you to "http://example.com". Proceed with caution',
@@ -66,6 +66,6 @@ export default {
         empty_name: "The name field is empty"
     },
     placeholders: {
-        your_name: "Your name"
+        your_name: "Tu nombre"
     }
 }

@@ -1,13 +1,25 @@
 // mini translator
 
-import en from './translations/en'
+const TRANSLATIONS = {
+    en: require('./translations/en').default,
+    zh: require('./translations/zh').default
+    //es: require('./translations/es').default
+}
 
 
 const Translator = function (translations, separator = '.') {
-    let lang = window.navigator.language || window.navigator.userLanguage
-    this.lang = typeof translations[lang] !== 'undefined' ? lang : 'en'
     this.separator = separator
     this.translations = translations
+
+    let navigatorLang = window.navigator.language || window.navigator.userLanguage
+    let selectedLang = window.location.search.match(/(?:[\?\&])(?:lang=)(\w{2})(?:&|$)/)
+    let lang = selectedLang ? selectedLang[1] : navigatorLang
+
+    this.setLanguage(lang)
+}
+
+Translator.prototype.setLanguage = function (lang) {
+    this.lang = typeof this.translations[lang] !== 'undefined' ? lang : 'en'
 }
 
 Translator.prototype.get = function (route) {
@@ -25,8 +37,8 @@ Translator.prototype.get = function (route) {
     return translation
 }
 
-let T = new Translator({en})
+window.Translator = new Translator(TRANSLATIONS)
 
 export default function (n) {
-    return T.get(n)
+    return window.Translator.get(n)
 }

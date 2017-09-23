@@ -1,6 +1,10 @@
 <template>
     <div style="padding-bottom: 25px">
+
         <header>
+            <a href="?lang=en" class="lang-btn">English</a>
+            <a href="?lang=zh" class="lang-btn">中文</a>
+
             <div class="header-cont centered">
                 <h1 class="title">Vuejs Dialog Plugin</h1>
             </div>
@@ -8,67 +12,73 @@
         </header>
 
         <section style="max-width: 350px; margin:auto; text-align: center">
-            <h2>Usage as a method</h2>
+            <h2 class="title-case">{{ trans('content.titles.method_usage')}}</h2>
             <hr/>
             <h4>
-                <button @click="showAlertDialog()">Alert Dialog - one button</button>
+                <button @click="showAlertDialog()">{{ trans('content.examples.method_usage.1') }}</button>
             </h4>
 
             <h4>
-                <button @click="showHtmlDialog()">Html Dialog - style/format content</button>
+                <button @click="showHtmlDialog()">{{ trans('content.examples.method_usage.2') }}</button>
             </h4>
 
             <h4>
-                <button @click="showBasicDialog()">Basic confirm - close instantly</button>
+                <button @click="showBasicDialog()">{{ trans('content.examples.method_usage.3') }}</button>
             </h4>
 
             <h4>
-                <button @click="showLoadingDialog()">Loading Dialog - Useful with ajax</button>
+                <button @click="showLoadingDialog()">{{ trans('content.examples.method_usage.4') }}</button>
             </h4>
 
             <h4>
-                <button @click="showReversedDialog()">Reversed Dialog - switch buttons</button>
+                <button @click="showReversedDialog()">{{ trans('content.examples.method_usage.5') }}</button>
             </h4>
 
             <h4>
-                <button @click="showAnimationFadeDialog()">Fade Dialog - Animation</button>
+                <button @click="showAnimationFadeDialog()">{{ trans('content.examples.method_usage.6') }}</button>
             </h4>
 
             <h4>
-                <button @click="showAnimationBounceDialog()">Bounce Dialog - Animation</button>
+                <button @click="showAnimationBounceDialog()">{{ trans('content.examples.method_usage.7') }}</button>
             </h4>
         </section>
 
         <section style="max-width: 350px; margin:auto; font-family: 'Noto Sans', sans-serif; text-align: center">
-            <h2>Usage as a directive</h2>
+            <h2 class="title-case">{{ trans('content.titles.directive_usage')}}</h2>
             <hr/>
 
             <h4>
-                <button v-confirm="`This is a message`">
-                    Give it a string v-confirm="This is a message"
+                <button v-confirm="trans('messages.directive_string')">
+                    {{ trans('content.examples.directive_usage.1') }} v-confirm="'{{ trans('messages.directive_string') }}'"
                 </button>
             </h4>
 
             <h4>
-                <a href="http://example.com" v-confirm="'This will take you to &quot;http://example.com&quot;. Proceed with caution'">Go to example.com</a>
+                <a href="http://example.com" v-confirm="trans('messages.directive_link')">
+                    {{ trans('content.examples.directive_usage.2') }}
+                </a>
             </h4>
 
             <h4>
                 <button v-confirm="{
-                    message: 'This dialog was also triggered using a v-confirm directive. It has both OK and CANCEL callback',
+                    message: trans('messages.directive_object'),
                     ok: clickOkHandler,
                     cancel: clickCancelHandler}"
                 >
-                    Give it an object v-confirm="messageAndCallback"
+                    {{ trans('content.examples.directive_usage.3') }}
                 </button>
             </h4>
 
             <h4>
                 <form @submit.prevent="submitDemo1Form()">
                     <fieldset>
-                        <input v-model="forms.demo1.name" type="text" name="name" placeholder="Your name"/>
-                        <button type="reset" v-confirm="'Changes would be discarded. Reset this form?'">Reset</button>
-                        <button type="submit" v-confirm="'Submit this form?'">submit</button>
+                        <input v-model="forms.demo1.name" type="text" name="name" :placeholder="trans('placeholders.your_name')"/>
+                        <button type="reset" v-confirm="trans('messages.form_reset')">
+                            {{ trans('content.words.reset') }}
+                        </button>
+                        <button type="submit" v-confirm="trans('messages.form_submit')">
+                            {{ trans('content.words.submit') }}
+                        </button>
                     </fieldset>
                 </form>
             </h4>
@@ -76,25 +86,25 @@
 
 
         <section style="max-width: 350px; margin:auto; font-family: 'Noto Sans', sans-serif; text-align: center">
-            <h2>Confirmation types</h2>
+            <h2>{{ trans('content.titles.confirmation_types')}}</h2>
             <hr/>
 
-            <p>Sometimes, you may want to be more strict by making sure a user really wants to proceed.</p>
-            <p>The SOFT and HARD confirmation dialogs helps with that.</p>
+            <p>{{ trans('content.descriptions.confirmation_types.1')}}</p>
+            <p>{{ trans('content.descriptions.confirmation_types.2')}}</p>
 
             <h4>
-                <button @click="showSoftConfirmDialog()">Soft confirm - multiple clicks required</button>
+                <button @click="showSoftConfirmDialog()"> {{ trans('content.examples.confirmation_types.1') }}</button>
             </h4>
 
             <h4>
-                <button @click="showHardConfirmDialog()">Hard confirm - verification text required</button>
+                <button @click="showHardConfirmDialog()">{{ trans('content.examples.confirmation_types.2') }}</button>
             </h4>
         </section>
 
         <notifications position="bottom left"></notifications>
 
         <a href="https://github.com/godofbrowser/vuejs-dialog"
-           v-confirm:soft="{html: true, message: exitMessage, cancelText: `Stay on Page`, okText: `Source Code`}">
+           v-confirm:soft="{html: true, message: exitMessage, cancelText: `Stay on Page`, okText: trans('content.words.source_code')}">
             <img style="position: absolute; top: 0; right: 0; border: 0;"
                  src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67"
                  alt="Fork me on GitHub"
@@ -128,9 +138,10 @@
             console.log('mounted app')
         },
         methods: {
+            trans,
             submitDemo1Form(){
-                let msg = "Form Submited. Your Name: "
-                msg += this.forms.demo1.name || 'The name field is empty'
+                let msg = trans('placeholders.your_name') + ": "
+                msg += this.forms.demo1.name || trans('messages.empty_name')
                 this.$notify(msg)
             },
             showAlertDialog(){
@@ -164,7 +175,7 @@
                     })
             },
             showHtmlDialog(){
-                this.$dialog.alert(trans('messages.html'), {html: true, okText: 'Dismiss'})
+                this.$dialog.alert(trans('messages.html'), {html: true, okText: trans('content.words.dismiss')})
             },
             showAnimationBounceDialog(){
                 this.$dialog.alert(trans('messages.html'), {html: true, animation: 'bounce'})
@@ -176,7 +187,7 @@
             showLoadingDialog(){
                 this.$dialog.confirm(trans('messages.loading'), {
                     html: true,
-                    okText: 'Proceed',
+                    okText: trans('content.words.proceed'),
                     loader: true
                 }).then((dialog) => {
                     setTimeout(() => {
@@ -192,7 +203,7 @@
             showReversedDialog(){
                 this.$dialog.confirm(trans('messages.reverse'), {
                     html: true,
-                    okText: 'Proceed',
+                    okText: trans('content.words.proceed'),
                     loader: true,
                     reverse: true
                 }).then((dialog) => {
