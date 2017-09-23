@@ -17,7 +17,7 @@ Translator.prototype.get = function (route) {
     for (let i = 0; i < parts.length; i++) {
         translation = translation[parts[i]]
         if (translation === undefined) {
-            translation = 'No Translation'
+            translation = '[Error: No Translation]'
             break
         }
     }

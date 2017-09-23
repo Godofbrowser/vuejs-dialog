@@ -1,6 +1,6 @@
 <template>
     <button v-if="enabled" :class="['dg-btn', 'dg-btn--ok', {'dg-btn--loading': loading}, {'dg-pull-right': !options.reverse}]"
-            @click.prevent="proceed()" ref="btn">
+            @click.prevent="proceed()" ref="btn" :disabled="is_disabled">
         <span class="dg-btn-content">
             <slot></slot>
             <span v-if="soft_confirm">({{ clicks_remaining }})</span>
@@ -27,13 +27,20 @@
             soft_confirm(){
                 return (this.options.type === CONFIRM_TYPES.SOFT)
             },
+            hard_confirm(){
+                return (this.options.type === CONFIRM_TYPES.HARD)
+            },
+            is_disabled(){
+                console.log((this.$parent.okBtnDisabled))
+                return (this.$parent.okBtnDisabled)
+            },
             clicks_remaining(){
                 return Math.max((this.options.clicksCount - this.clicks_count), 0)
             }
         },
         methods: {
             proceed(){
-                if(this.validateProceed()){
+                if(!this.is_disabled && this.validateProceed()){
                     this.$emit('click')
                 }
             },

@@ -1,8 +1,13 @@
 <template>
-    <div style="max-width: 350px; margin:auto; font-family: 'Noto Sans', sans-serif; text-align: center">
-        <h1 class="page-title">Vuejs-Dialog Plugin Examples</h1>
+    <div>
+        <header>
+            <div class="header-cont centered">
+                <h1 class="title">Vuejs Dialog Plugin</h1>
+            </div>
 
-        <section>
+        </header>
+
+        <section style="max-width: 350px; margin:auto; text-align: center">
             <h2>Usage as a method</h2>
             <hr/>
             <h4>
@@ -34,7 +39,7 @@
             </h4>
         </section>
 
-        <section>
+        <section style="max-width: 350px; margin:auto; font-family: 'Noto Sans', sans-serif; text-align: center">
             <h2>Usage as a directive</h2>
             <hr/>
 
@@ -70,7 +75,7 @@
         </section>
 
 
-        <section>
+        <section style="max-width: 350px; margin:auto; font-family: 'Noto Sans', sans-serif; text-align: center">
             <h2>Confirmation types</h2>
             <hr/>
 
@@ -79,6 +84,10 @@
 
             <h4>
                 <button @click="showSoftConfirmDialog()">Soft confirm - multiple clicks required</button>
+            </h4>
+
+            <h4>
+                <button @click="showHardConfirmDialog()">Hard confirm - verification text required</button>
             </h4>
         </section>
 
@@ -138,6 +147,15 @@
             },
             showSoftConfirmDialog(){
                 this.$dialog.confirm(trans('messages.soft'), {type: 'soft'})
+                    .then(() => {
+                        this.$notify({type: 'success', text: trans('messages.click_continue')})
+                    })
+                    .catch(() => {
+                        this.$notify({type: 'success', text: trans('messages.click_cancel')})
+                    })
+            },
+            showHardConfirmDialog(){
+                this.$dialog.confirm(trans('messages.hard'), {type: 'hard', html: true, verification: 'let me go'})
                     .then(() => {
                         this.$notify({type: 'success', text: trans('messages.click_continue')})
                     })

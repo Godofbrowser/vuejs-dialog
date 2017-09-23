@@ -1,35 +1,36 @@
 <template>
     <div>
         <transition :name="animation" appear="" @after-leave="backdrop = false">
-            <div v-if="show" ref="container" class="dg-container">
+            <div v-if="show" ref="container" :class="['dg-container', {'dg-container__has-input': (isHardConfirm || isPrompt)}]">
                 <div class="dg-content-cont dg-content-cont--floating">
                     <div class="dg-main-content">
-                        <!--<div class="dg-content-header">-->
-                        <!---->
-                        <!--</div>-->
 
                         <div class="dg-content-body">
                             <div v-if="options.html" class="dg-content" v-html="options.message"></div>
                             <div v-else="" class="dg-content">{{ options.message }}</div>
 
-                            <!--<form style="background-color: ghostwhite; padding: 10px; margin-bottom: -15px">-->
-                                <!--<label for="dg-confirm-input" style="font-size: 13px">Type "{{ options.verification }}" below to confirm</label>-->
-                                <!--<input type="text" :placeholder="options.verification" id="dg-confirm-input"-->
-                                       <!--style="width: 100%;margin-top: 10px;-->
-                               <!--padding: 5px 15px; font-size: 16px;border-radius: 4px; border: 2px solid #eee"/>-->
-                            <!--</form>-->
+                            <form v-if="isHardConfirm || isPrompt" class="dg-form">
+                                <label for="dg-input-label" style="font-size: 13px">Type "{{ options.verification }}" below to confirm</label>
+                                <input type="text" placeholder="Verification text"
+                                       v-model="input"
+                                       id="dg-input-label"
+                                       style="width: 100%;margin-top: 10px;
+                               padding: 5px 15px; font-size: 16px;border-radius: 4px; border: 2px solid #eee"/>
+                            </form>
                         </div>
 
                         <div class="dg-content-footer">
 
                             <button @click="clickLeftBtn()" :is="leftBtnComponent" :loading="loading"
                                        :enabled="leftBtnEnabled" :options="options" :focus="leftBtnFocus">
-                                <span>{{ options.reverse ? options.okText : options.cancelText}}</span>
+                                <span v-if="options.html" v-html="options.reverse ? options.okText : options.cancelText"></span>
+                                <span v-else="">{{ options.reverse ? options.okText : options.cancelText}}</span>
                             </button>
 
                             <button :is="rightBtnComponent" @click="clickRightBtn()" :loading="loading"
                                        :enabled="rightBtnEnabled" :options="options" :focus="rightBtnFocus">
-                                <span>{{ options.reverse ? options.cancelText : options.okText }}</span>
+                                <span v-if="options.html" v-html="options.reverse ? options.cancelText : options.okText"></span>
+                                <span v-else="">{{ options.reverse ? options.cancelText : options.okText }}</span>
                             </button>
 
                             <div class="dg-clear"></div>
@@ -48,11 +49,12 @@
 <script>
     import OkBtn from './ok-btn.vue'
     import CancelBtn from './cancel-btn.vue'
-    import {DIALOG_TYPES, ANIMATION_TYPES} from '../js/constants'
+    import {DIALOG_TYPES, ANIMATION_TYPES, CONFIRM_TYPES} from '../js/constants'
 
     export default {
         data: function () {
             return {
+                input: '',
                 show: false,
                 backdrop: true,
                 canceled: false,
@@ -75,8 +77,20 @@
             loaderEnabled(){
                 return !!this.options.loader
             },
+            isHardConfirm(){
+                return this.options.window === DIALOG_TYPES.CONFIRM
+                && this.options.type === CONFIRM_TYPES.HARD
+            },
+            isPrompt(){
+                return (this.options.window === DIALOG_TYPES.PROMPT)
+            },
             cancelBtnDisabled(){
                 return (this.options.window === DIALOG_TYPES.ALERT)
+            },
+            okBtnDisabled(){
+                return (this.options.window === DIALOG_TYPES.CONFIRM)
+                    && (this.options.type === CONFIRM_TYPES.HARD)
+                    && (this.input !== this.options.verification)
             },
             leftBtnEnabled(){
                 return (this.cancelBtnDisabled === false) || (this.options.reverse === true)
@@ -157,4 +171,5 @@
 <style lang="css">
     @import url('../styles/_animations.css');
     @import url('../styles/default.css');
+    @import url('../styles/_helpers.css');
 </style>
