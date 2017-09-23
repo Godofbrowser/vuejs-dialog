@@ -123,7 +123,7 @@ const DOCS = Object.assign({}, COMMON, {
 
 const DIST = Object.assign({}, COMMON, {
     name: 'dist',
-    entry: './src/plugin/',
+    entry: './src/plugin/js',
     output: {
         library: 'VuejsDialog',
         libraryTarget: 'umd',

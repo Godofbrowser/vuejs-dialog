@@ -1,7 +1,7 @@
 <template>
     <div>
         <transition :name="animation" appear="" @after-leave="backdrop = false">
-            <div v-if="show" ref="container" :class="['dg-container', {'dg-container__has-input': (isHardConfirm || isPrompt)}]">
+            <div v-if="show" ref="container" :class="['dg-container', {'dg-container--has-input': (isHardConfirm || isPrompt)}]">
                 <div class="dg-content-cont dg-content-cont--floating">
                     <div class="dg-main-content">
 
@@ -10,7 +10,9 @@
                             <div v-else="" class="dg-content">{{ options.message }}</div>
 
                             <form v-if="isHardConfirm || isPrompt" class="dg-form">
-                                <label for="dg-input-label" style="font-size: 13px">Type "{{ options.verification }}" below to confirm</label>
+                                <label for="dg-input-label" style="font-size: 13px">
+                                    Type "{{ options.verification }}" below to confirm
+                                </label>
                                 <input type="text" placeholder="Verification text"
                                        v-model="input"
                                        id="dg-input-label"
@@ -168,8 +170,8 @@
     }
 </script>
 
-<style lang="css">
-    @import url('../styles/_animations.css');
-    @import url('../styles/default.css');
-    @import url('../styles/_helpers.css');
+<style lang="scss">
+    @import '../styles/shared/_animations';
+    @import '../styles/shared/_helpers';
+    @import '../styles/default';
 </style>

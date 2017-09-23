@@ -44,13 +44,13 @@
             <hr/>
 
             <h4>
-                <a href="http://example.com" v-confirm="'This will take you to http://example.com. Proceed with caution'">Go to example.com</a>
-            </h4>
-
-            <h4>
                 <button v-confirm="`This is a message`">
                     Give it a string v-confirm="This is a message"
                 </button>
+            </h4>
+
+            <h4>
+                <a href="http://example.com" v-confirm="`This will take you to &quot;http://example.com&quot;. Proceed with caution`">Go to example.com</a>
             </h4>
 
             <h4>
@@ -108,7 +108,7 @@
 
     const exitMessage = `
 <p style="text-align: center; margin: 0;">
-    <span style="font-weight: bold; font-size: large; color: lime">Thank You!</span>
+    <span class="dg-highlight-1">Thank You!</span>
      <br/>
      I hope you find it useful
 </p>`
@@ -216,7 +216,7 @@
 </script>
 
 <style lang="scss">
-    @import "../scss/app.scss";
+    @import "../scss/app";
 
     .vue-notification {
         padding: 10px;
