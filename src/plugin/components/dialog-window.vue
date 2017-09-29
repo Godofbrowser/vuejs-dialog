@@ -1,5 +1,9 @@
 <template>
     <div>
+        <transition name="dg-backdrop" appear="" @after-leave="anmiationEnded" @after-enter="show = true">
+            <div v-if="backdrop" class="dg-backdrop"></div>
+        </transition>
+
         <transition :name="animation" appear="" @after-leave="backdrop = false">
             <div v-if="show" ref="container" :class="['dg-container', {'dg-container--has-input': (isHardConfirm || isPrompt)}]">
                 <div class="dg-content-cont dg-content-cont--floating">
@@ -40,10 +44,6 @@
                     </div>
                 </div>
             </div>
-        </transition>
-
-        <transition name="dg-backdrop" appear="" @after-leave="anmiationEnded" @after-enter="show = true">
-            <div v-if="backdrop" class="dg-backdrop"></div>
         </transition>
     </div>
 </template>
@@ -152,7 +152,8 @@
                 if (this.canceled){
                     this.options.promiseRejecter(false)
                 }
-                this.$emit('close')
+                console.log('emit close: ', this.options.id)
+                this.$emit('close', this.options.id)
             },
             escapeKeyListener(e) {
                 if (e.keyCode === 27) {
@@ -161,10 +162,10 @@
             }
         },
         created() {
-            document.addEventListener('keydown', this.escapeKeyListener);
+            document.addEventListener('keydown', this.escapeKeyListener)
         },
         destroyed() {
-            document.removeEventListener('keydown', this.escapeKeyListener);
+            document.removeEventListener('keydown', this.escapeKeyListener)
         },
         components: {CancelBtn, OkBtn}
     }
