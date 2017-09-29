@@ -1,6 +1,6 @@
 <template>
     <div>
-        <dialog-window v-for="dialog in dialogs"
+        <dialog-window v-for="dialog in dialogsARR"
                        :options="dialog"
                        :key="dialog.id"
                        @close="closeDialog">
@@ -9,38 +9,30 @@
 </template>
 
 <script>
-    import Vue from 'vue'
     import DialogWindow from './dialog-window.vue'
 
     export default {
         data: function () {
             return {
-                dialogsOBJ: {}
-            }
-        },
-        computed: {
-            dialogs(){
-                let ret = []
-                for(let dialog in this.dialogsOBJ){
-                    if(this.dialogsOBJ.hasOwnProperty(dialog)){
-                        console.log("Computed: ", dialog, this.dialogsOBJ[dialog])
-                        ret.push(this.dialogsOBJ[dialog])
-                    }
-                }
-                return ret
+                dialogsARR: []
             }
         },
         methods: {
             commit(data){
-                this.$set(this.dialogsOBJ, data.id, data)
+                this.dialogsARR.push(data)
             },
-            closeDialog(id){
-                console.log(id)
+            closeDialog(dialogId){
+                let dialogIndex = null
+                for(let i=0; i < this.dialogsARR.length; i++){
+                    if(this.dialogsARR[i].id === dialogId){
+                        dialogIndex = i
+                        break
+                    }
+                }
 
-                this.$delete(this.dialogsOBJ, id)
-
-                console.log(this.dialogs.length, this.dialogs)
-
+                if(dialogIndex !== null) {
+                    this.$delete(this.dialogsARR, dialogIndex)
+                }
             }
         },
         components: {DialogWindow}

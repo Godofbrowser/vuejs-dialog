@@ -152,7 +152,7 @@
                 if (this.canceled){
                     this.options.promiseRejecter(false)
                 }
-                console.log('emit close: ', this.options.id)
+
                 this.$emit('close', this.options.id)
             },
             escapeKeyListener(e) {
