@@ -46,7 +46,7 @@ const COMMON = {
                     }, {
                         loader: "postcss-loader",
                         options: {
-                            plugins: (loader) => [
+                            plugins: () => [
                                 require('autoprefixer')()
                             ]
                         }

@@ -7,5 +7,5 @@ fs.copy(source, dest, function (err) {
     if (err) {
         return console.error(err);
     }
-    return console.log('Copied to ' + dest);
+    return console.info('Copied to ' + dest);
 });
