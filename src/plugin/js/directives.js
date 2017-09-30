@@ -9,9 +9,6 @@ let Directives = function (Vue) {
         Vue: {get: () => Vue},
         confirmDefinition: {
             get: this.defineConfirm
-        },
-        alertDefinition: {
-            get: this.defineAlert
         }
     })
 }
@@ -61,26 +58,25 @@ Directives.prototype.getCatchCallback =  function(binding) {
 
 
 Directives.prototype.defineConfirm = function () {
-    const _this = this
     const DirectiveDefinition = {}
 
     const clickHandler = function (event, el, binding) {
         event.preventDefault()
         event.stopImmediatePropagation()
 
-        let options = _this.getOptions(binding)
-        let confirmMessage = _this.getConfirmMessage(binding)
+        let options = this.getOptions(binding)
+        let confirmMessage = this.getConfirmMessage(binding)
+        let thenCallback = this.getThenCallback(binding, el)
+        let catchCallback = this.getCatchCallback(binding)
 
-        _this.Vue.dialog
+        this.Vue.dialog
             .confirm(confirmMessage, options)
-            .then(_this.getThenCallback(binding, el))
-            .catch(_this.getCatchCallback(binding))
+            .then(thenCallback)
+            .catch(catchCallback)
     }
 
     DirectiveDefinition.bind = (el, binding) => {
-        if (el.VuejsDialog === undefined) {
-            el.VuejsDialog = {}
-        }
+        el.VuejsDialog = el.VuejsDialog || {}
 
         el.VuejsDialog.clickHandler = function (event) {
             clickHandler(event, el, binding)
@@ -94,10 +90,6 @@ Directives.prototype.defineConfirm = function () {
     }
 
     return DirectiveDefinition
-}
-
-Directives.prototype.defineAlert = function () {
-    // Still Considering it uses case.
 }
 
 export default Directives

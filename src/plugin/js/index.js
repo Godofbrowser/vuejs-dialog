@@ -47,8 +47,6 @@ Plugin.install = function (Vue, options) {
 
 	Vue.directive('confirm', DirectivesObj.confirmDefinition)
 
-	//Vue.directive('alert', DirectivesObj.alertDefinition)
-
 	Vue.dialog = new Plugin(Vue, options)
 
 	Object.defineProperties(Vue.prototype, {
