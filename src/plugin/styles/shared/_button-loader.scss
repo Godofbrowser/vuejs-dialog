@@ -1,0 +1,51 @@
+.dg-btn-loader {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  top: 0;
+  left: 0;
+}
+
+#dg-circleG {
+  width: 67px;
+  margin: auto;
+}
+
+.dg-circleG {
+  background-color: rgb(255, 255, 255);
+  float: left;
+  height: 14px;
+  margin-left: 8px;
+  width: 14px;
+  animation-name: dg-bounce_circleG;
+  animation-duration: 0.5875s;
+  animation-iteration-count: infinite;
+  animation-direction: normal;
+  border-radius: 9px;
+}
+
+#dg-circleG_1 {
+  animation-delay: 0.1195s;
+}
+
+#dg-circleG_2 {
+  animation-delay: 0.2755s;
+}
+
+#dg-circleG_3 {
+  animation-delay: 0.3485s;
+}
+
+@keyframes dg-bounce_circleG {
+  0% {
+  }
+
+  50% {
+    background-color: rgb(9, 162, 227);
+  }
+
+  100% {
+  }
+}

@@ -1,11 +1,11 @@
 <template>
     <div>
-        <transition name="dg-backdrop" appear="" @after-leave="anmiationEnded" @after-enter="show = true">
-            <div v-if="backdrop" class="dg-backdrop"></div>
+        <transition name="dg-backdrop" appear @after-leave="animationEnded('backdrop')">
+            <div v-if="show" class="dg-backdrop"></div>
         </transition>
 
-        <transition :name="animation" appear="" @after-leave="backdrop = false">
-            <div v-if="show" ref="container" :class="['dg-container', {'dg-container--has-input': (isHardConfirm || isPrompt)}]">
+        <transition :name="animation" @after-leave="animationEnded('content')" appear>
+            <div v-if="show" :class="['dg-container', {'dg-container--has-input': (isHardConfirm || isPrompt)}]">
                 <div class="dg-content-cont dg-content-cont--floating">
                     <div class="dg-main-content">
 
@@ -29,14 +29,14 @@
 
                             <button @click="clickLeftBtn()" :is="leftBtnComponent" :loading="loading"
                                        :enabled="leftBtnEnabled" :options="options" :focus="leftBtnFocus">
-                                <span v-if="options.html" v-html="options.reverse ? options.okText : options.cancelText"></span>
-                                <span v-else="">{{ options.reverse ? options.okText : options.cancelText}}</span>
+                                <span v-if="options.html" v-html="leftBtnText"></span>
+                                <span v-else="">{{ leftBtnText }}</span>
                             </button>
 
                             <button :is="rightBtnComponent" @click="clickRightBtn()" :loading="loading"
                                        :enabled="rightBtnEnabled" :options="options" :focus="rightBtnFocus">
-                                <span v-if="options.html" v-html="options.reverse ? options.cancelText : options.okText"></span>
-                                <span v-else="">{{ options.reverse ? options.cancelText : options.okText }}</span>
+                                <span v-if="options.html" v-html="rightBtnText"></span>
+                                <span v-else="">{{ rightBtnText }}</span>
                             </button>
 
                             <div class="dg-clear"></div>
@@ -57,16 +57,26 @@
         data: function () {
             return {
                 input: '',
-                show: false,
-                backdrop: true,
-                canceled: false,
-                loading: false
+                show: true,
+                loading: false,
+                endedAnimations: []
             }
         },
         props: {
             options: {
                 type: Object,
                 required: true
+            },
+            escapeKeyClose: {
+                type: Boolean,
+                "default": false
+            }
+        },
+        watch: {
+            "escapeKeyClose": function(val){
+                if(val === true){
+                    this.cancelBtnDisabled ? this.proceed() : this.cancel()
+                }
             }
         },
         computed: {
@@ -111,6 +121,12 @@
             },
             rightBtnFocus(){
                 return (this.options.reverse === false)
+            },
+            leftBtnText(){
+                return this.options.reverse ? this.options.okText : this.options.cancelText
+            },
+            rightBtnText(){
+                return this.options.reverse ? this.options.cancelText : this.options.okText
             }
         },
         methods: {
@@ -135,7 +151,6 @@
             cancel(){
                 if (this.loading === true)
                     return
-                this.canceled = true
                 this.close()
             },
             switchLoadingState(loading = null){
@@ -148,31 +163,23 @@
             close(){
                 this.show = false
             },
-            anmiationEnded(){
-                if (this.canceled){
+            animationEnded(type){
+                this.endedAnimations.push(type)
+
+                if(this.endedAnimations.includes('backdrop') && this.endedAnimations.includes('content')){
+
                     this.options.promiseRejecter(false)
+
+                    this.$emit('close', this.options.id)
                 }
 
-                this.$emit('close', this.options.id)
             },
-            escapeKeyListener(e) {
-                if (e.keyCode === 27) {
-                    this.cancelBtnDisabled ? this.proceed() : this.cancel()
-                }
-            }
-        },
-        created() {
-            document.addEventListener('keydown', this.escapeKeyListener)
-        },
-        destroyed() {
-            document.removeEventListener('keydown', this.escapeKeyListener)
+//            escapeKeyListener(e) {
+//                if (e.keyCode === 27) {
+//                    this.cancelBtnDisabled ? this.proceed() : this.cancel()
+//                }
+//            }
         },
         components: {CancelBtn, OkBtn}
     }
 </script>
-
-<style lang="scss">
-    @import '../styles/shared/_animations';
-    @import '../styles/shared/_helpers';
-    @import '../styles/default';
-</style>

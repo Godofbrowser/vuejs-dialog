@@ -25,3 +25,16 @@ export const clickNode = function (node) {
         node.onclick();
     }
 }
+
+export const firstIndex = function (arr, search, prop) {
+    let i
+    let limit = arr.length
+
+    for(i=0; i < limit; i++){
+        if(arr[i][prop] === search){
+            return i
+        }
+    }
+
+    return -1
+}
