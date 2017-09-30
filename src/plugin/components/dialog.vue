@@ -30,10 +30,8 @@
                 data.escapeKeyPressed = false
                 this.dialogsARR.push(data)
             },
-            destroyDialog(dialogId = null){
-                let dialogIndex = dialogId === null
-                    ? (-1 + this.dialogsARR.length)
-                    : firstIndex(this.dialogsARR, dialogId, 'id')
+            destroyDialog(dialogId){
+                let dialogIndex = firstIndex(this.dialogsARR, dialogId, 'id')
 
                 if (dialogIndex !== -1) {
                     this.$delete(this.dialogsARR, dialogIndex)
