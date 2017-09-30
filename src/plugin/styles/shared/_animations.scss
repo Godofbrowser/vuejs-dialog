@@ -24,19 +24,19 @@
 }
 
 .dg-backdrop-enter-active {
-	animation: dg-fadeIn .16s;
+	animation: dg-fadeIn .3s;
 }
 
 .dg-backdrop-leave-active {
-	animation: dg-fadeOut .16s;
+	animation: dg-fadeOut .5s;
 }
 
 .dg-fade-enter-active {
-	animation: dg-fadeIn .6s;
+	animation: dg-fadeIn .6s cubic-bezier(0.000, 0.000, 0.580, 1.000);
 }
 
 .dg-fade-leave-active {
-	animation: dg-fadeOut .5s;
+	animation: dg-fadeOut .6s cubic-bezier(0.000, 0.000, 0.580, 1.000);
 }
 
 @keyframes dg-fadeIn {
@@ -49,10 +49,10 @@
 }
 
 .dg-zoom-enter-active {
-	animation: dg-zoomIn .3s;
+	animation: dg-zoomIn .3s cubic-bezier(0.000, 0.000, 0.580, 1.000);
 }
 .dg-zoom-leave-active {
-	animation: dg-zoomOut .3s;
+	animation: dg-zoomOut .4s cubic-bezier(0.000, 0.000, 0.580, 1.000);
 }
 
 @keyframes dg-zoomIn {
