@@ -21,7 +21,7 @@ export default {
         descriptions: {
             confirmation_types: {
                 1: "Sometimes, you may want to be more strict by making sure a user really wants to proceed.",
-                2: "The SOFT and HARD confirmation dialogsOBJ helps with that."
+                2: "The SOFT and HARD confirmation dialogs helps with that."
             },
         },
         examples: {

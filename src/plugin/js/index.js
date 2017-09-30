@@ -8,15 +8,27 @@ import {mergeObjs} from './utilities'
 
 
 let Plugin = function(Vue, globalOptions = {}){
-	this.globalOptions = globalOptions
+	this.Vue = Vue
+	this.mounted = false
+	this.Dialog = {}
+    this.globalOptions = mergeObjs(DEFAULT_OPTIONS, globalOptions)
+}
 
-    this.Dialog = (() => {
-        let DialogConstructor = Vue.extend(DialogComponent)
-        let node = document.createElement("div")
-        document.querySelector('body').appendChild(node)
+Plugin.prototype.mountIfNotMounted = function(){
+	if(this.mounted === true){
+		return
+	}
 
-        return (new DialogConstructor()).$mount(node)
-    })()
+	this.Dialog = (() => {
+		let DialogConstructor = this.Vue.extend(DialogComponent)
+		let node = document.createElement("div")
+		document.querySelector('body').appendChild(node)
+
+		return (new DialogConstructor()).$mount(node)
+	})()
+
+	this.mounted = true
+
 }
 
 Plugin.prototype.alert = function(message = null, options = {}){
@@ -30,6 +42,7 @@ Plugin.prototype.confirm = function(message = null, options = {}){
 }
 
 Plugin.prototype.open = function(type, localOptions = {}){
+	this.mountIfNotMounted()
 	return new Promise((resolve, reject) => {
 
         localOptions.id = 'dialog.' + Date.now()
@@ -37,7 +50,7 @@ Plugin.prototype.open = function(type, localOptions = {}){
         localOptions.promiseResolver = resolve
         localOptions.promiseRejecter = reject
 
-		this.Dialog.commit(mergeObjs(DEFAULT_OPTIONS, this.globalOptions, localOptions))
+		this.Dialog.commit(mergeObjs(this.globalOptions, localOptions))
 	})
 }
 

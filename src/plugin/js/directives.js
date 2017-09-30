@@ -60,7 +60,7 @@ Directives.prototype.getCatchCallback =  function(binding) {
 Directives.prototype.defineConfirm = function () {
     const DirectiveDefinition = {}
 
-    const clickHandler = function (event, el, binding) {
+    const clickHandler = (event, el, binding) => {
         event.preventDefault()
         event.stopImmediatePropagation()
 
