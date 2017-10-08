@@ -1,7 +1,5 @@
 {
-  "presets": [
-    ["env", { "modules": false }]
-  ],
+  "presets": ["env"],
   "plugins": [
     "transform-object-assign",
     ["transform-runtime", {
