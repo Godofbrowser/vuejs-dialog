@@ -55,32 +55,28 @@ Directives.prototype.getCatchCallback =  function(binding) {
     return noop
 }
 
+Directives.prototype.clickHandler =  function(event, el, binding) {
+    event.preventDefault()
+    event.stopImmediatePropagation()
 
+    let options = this.getOptions(binding)
+    let confirmMessage = this.getConfirmMessage(binding)
+    let thenCallback = this.getThenCallback(binding, el)
+    let catchCallback = this.getCatchCallback(binding)
+
+    this.Vue.dialog
+        .confirm(confirmMessage, options)
+        .then(thenCallback)
+        .catch(catchCallback)
+}
 
 Directives.prototype.defineConfirm = function () {
     const DirectiveDefinition = {}
 
-    const clickHandler = (event, el, binding) => {
-        event.preventDefault()
-        event.stopImmediatePropagation()
-
-        let options = this.getOptions(binding)
-        let confirmMessage = this.getConfirmMessage(binding)
-        let thenCallback = this.getThenCallback(binding, el)
-        let catchCallback = this.getCatchCallback(binding)
-
-        this.Vue.dialog
-            .confirm(confirmMessage, options)
-            .then(thenCallback)
-            .catch(catchCallback)
-    }
-
     DirectiveDefinition.bind = (el, binding) => {
         el.VuejsDialog = el.VuejsDialog || {}
 
-        el.VuejsDialog.clickHandler = function (event) {
-            clickHandler(event, el, binding)
-        }
+        el.VuejsDialog.clickHandler = event => this.clickHandler(event, el, binding)
 
         el.addEventListener('click', el.VuejsDialog.clickHandler, true)
     }
