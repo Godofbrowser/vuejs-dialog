@@ -2,9 +2,12 @@
  * Created by Emmy on 10/8/2017.
  */
 
-import Plugin from '../../src/plugin/js/index'
+import Plugin from '../../../../src/plugin/js/index'
 import should from 'should'
 import {assert} from 'chai'
+import Vue from 'vue'
+
+Vue.config.productionTip = false
 
 describe('Plugin installer', function () {
     it('"Plugin.install" Should be a function', function () {
@@ -12,20 +15,16 @@ describe('Plugin installer', function () {
     })
 })
 
+Vue.use(Plugin)
+
 describe('Plugin Installed', function () {
     it('Plugin Should be installed', function () {
-        const Vue = require('vue').default
-        Vue.use(Plugin)
-
         assert.property(Vue, 'dialog')
     })
 })
 
 describe('Plugin Available', function () {
     it('"$dialog" Should be a available on the created, mounted hooks', function () {
-        const Vue = require('vue').default
-        Vue.use(Plugin)
-
         new Vue({
             created(){
                 assert.property(this, '$dialog')
@@ -33,8 +32,8 @@ describe('Plugin Available', function () {
             mounted(){
                 assert.property(this, '$dialog')
             },
-            render(h){
-                return h('p', {id: 'test'}, 'test')
+            render(){
+                return ''
             }
         }).$mount()
     })
@@ -42,17 +41,14 @@ describe('Plugin Available', function () {
 
 describe('Plugin Available', function () {
     it('"$dialog" Should be a available in component methods', function () {
-        const Vue = require('vue').default
-        Vue.use(Plugin)
-
         let vm = new Vue({
             methods: {
                 check(){
                     assert.property(this, '$dialog')
                 }
             },
-            render(h){
-                return h('p', {id: 'test'}, 'test')
+            render(){
+                return ''
             }
         }).$mount()
 

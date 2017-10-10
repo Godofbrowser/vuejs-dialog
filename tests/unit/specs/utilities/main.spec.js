@@ -2,9 +2,8 @@
  * Created by Emmy on 10/7/2017.
  */
 
-import * as Utility from '../../src/plugin/js/utilities'
+import * as Utility from '../../../../src/plugin/js/utilities'
 import should from 'should'
-
 
 describe('Utility #cloneObj', function () {
     it('The problem: Altering an object "objA" affects "objB"', function () {

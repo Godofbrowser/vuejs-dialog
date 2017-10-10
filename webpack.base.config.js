@@ -7,7 +7,6 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const isProduction = process.env.NODE_ENV === 'production'
 
-
 module.exports = {
 	module: {
 		rules: [
@@ -58,5 +57,13 @@ module.exports = {
 				loader: 'vue-html-loader'
 			}
 		]
-	}
+	},
+    plugins: [
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+                BABEL_ENV: JSON.stringify(process.env.BABEL_ENV)
+            }
+        })
+    ]
 }

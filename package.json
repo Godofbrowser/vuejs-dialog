@@ -10,10 +10,9 @@
     "hot": "node node_modules/cross-env/dist/bin/cross-env NODE_ENV=development node_modules/.bin/webpack-dev-server --open --hot",
     "dev": "node node_modules/cross-env/dist/bin/cross-env NODE_ENV=development webpack",
     "watch": "node node_modules/cross-env/dist/bin/cross-env NODE_ENV=development webpack --watch",
-    "build": "node node_modules/cross-env/dist/bin/cross-env.js NODE_ENV=production webpack --progress --hide-modules",
-    "test": "node node_modules/cross-env/dist/bin/cross-env.js NODE_ENV=test ./node_modules/mocha-webpack/bin/mocha-webpack --webpack-config webpack.test.config.js \"tests/**/*.js\" --recursive",
-    "test-watch": "node node_modules/cross-env/dist/bin/cross-env.js NODE_ENV=test ./node_modules/mocha-webpack/bin/mocha-webpack --watch --webpack-config webpack.test.config.js \"tests/**/*.js\" --recursive",
-    "test-init": "node node_modules/cross-env/dist/bin/cross-env.js NODE_ENV=test ./node_modules/mocha/bin/mocha --require babel-register \"tests/**/*.js\" --recursive"
+    "build": "node node_modules/cross-env/dist/bin/cross-env NODE_ENV=production webpack --progress --hide-modules",
+    "test": "node node_modules/cross-env/dist/bin/cross-env NODE_ENV=test BABEL_ENV=test ./node_modules/karma/bin/karma start tests/unit/karma.conf.js --single-run",
+    "test-watch": "node node_modules/cross-env/dist/bin/cross-env NODE_ENV=test BABEL_ENV=test ./node_modules/karma/bin/karma start tests/unit/karma.conf.js"
   },
   "repository": {
     "type": "git",
@@ -57,6 +56,11 @@
     "file-loader": "^0.9.0",
     "fs-extra": "^4.0.2",
     "html-webpack-plugin": "^2.30.1",
+    "karma": "^1.7.1",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-mocha": "^1.3.0",
+    "karma-phantomjs-launcher": "^1.0.4",
+    "karma-webpack": "^2.0.5",
     "mocha": "^4.0.1",
     "mocha-webpack": "^0.7.0",
     "node-sass": "^4.5.3",
