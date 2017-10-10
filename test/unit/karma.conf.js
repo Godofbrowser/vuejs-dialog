@@ -7,7 +7,7 @@
 //  we are also using it with karma-webpack
 //  https://github.com/webpack/karma-webpack
 
-const webpackConfig = require('../../webpack.test.config')
+const webpackConfig = require('../../webpack.test.conf')
 
 module.exports = function (config) {
     config.set({

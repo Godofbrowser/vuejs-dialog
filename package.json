@@ -11,8 +11,8 @@
     "dev": "node node_modules/cross-env/dist/bin/cross-env NODE_ENV=development webpack",
     "watch": "node node_modules/cross-env/dist/bin/cross-env NODE_ENV=development webpack --watch",
     "build": "node node_modules/cross-env/dist/bin/cross-env NODE_ENV=production webpack --progress --hide-modules",
-    "test": "node node_modules/cross-env/dist/bin/cross-env NODE_ENV=test BABEL_ENV=test ./node_modules/karma/bin/karma start tests/unit/karma.conf.js --single-run",
-    "test-watch": "node node_modules/cross-env/dist/bin/cross-env NODE_ENV=test BABEL_ENV=test ./node_modules/karma/bin/karma start tests/unit/karma.conf.js"
+    "test": "node node_modules/cross-env/dist/bin/cross-env NODE_ENV=test BABEL_ENV=test ./node_modules/karma/bin/karma start test/unit/karma.conf.js --single-run",
+    "test-watch": "node node_modules/cross-env/dist/bin/cross-env NODE_ENV=test BABEL_ENV=test ./node_modules/karma/bin/karma start test/unit/karma.conf.js"
   },
   "repository": {
     "type": "git",

@@ -3,7 +3,7 @@
  * Created by Emmy on 10/7/2017.
  */
 
-const baseConfig = require('./webpack.base.config')
+const baseConfig = require('./webpack.base.conf')
 
 module.exports = Object.assign({}, baseConfig, {
 	target: 'node',
