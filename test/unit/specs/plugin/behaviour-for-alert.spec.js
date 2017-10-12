@@ -34,7 +34,7 @@ describe('Calling "alert()"', function () {
     })
 })
 
-describe('#alert(), Clicking "ok"', function () {
+describe('with #alert(), Clicking "ok"', function () {
     // this.timeout(3000);
     beforeEach(HOOKS.sanitizeAndPrepareWindow)
 
@@ -51,11 +51,18 @@ describe('#alert(), Clicking "ok"', function () {
 
 describe('with #alert(), user ', function () {
     // this.timeout(3000);
-    beforeEach(HOOKS.sanitizeAndPrepareWindow)
+    before(HOOKS.sanitizeAndPrepareWindow)
+    before(function(){
+        window.vm.triggerAlert()
+    })
+
+    it('Should see ok button', function () {
+        Vue.nextTick(() => {
+            assert.equal(getElem('dg-btn--ok').length, 1)
+        })
+    })
 
     it('Should not see cancel button', function () {
-        window.vm.triggerAlert()
-
         Vue.nextTick(() => {
             assert.equal(getElem('dg-btn--cancel').length, 0)
         })

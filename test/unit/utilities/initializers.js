@@ -2,12 +2,10 @@
  * Created by Emmy on 10/11/2017.
  */
 
-import Vue from 'vue'
 import Plugin from '../../../src/plugin/js/index'
 import {clickNode} from '../../../src/plugin/js/utilities'
 import {getElem} from './helpers'
 import {createLocalVue} from 'vue-test-utils'
-import Promise from 'promise-polyfill'
 
 export function setupVmWithLocalVue() {
     let LocalVue = createLocalVue()

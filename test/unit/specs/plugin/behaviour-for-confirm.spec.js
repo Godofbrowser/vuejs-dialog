@@ -33,3 +33,24 @@ describe('Calling "confirm()"', function () {
         })
     })
 })
+
+
+describe('with #confirm(), user ', function () {
+    this.timeout(100);
+    before(HOOKS.sanitizeAndPrepareWindow)
+    before(function () {
+        window.vm.triggerConfirm()
+    })
+
+    it('Should see ok button', function () {
+        Vue.nextTick(() => {
+            assert.equal(getElem('dg-btn--ok').length, 1)
+        })
+    })
+
+    it('Should see cancel button', function () {
+        Vue.nextTick(() => {
+            assert.equal(getElem('dg-btn--cancel').length, 1)
+        })
+    })
+})
