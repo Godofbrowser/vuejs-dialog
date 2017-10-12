@@ -7,7 +7,7 @@
 //  we are also using it with karma-webpack
 //  https://github.com/webpack/karma-webpack
 
-const webpackConfig = require('../../webpack.test.conf')
+const webpackConfig = require('../../webpack.test.config')
 
 module.exports = function (config) {
     config.set({
@@ -25,7 +25,7 @@ module.exports = function (config) {
         files: ['specs/**/*.spec.js'],
         preprocessors: {
             // './index.js': ['webpack', 'sourcemap']
-            './specs/**/*.spec.js': ['webpack']
+            './specs/**/*.spec.js': ['webpack', 'sourcemap']
         },
         webpack: webpackConfig,
         webpackMiddleware: {

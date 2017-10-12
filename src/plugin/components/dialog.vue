@@ -3,7 +3,7 @@
         <dialog-window v-for="dialog in dialogsARR"
                        :options="dialog"
                        :key="dialog.id"
-                       :escapeKeyClose="dialog.escapeKeyPressed"
+                       :escapeKeyClose="dialog.escapeKeyClose"
                        @close="destroyDialog">
         </dialog-window>
     </div>
@@ -27,8 +27,11 @@
         },
         methods: {
             commit(data){
-                data.escapeKeyPressed = false
+                data.escapeKeyClose = false
                 this.dialogsARR.push(data)
+            },
+            forceCloseAll() {
+                this.dialogsARR.forEach((d, idx) => this.$delete(this.dialogsARR, idx))
             },
             destroyDialog(dialogId){
                 let dialogIndex = firstIndex(this.dialogsARR, dialogId, 'id')
@@ -43,7 +46,7 @@
                 let dialogIndex = (-1 + this.dialogsARR.length)
 
                 if(dialogIndex > -1){
-                    this.$set(this.dialogsARR[dialogIndex], 'escapeKeyPressed', true)
+                    this.$set(this.dialogsARR[dialogIndex], 'escapeKeyClose', true)
                 }
             }
         },

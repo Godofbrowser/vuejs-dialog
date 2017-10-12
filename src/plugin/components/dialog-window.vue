@@ -59,6 +59,7 @@
                 input: '',
                 show: true,
                 loading: false,
+                closed: false,
                 endedAnimations: []
             }
         },
@@ -162,23 +163,24 @@
             },
             close(){
                 this.show = false
+                this.closed = true
             },
             animationEnded(type){
                 this.endedAnimations.push(type)
 
-                if(this.endedAnimations.includes('backdrop') && this.endedAnimations.includes('content')){
-
+                if(this.endedAnimations.indexOf('backdrop') !== -1
+                    && this.endedAnimations.indexOf('content') !== -1
+                ){
                     this.options.promiseRejecter(false)
-
                     this.$emit('close', this.options.id)
                 }
 
-            },
-//            escapeKeyListener(e) {
-//                if (e.keyCode === 27) {
-//                    this.cancelBtnDisabled ? this.proceed() : this.cancel()
-//                }
-//            }
+            }
+        },
+        beforeDestroy(){
+            if(this.closed === false){
+                this.cancelBtnDisabled ? this.proceed() : this.cancel()
+            }
         },
         components: {CancelBtn, OkBtn}
     }

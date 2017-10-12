@@ -10,7 +10,7 @@ import {mergeObjs} from './utilities'
 let Plugin = function(Vue, globalOptions = {}){
 	this.Vue = Vue
 	this.mounted = false
-	this.Dialog = {}
+	this.$root = {} // The root component
     this.globalOptions = mergeObjs(DEFAULT_OPTIONS, globalOptions)
 }
 
@@ -19,7 +19,7 @@ Plugin.prototype.mountIfNotMounted = function(){
 		return
 	}
 
-	this.Dialog = (() => {
+	this.$root = (() => {
 		let DialogConstructor = this.Vue.extend(DialogComponent)
 		let node = document.createElement("div")
 		document.querySelector('body').appendChild(node)
@@ -28,7 +28,18 @@ Plugin.prototype.mountIfNotMounted = function(){
 	})()
 
 	this.mounted = true
+}
 
+Plugin.prototype.destroy = function(){
+	if(this.mounted === true){
+        this.$root.forceCloseAll()
+
+        let elem = this.$root.$el
+        this.$root.$destroy()
+        this.$root.$off()
+        elem.remove()
+        this.mounted = false
+	}
 }
 
 Plugin.prototype.alert = function(message = null, options = {}){
@@ -50,7 +61,7 @@ Plugin.prototype.open = function(type, localOptions = {}){
         localOptions.promiseResolver = resolve
         localOptions.promiseRejecter = reject
 
-		this.Dialog.commit(mergeObjs(this.globalOptions, localOptions))
+		this.$root.commit(mergeObjs(this.globalOptions, localOptions))
 	})
 }
 

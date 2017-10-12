@@ -58,6 +58,11 @@ module.exports = {
 			}
 		]
 	},
+    resolve: {
+        alias: {
+            vue: 'vue/dist/vue.js'
+        }
+    },
     plugins: [
         new webpack.DefinePlugin({
             'process.env': {
