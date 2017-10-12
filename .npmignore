@@ -3,5 +3,6 @@
 node_modules/
 src/
 docs/
+test/
 *.log
 .tmp
