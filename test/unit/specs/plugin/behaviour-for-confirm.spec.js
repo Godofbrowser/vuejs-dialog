@@ -3,7 +3,7 @@
  */
 
 import * as HOOKS from '../../utilities/hooks'
-import {getElem} from '../../utilities/helpers'
+import {getElem, nodeLength} from '../../utilities/helpers'
 import { assert, expect } from 'chai'
 import Vue from 'vue'
 import Promise from 'promise-polyfill'
@@ -11,46 +11,47 @@ import Promise from 'promise-polyfill'
 Vue.config.productionTip = false
 
 describe('Calling "confirm()"', function () {
-    // this.timeout(3000);
-    beforeEach(HOOKS.sanitizeAndPrepareWindow)
+    let dg
+
+    before(HOOKS.sanitizeAndPrepareWindow)
+    before(function (done) {
+        dg = window.vm.triggerConfirm()
+        Vue.nextTick(done) // be sure done has updated before proceeding
+    })
 
     it('Should return a promise', function () {
-        let dg = window.vm.triggerConfirm()
         expect(dg).to.be.instanceOf(Promise)
     })
 
-    it('Should make the dialog visible', function (done) {
-        window.vm.triggerConfirm()
-        let nodes = getElem('dg-container')
+    it('Should make the dialog visible', function () {
+        assert.strictEqual(nodeLength('.dg-container'), 1)
+    })
 
-        Vue.nextTick(() => {
-            try{
-                assert.equal(nodes.length, 1)
-                done()
-            }catch(err){
-                done(new Error(err.toString()))
-            }
-        })
+    it('Should make the ok button visible', function () {
+        assert.strictEqual(nodeLength('.dg-btn--ok'), 1)
+    })
+
+    it('Should make the cancel button visible', function () {
+        assert.strictEqual(nodeLength('.dg-btn--cancel'), 1)
     })
 })
 
+describe('Clicking \'ok\' on #confirm()', function () {
+    beforeEach(HOOKS.sanitizeAndPrepareWindow)
 
-describe('with #confirm(), user ', function () {
-    this.timeout(100);
-    before(HOOKS.sanitizeAndPrepareWindow)
-    before(function () {
+    it('Should resolve the promise', function (done) {
+        window.vm.triggerConfirm().then(() => {done()}) // expected
+        Vue.nextTick(() => window.vm.clickDialogBtn('ok'))
+    })
+})
+
+describe('Clicking \'cancel\' on #confirm()', function () {
+    beforeEach(HOOKS.sanitizeAndPrepareWindow)
+
+    it('Should reject the promise', function (done) {
         window.vm.triggerConfirm()
-    })
-
-    it('Should see ok button', function () {
-        Vue.nextTick(() => {
-            assert.equal(getElem('dg-btn--ok').length, 1)
-        })
-    })
-
-    it('Should see cancel button', function () {
-        Vue.nextTick(() => {
-            assert.equal(getElem('dg-btn--cancel').length, 1)
-        })
+            .then(() => {done(new Error('Cancel button should Reject promise'))})
+            .catch(() => {done()}) // expected
+        Vue.nextTick(() => window.vm.clickDialogBtn('cancel'))
     })
 })

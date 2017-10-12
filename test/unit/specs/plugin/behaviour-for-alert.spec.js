@@ -2,69 +2,45 @@
  * Created by Emmy on 10/8/2017.
  */
 
-import * as HOOKS from '../../utilities/hooks'
-import {getElem} from '../../utilities/helpers'
-import { assert, expect } from 'chai'
 import Vue from 'vue'
 import Promise from 'promise-polyfill'
+import {assert, expect} from 'chai'
+import * as HOOKS from '../../utilities/hooks'
+import {nodeLength} from '../../utilities/helpers'
 
 Vue.config.productionTip = false
 
 describe('Calling "alert()"', function () {
-    // this.timeout(3000);
-    beforeEach(HOOKS.sanitizeAndPrepareWindow)
+    let dg
+
+    before(HOOKS.sanitizeAndPrepareWindow)
+    before(function (done) {
+        dg = window.vm.triggerAlert()
+        Vue.nextTick(done) // be sure done has updated before proceeding
+    })
 
     it('Should return a promise', function () {
-        let dg = window.vm.triggerAlert()
         expect(dg).to.be.instanceOf(Promise)
     })
 
-    it('Should make the dialog visible', function (done) {
-        let elem = getElem('dg-container')
-        window.vm.triggerAlert().then(() => {}).catch(() => {})
+    it('Should make the dialog visible', function () {
+        assert.strictEqual(nodeLength('.dg-container'), 1)
+    })
 
-        Vue.nextTick(() => {
-            try{
-                assert.equal(getElem('dg-container').length, 1)
-                done()
-            }catch(err){
-                done(new Error(err.toString()))
-            }
-        })
+    it('Should make the ok button visible', function () {
+        assert.strictEqual(nodeLength('.dg-btn--ok'), 1)
+    })
+
+    it('Should make the cancel button visible', function () {
+        assert.strictEqual(nodeLength('.dg-btn--cancel'), 0)
     })
 })
 
-describe('with #alert(), Clicking "ok"', function () {
-    // this.timeout(3000);
-    beforeEach(HOOKS.sanitizeAndPrepareWindow)
+describe('Calling "alert()", then Click "ok"', function () {
+    before(HOOKS.sanitizeAndPrepareWindow)
 
     it('Should resolve the promise', function (done) {
-        window.vm.triggerAlert()
-            .then(() => {done()}) // expected
-            .catch(err => { done(err.toString())})
-
-        Vue.nextTick(() => {
-            window.vm.clickDialogBtn('ok')
-        })
-    })
-})
-
-describe('with #alert(), user ', function () {
-    // this.timeout(3000);
-    before(HOOKS.sanitizeAndPrepareWindow)
-    before(function(){
-        window.vm.triggerAlert()
-    })
-
-    it('Should see ok button', function () {
-        Vue.nextTick(() => {
-            assert.equal(getElem('dg-btn--ok').length, 1)
-        })
-    })
-
-    it('Should not see cancel button', function () {
-        Vue.nextTick(() => {
-            assert.equal(getElem('dg-btn--cancel').length, 0)
-        })
+        window.vm.triggerAlert().then(() => {done()}) // expected
+        Vue.nextTick(() => window.vm.clickDialogBtn('ok'))
     })
 })

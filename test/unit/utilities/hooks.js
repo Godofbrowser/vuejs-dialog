@@ -7,8 +7,6 @@ import {setupVmWithLocalVue} from './initializers'
 import Promise from 'promise-polyfill'
 
 export function sanitizeAndPrepareWindow(done) {
-    this.timeout(500)
-
     Promise.resolve()
         .then((function (){
             return new Promise(function (resolve) {
@@ -29,14 +27,15 @@ export function sanitizeAndPrepareWindow(done) {
                     elem.remove()
                     delete window.vm
                 }
-                Vue.nextTick(resolve)
+                resolve()
             })
         })).then(() => {
             // set them up again
             window.vm = setupVmWithLocalVue()
-            done()
+            // Proceed
+            Vue.nextTick(done)
         }).catch((err) => {
-            done(new Error('prepareWindow: '+ err.toString()))
+            done(new Error(err.toString()))
         })
 
 }

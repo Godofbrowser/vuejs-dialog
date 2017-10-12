@@ -29,8 +29,9 @@ export function setupVmWithLocalVue() {
     })).$mount(node)
 }
 
-function clickDialogBtn(type = 'ok', idx = null) {
-    let node, nodes = (type === 'ok') ? getElem('dg-btn--ok') : getElem('dg-btn--cancel')
+function clickDialogBtn(dgBtn = 'ok', idx = null) {
+    let selector = (dgBtn === 'ok') ? '.dg-btn--ok' : '.dg-btn--cancel'
+    let node, nodes =  getElem(selector, true)
 
     if (nodes.length > 0) {
         if (idx === null) {
@@ -41,9 +42,9 @@ function clickDialogBtn(type = 'ok', idx = null) {
             for (let i = 0; i < nodes.length; i++) {
                 clickNode(nodes[i])
             }
-        } else {
+        } else if (node = nodes[parseInt(idx)]) {
             // click at index
-            (node = nodes[parseInt(idx)]) && clickNode(node)
+            clickNode(node)
         }
     }
 }
