@@ -31,12 +31,12 @@ describe('Calling "alert()"', function () {
         assert.strictEqual(nodeLength('.dg-btn--ok'), 1)
     })
 
-    it('Should make the cancel button visible', function () {
+    it('Should exclude the cancel button', function () {
         assert.strictEqual(nodeLength('.dg-btn--cancel'), 0)
     })
 })
 
-describe('Calling "alert()", then Click "ok"', function () {
+describe('Clicking "ok" on #alert()', function () {
     before(HOOKS.sanitizeAndPrepareWindow)
 
     it('Should resolve the promise', function (done) {

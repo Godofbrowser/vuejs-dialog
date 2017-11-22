@@ -29,7 +29,7 @@ Include the script:
  
  <script>
 // Tell Vue to install the plugin.
-window.Vue.use(VuejsDialog)
+window.Vue.use(VuejsDialog.default)
 </script>
   ```
 #### NPM
