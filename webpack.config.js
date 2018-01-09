@@ -1,5 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
+const WebpackShellPlugin = require('webpack-shell-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production'
 
@@ -21,11 +22,6 @@ if (isProduction) {
     DIST.devtool = '#source-map'
     // http://vue-loader.vuejs.org/en/workflow/production.html
     DIST.plugins = (DIST.plugins || []).concat([
-        new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: '"production"'
-            }
-        }),
         new webpack.optimize.UglifyJsPlugin({
             sourceMap: true,
             compress: {
@@ -34,6 +30,9 @@ if (isProduction) {
         }),
         new webpack.LoaderOptionsPlugin({
             minimize: true
+        }),
+        new WebpackShellPlugin({
+            onBuildExit: ['node src\\docs\\js\\copy-to-docs.js']
         })
     ])
 }

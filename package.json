@@ -13,8 +13,8 @@
     "watch-docs": "node node_modules/cross-env/dist/bin/cross-env NODE_ENV=development webpack --config=webpack.docs.config.js --watch",
     "build-docs": "node node_modules/cross-env/dist/bin/cross-env NODE_ENV=production webpack --config=webpack.docs.config.js --progress --hide-modules",
 
-    "watch": "node node_modules/cross-env/dist/bin/cross-env NODE_ENV=development webpack --config=webpack.lib.config.js --watch",
-    "build": "node node_modules/cross-env/dist/bin/cross-env NODE_ENV=production webpack --config=webpack.lib.config.js --progress --hide-modules",
+    "watch": "node node_modules/cross-env/dist/bin/cross-env NODE_ENV=development webpack --config=webpack.config.js --watch",
+    "build": "node node_modules/cross-env/dist/bin/cross-env NODE_ENV=production webpack --config=webpack.config.js --progress --hide-modules",
 
     "watch-test": "node node_modules/cross-env/dist/bin/cross-env NODE_ENV=test BABEL_ENV=test ./node_modules/karma/bin/karma start test/unit/karma.config.js --delay",
     "test": "node node_modules/cross-env/dist/bin/cross-env NODE_ENV=test BABEL_ENV=test ./node_modules/karma/bin/karma start test/unit/karma.config.js --single-run --delay"

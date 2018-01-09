@@ -46,11 +46,6 @@ const DOCS = Object.assign({}, COMMON, {
 if (isProduction) {
     DOCS.devtool = '#none'
     DOCS.plugins = (DOCS.plugins || []).concat([
-        new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: '"production"'
-            }
-        }),
         new webpack.optimize.UglifyJsPlugin({
             sourceMap: false,
             compress: {
