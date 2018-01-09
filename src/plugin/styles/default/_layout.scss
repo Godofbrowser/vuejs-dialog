@@ -109,12 +109,12 @@
   border: 0;
 }
 
-.dg-btn.dg-btn--cancel {
+.dg-btn--cancel {
   color: #fefefe;
   background-color: #0096D9;
 }
 
-.dg-btn.dg-btn--ok {
+.dg-btn--ok {
   color: #0096D9;
   background-color: #fefefe;
   border-color: #0096D9;
@@ -134,7 +134,7 @@
   clear: both;
 }
 
-.dg-container.dg-container--has-input {
+.dg-container--has-input {
   .dg-main-content {
     max-width: 450px;
   }

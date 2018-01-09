@@ -1,17 +1,15 @@
-/**
- * Created by Emmy on 10/7/2017.
- */
-
+const path = require('path')
 const webpack = require('webpack')
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const WebpackNotifierPlugin = require('webpack-notifier');
 
 const isProduction = process.env.NODE_ENV === 'production'
 
-module.exports = {
-	module: {
-		rules: [
-			{
-				test: /\.vue$/,
+const COMMON = {
+    module: {
+        rules: [
+            {
+                test: /\.vue$/,
                 use: [{
                     loader: 'vue-loader',
                     options: {
@@ -24,16 +22,13 @@ module.exports = {
                         postcss: [require('postcss-cssnext')()]
                     }
                 }]
-			},
-			{
-				test: /\.js$/,
-				loader: 'babel-loader',
-				exclude: /node_modules/
-			},
-			{
-				test: /\.css$/,
-				loader: 'css-loader'
-			},            {
+            },
+            {
+                test: /\.js$/,
+                loader: 'babel-loader',
+                exclude: /node_modules/
+            },
+            {
                 test: /\.scss$/,
                 use: ExtractTextPlugin.extract({
                     fallback: "style-loader",
@@ -52,23 +47,35 @@ module.exports = {
                     }]
                 })
             },
-			{
-				test: /\.html$/,
-				loader: 'vue-html-loader'
-			}
-		]
-	},
-    resolve: {
-        alias: {
-            vue: 'vue/dist/vue.js'
-        }
+            {
+                test: /\.(png|jpg|gif|svg)$/,
+                loader: 'file-loader',
+                options: {
+                    name: '[name].[ext]?[hash]'
+                }
+            }
+        ]
     },
     plugins: [
-        new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: JSON.stringify(process.env.NODE_ENV),
-                BABEL_ENV: JSON.stringify(process.env.BABEL_ENV)
-            }
-        })
-    ]
+        new WebpackNotifierPlugin({alwaysNotify: true})
+    ],
+    watchOptions: {
+        aggregateTimeout: 300,
+        ignored: /node_modules/
+    },
+    resolve: {
+        alias: {
+            'vue$': 'vue/dist/vue.esm.js'
+        }
+    },
+    devServer: {
+        historyApiFallback: true,
+        noInfo: true
+    },
+    performance: {
+        hints: false
+    },
+    devtool: '#eval-source-map'
 }
+
+module.exports = COMMON
