@@ -1,6 +1,6 @@
 {
   "name": "vuejs-dialog",
-  "version": "0.4.5",
+  "version": "0.4.6",
   "description": "A lightweight, promise based alert, prompt and confirm dialog",
   "main": "dist/vuejs-dialog.min.js",
   "directories": {
@@ -9,13 +9,10 @@
   "scripts": {
     "hot": "node node_modules/cross-env/dist/bin/cross-env NODE_ENV=development node_modules/.bin/webpack-dev-server --open --hot",
     "dev": "node node_modules/cross-env/dist/bin/cross-env NODE_ENV=development webpack",
-
     "watch-docs": "node node_modules/cross-env/dist/bin/cross-env NODE_ENV=development webpack --config=webpack.docs.config.js --watch",
     "build-docs": "node node_modules/cross-env/dist/bin/cross-env NODE_ENV=production webpack --config=webpack.docs.config.js --progress --hide-modules",
-
     "watch": "node node_modules/cross-env/dist/bin/cross-env NODE_ENV=development webpack --config=webpack.config.js --watch",
     "build": "node node_modules/cross-env/dist/bin/cross-env NODE_ENV=production webpack --config=webpack.config.js --progress --hide-modules",
-
     "watch-test": "node node_modules/cross-env/dist/bin/cross-env NODE_ENV=test BABEL_ENV=test ./node_modules/karma/bin/karma start test/unit/karma.config.js --delay",
     "test": "node node_modules/cross-env/dist/bin/cross-env NODE_ENV=test BABEL_ENV=test ./node_modules/karma/bin/karma start test/unit/karma.config.js --single-run --delay"
   },
