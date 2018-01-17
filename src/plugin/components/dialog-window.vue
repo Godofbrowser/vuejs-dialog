@@ -13,7 +13,7 @@
                             <div v-if="options.html" class="dg-content" v-html="options.message"></div>
                             <div v-else="" class="dg-content">{{ options.message }}</div>
 
-                            <form v-if="isHardConfirm || isPrompt" class="dg-form">
+                            <form v-if="isHardConfirm || isPrompt" class="dg-form" @submit.prevent="submitDialogForm">
                                 <label for="dg-input-label" style="font-size: 13px">
                                     Type "{{ options.verification }}" below to confirm
                                 </label>
@@ -136,6 +136,9 @@
             },
             clickLeftBtn(){
                 this.options.reverse ? this.proceed() : this.cancel()
+            },
+            submitDialogForm(){
+                this.okBtnDisabled || this.proceed()
             },
             proceed(){
                 if (this.loaderEnabled) {
