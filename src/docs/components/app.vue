@@ -7,99 +7,114 @@
 
             <div class="header-cont centered">
                 <h1 class="title">Vuejs Dialog Plugin</h1>
+                <p class="description">A lightweight, promise based alert, prompt and confirm dialog</p>
             </div>
-
         </header>
 
-        <section style="max-width: 350px; margin:auto; text-align: center">
-            <h2 class="title-case">{{ trans('content.titles.method_usage')}}</h2>
-            <hr/>
-            <h4>
-                <button @click="showAlertDialog()">{{ trans('content.examples.method_usage.1') }}</button>
-            </h4>
+        <div class="container">
 
-            <h4>
-                <button @click="showHtmlDialog()">{{ trans('content.examples.method_usage.2') }}</button>
-            </h4>
+            <aside v-if="0">
+                <div class="sidebar">
+                    <ul class="list-unstyled nav">
+                        <li v-for="_ in 8"><a class="button" href="#">Nav item</a></li>
+                    </ul>
+                </div>
+            </aside>
 
-            <h4>
-                <button @click="showBasicDialog()">{{ trans('content.examples.method_usage.3') }}</button>
-            </h4>
+            <main>
+                <section>
+                    <h2 class="title-case">{{ trans('content.titles.method_usage')}}</h2>
+                    <hr/>
+                    <h4>
+                        <button class="button" @click="showAlertDialog()">{{ trans('content.examples.method_usage.1') }}</button>
+                    </h4>
 
-            <h4>
-                <button @click="showLoadingDialog()">{{ trans('content.examples.method_usage.4') }}</button>
-            </h4>
+                    <h4>
+                        <button class="button" @click="showHtmlDialog()">{{ trans('content.examples.method_usage.2') }}</button>
+                    </h4>
 
-            <h4>
-                <button @click="showReversedDialog()">{{ trans('content.examples.method_usage.5') }}</button>
-            </h4>
+                    <h4>
+                        <button class="button" @click="showBasicDialog()">{{ trans('content.examples.method_usage.3') }}</button>
+                    </h4>
 
-            <h4>
-                <button @click="showAnimationFadeDialog()">{{ trans('content.examples.method_usage.6') }}</button>
-            </h4>
+                    <h4>
+                        <button class="button" @click="showLoadingDialog()">{{ trans('content.examples.method_usage.4') }}</button>
+                    </h4>
 
-            <h4>
-                <button @click="showAnimationBounceDialog()">{{ trans('content.examples.method_usage.7') }}</button>
-            </h4>
-        </section>
+                    <h4>
+                        <button class="button" @click="showReversedDialog()">{{ trans('content.examples.method_usage.5') }}</button>
+                    </h4>
 
-        <section style="max-width: 350px; margin:auto; font-family: 'Noto Sans', sans-serif; text-align: center">
-            <h2 class="title-case">{{ trans('content.titles.directive_usage')}}</h2>
-            <hr/>
+                    <h4>
+                        <button class="button" @click="showAnimationFadeDialog()">{{ trans('content.examples.method_usage.6') }}</button>
+                    </h4>
 
-            <h4>
-                <button v-confirm="trans('messages.directive_string')">
-                    {{ trans('content.examples.directive_usage.1') }} v-confirm="'{{ trans('messages.directive_string') }}'"
-                </button>
-            </h4>
+                    <h4>
+                        <button class="button" @click="showAnimationBounceDialog()">{{ trans('content.examples.method_usage.7') }}</button>
+                    </h4>
+                </section>
 
-            <h4>
-                <a href="http://example.com" v-confirm="trans('messages.directive_link')">
-                    {{ trans('content.examples.directive_usage.2') }}
-                </a>
-            </h4>
+                <section>
+                    <h2 class="title-case">{{ trans('content.titles.directive_usage')}}</h2>
+                    <hr/>
 
-            <h4>
-                <button v-confirm="{
-                    message: trans('messages.directive_object'),
-                    ok: clickOkHandler,
-                    cancel: clickCancelHandler}"
-                >
-                    {{ trans('content.examples.directive_usage.3') }}
-                </button>
-            </h4>
-
-            <h4>
-                <form @submit.prevent="submitDemo1Form()">
-                    <fieldset>
-                        <input v-model="forms.demo1.name" type="text" name="name" :placeholder="trans('placeholders.your_name')"/>
-                        <button type="reset" v-confirm="trans('messages.form_reset')">
-                            {{ trans('content.words.reset') }}
+                    <h4>
+                        <button class="button" v-confirm="trans('messages.directive_string')">
+                            {{ trans('content.examples.directive_usage.1') }} v-confirm="'{{ trans('messages.directive_string') }}'"
                         </button>
-                        <button type="submit" v-confirm="trans('messages.form_submit')">
-                            {{ trans('content.words.submit') }}
+                    </h4>
+
+                    <h4>
+                        <a href="http://example.com" v-confirm="trans('messages.directive_link')">
+                            {{ trans('content.examples.directive_usage.2') }}
+                        </a>
+                    </h4>
+
+                    <h4>
+                        <button class="button" v-confirm="{
+                        message: trans('messages.directive_object'),
+                        ok: clickOkHandler,
+                        cancel: clickCancelHandler}"
+                        >
+                            {{ trans('content.examples.directive_usage.3') }}
                         </button>
-                    </fieldset>
-                </form>
-            </h4>
-        </section>
+                    </h4>
 
+                    <form @submit.prevent="submitDemo1Form()" style="display: inline-block;">
+                        <fieldset  style="padding: 10px;">
+                            <input v-model="forms.demo1.name" type="text" name="name" class="input-elem" :placeholder="trans('placeholders.your_name')" style="margin-bottom: 10px;"/>
 
-        <section style="max-width: 350px; margin:auto; font-family: 'Noto Sans', sans-serif; text-align: center">
-            <h2>{{ trans('content.titles.confirmation_types')}}</h2>
-            <hr/>
+                            <button class="button" type="reset" v-confirm="trans('messages.form_reset')">
+                                {{ trans('content.words.reset') }}
+                            </button>
+                            <button class="button" type="submit" v-confirm="trans('messages.form_submit')">
+                                {{ trans('content.words.submit') }}
+                            </button>
+                        </fieldset>
+                    </form>
+                </section>
 
-            <p>{{ trans('content.descriptions.confirmation_types.1')}}</p>
-            <p>{{ trans('content.descriptions.confirmation_types.2')}}</p>
+                <section>
+                    <h2>{{ trans('content.titles.confirmation_types')}}</h2>
+                    <hr/>
 
-            <h4>
-                <button @click="showSoftConfirmDialog()"> {{ trans('content.examples.confirmation_types.1') }}</button>
-            </h4>
+                    <p>{{ trans('content.descriptions.confirmation_types.1')}}</p>
+                    <p>{{ trans('content.descriptions.confirmation_types.2')}}</p>
 
-            <h4>
-                <button @click="showHardConfirmDialog()">{{ trans('content.examples.confirmation_types.2') }}</button>
-            </h4>
-        </section>
+                    <h4>
+                        <button class="button" @click="showSoftConfirmDialog()"> {{ trans('content.examples.confirmation_types.1') }}</button>
+                    </h4>
+
+                    <h4>
+                        <button class="button" @click="showHardConfirmDialog()">{{ trans('content.examples.confirmation_types.2') }}</button>
+                    </h4>
+                </section>
+            </main>
+
+        </div>
+
+        <footer v-if="0"><p>&copy; 2018 - footer text content here</p></footer>
+
 
         <notifications position="bottom left"></notifications>
 
