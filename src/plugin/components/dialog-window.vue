@@ -14,10 +14,8 @@
                             <div v-else="" class="dg-content">{{ options.message }}</div>
 
                             <form v-if="isHardConfirm || isPrompt" class="dg-form" @submit.prevent="submitDialogForm">
-                                <label for="dg-input-label" style="font-size: 13px">
-                                    Type "{{ options.verification }}" below to confirm
-                                </label>
-                                <input type="text" placeholder="Verification text"
+                                <label for="dg-input-label" style="font-size: 13px">{{ hardConfirmHelpText }}</label>
+                                <input type="text" :placeholder="options.verification"
                                        v-model="input"
                                        id="dg-input-label"
                                        style="width: 100%;margin-top: 10px;
@@ -128,6 +126,12 @@
             },
             rightBtnText(){
                 return this.options.reverse ? this.options.cancelText : this.options.okText
+            },
+            hardConfirmHelpText() {
+                return this.options.verificationHelp
+                    .replace(/\[\+:(\w+)]/, (match, $1) => {
+                        return this.options[$1] || match
+                    })
             }
         },
         methods: {

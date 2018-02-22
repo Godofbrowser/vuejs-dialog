@@ -139,6 +139,7 @@ let options = {
     animation: 'zoom', // Available: "zoom", "bounce", "fade"
     type: 'basic', // coming soon: 'soft', 'hard'
     verification: 'continue', // for hard confirm, user will be prompted to type this to enable the proceed button
+    verificationHelp: 'Type "[+:verification]" below to confirm', // Verification help text. [+:verification] will be matched with 'options.verification' (i.e 'Type "continue" below to confirm')
     clicksCount: 3, // for soft confirm, user will be asked to click on "proceed" btn 3 times before actually proceeding
 };
 

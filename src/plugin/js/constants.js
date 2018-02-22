@@ -18,17 +18,18 @@ export const ANIMATION_TYPES = {
 }
 
 export const DEFAULT_OPTIONS = {
-    html            : false,
-    loader          : false,
-    reverse         : false,
-    headline        : "Please confirm",
-    okText          : "Continue",
-    cancelText      : "Close",
-    type            : CONFIRM_TYPES.BASIC,
-    window          : DIALOG_TYPES.CONFIRM,
-    message         : "Proceed with the request?",
-    helpText        : "Click the proceed button to continue",
-    clicksCount      : 3,
-    animation       : 'zoom',
-    verification    : 'continue'
+    html                 : false,
+    loader               : false,
+    reverse              : false,
+    headline             : "Please confirm",
+    okText               : "Continue",
+    cancelText           : "Close",
+    type                 : CONFIRM_TYPES.BASIC,
+    window               : DIALOG_TYPES.CONFIRM,
+    message              : "Proceed with the request?",
+    helpText             : "Click the proceed button to continue",
+    clicksCount          : 3,
+    animation            : 'zoom',
+    verification         : 'continue',
+    verificationHelp     : 'Type "[+:verification]" below to confirm'
 }
