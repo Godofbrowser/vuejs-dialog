@@ -6,46 +6,43 @@
   align-items: center;
   top: 0;
   left: 0;
-}
 
-#dg-circleG {
-  width: 67px;
-  margin: auto;
-}
-
-.dg-circleG {
-  background-color: transparent;
-  float: left;
-  height: 14px;
-  margin-left: 8px;
-  width: 14px;
-  animation-name: dg-bounce_circleG;
-  animation-duration: 0.5875s;
-  animation-iteration-count: infinite;
-  animation-direction: normal;
-  border-radius: 9px;
-}
-
-#dg-circleG_1 {
-  animation-delay: 0.1195s;
-}
-
-#dg-circleG_2 {
-  animation-delay: 0.2755s;
-}
-
-#dg-circleG_3 {
-  animation-delay: 0.3485s;
-}
-
-@keyframes dg-bounce_circleG {
-  0% {
+  .dg-circles {
+    width: 100%;
+    display: block;
+    text-align: center;
   }
 
-  50% {
+  .dg-circle {
+    width: .9em;
+    height: .9em;
+    opacity: 0;
     background-color: rgb(9, 162, 227);
-  }
+    display: inline-block;
+    border-radius: 50%;
+    animation-name: dg-circle-oscillation;
+    animation-duration: 0.5875s;
+    animation-iteration-count: infinite;
+    animation-direction: normal;
 
-  100% {
+    &:not(:last-child) {
+      margin-right: 8px;
+    }
+
+    &:nth-child(1) {
+      animation-delay: 0.1195s;
+    }
+    &:nth-child(2) {
+      animation-delay: 0.2755s;
+    }
+    &:nth-child(3) {
+      animation-delay: 0.3485s;
+    }
   }
+}
+
+@keyframes dg-circle-oscillation {
+  0% {}
+  50% {opacity: 1}
+  100% {}
 }

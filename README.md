@@ -166,6 +166,16 @@ Vue.use(VuejsDialog, {
 // Please note that local configurations will be considered before global configurations.
 // This gives you the flexibility of overriding the global config on individual call.
 ```
+
+### CSS Override
+
+Please use basic css, ex:
+```css
+.dg-btn-loader .dg-circle {
+    background-color: green;
+}
+```
+
 # License
 
 [MIT](http://opensource.org/licenses/MIT)
