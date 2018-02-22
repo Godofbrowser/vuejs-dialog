@@ -171,6 +171,10 @@ Vue.use(VuejsDialog, {
 
 Please use basic css, ex:
 ```css
+.dg-btn--ok {
+     border-color: green;
+ }
+ 
 .dg-btn-loader .dg-circle {
     background-color: green;
 }
