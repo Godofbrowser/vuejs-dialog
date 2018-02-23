@@ -181,6 +181,16 @@ Please use basic css, ex:
 }
 ```
 
+### Pro tip
+You can use any of the options in your verification help text. Example:
+
+```javascript
+this.$dialog.confirm($message, {
+    verificationHelp: 'Enter "[+:verification]" below and click on "[+:okText]"',
+     type: 'hard'
+})
+```
+
 # License
 
 [MIT](http://opensource.org/licenses/MIT)

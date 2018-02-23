@@ -129,7 +129,7 @@
             },
             hardConfirmHelpText() {
                 return this.options.verificationHelp
-                    .replace(/\[\+:(\w+)]/, (match, $1) => {
+                    .replace(/\[\+:(\w+)]/g, (match, $1) => {
                         return this.options[$1] || match
                     })
             }
