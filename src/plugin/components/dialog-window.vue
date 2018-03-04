@@ -13,11 +13,16 @@
                             <div v-if="options.html" class="dg-content" v-html="options.message"></div>
                             <div v-else="" class="dg-content">{{ options.message }}</div>
 
-                            <form v-if="isHardConfirm || isPrompt" class="dg-form" @submit.prevent="submitDialogForm">
-                                <label for="dg-input-label" style="font-size: 13px">{{ hardConfirmHelpText }}</label>
+                            <form v-if="isHardConfirm || isPrompt"
+                                  class="dg-form"
+                                  autocomplete="off"
+                                  @submit.prevent="submitDialogForm">
+                                <label for="dg-input-elem" style="font-size: 13px">{{ hardConfirmHelpText }}</label>
                                 <input type="text" :placeholder="options.verification"
                                        v-model="input"
-                                       id="dg-input-label"
+                                       autocomplete="off"
+                                       id="dg-input-elem"
+                                       ref="inputElem"
                                        style="width: 100%;margin-top: 10px;
                                padding: 5px 15px; font-size: 16px;border-radius: 4px; border: 2px solid #eee"/>
                             </form>
@@ -116,10 +121,10 @@
                 return (this.options.reverse === true) ? 'cancel-btn' : 'ok-btn'
             },
             leftBtnFocus(){
-                return (this.options.reverse === true)
+                return !this.isHardConfirm && (this.options.reverse === true)
             },
             rightBtnFocus(){
-                return (this.options.reverse === false)
+                return !this.isHardConfirm && (this.options.reverse === false)
             },
             leftBtnText(){
                 return this.options.reverse ? this.options.okText : this.options.cancelText
@@ -133,6 +138,9 @@
                         return this.options[$1] || match
                     })
             }
+        },
+        mounted () {
+            this.isHardConfirm && this.$refs.inputElem.focus()
         },
         methods: {
             clickRightBtn(){
