@@ -28,7 +28,7 @@
         watch: {
             'dialogsARR': {
                 handler (dialogs) {
-                    let clsName = 'dg-no-scroll'
+                    let clsName = 'dg-open'
                     const body = document.getElementsByTagName('body')[0]
 
                     if (!body) {

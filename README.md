@@ -89,18 +89,17 @@ this.$dialog.confirm("If you delete this record, it'll be gone forever.", {
     });
 ```
 
-## Usage as a directive (new)
+## Usage as a directive
 
-If you don't pass a message, the global/default message would be used.
+__If you don't pass a message, the global/default message would be used.__
 ```html
 <button type="submit" v-confirm="">submit</button>
 ```
 
-
 ```html
 // Callbacks can be provided
-// Note: If "loader" is set to true, the makeAdmin callback will be passed a "dialog" object
-// Which is useful for stoping the loader, or closing the dialog.
+// Note: If "loader" is set to true, the makeAdmin callback will receive a "dialog" object
+// Which is useful for closing the dialog when transaction is complete.
 <button v-confirm="{ok: makeAdmin, cancel: doNothing, message: 'User will be given admin privileges. Make user an Admin?'}">Make Admin</button>
 ```
 ```javascript
@@ -115,14 +114,58 @@ methods: {
 }
 ```
 
-
-For v-confirm directive, if an "OK" callback is not provided, the default event would be triggered.
+__A more practical use of ths `v-confirm` directive inside a loop__
 
 ```html
-// You can use it on links too
+// While looping through users
+<button v-for="user in users"
+        v-confirm="{
+            loader: true,
+            ok: dialog => makeAdmin(dialog, user), 
+            cancel: doNothing, 
+            message: 'User will be given admin privileges. Make user an Admin?'}"
+>
+Make Admin
+</button>
+```
+```javascript
+methods: {
+    makeAdmin: function(dialog, user) {
+        // Make user admin from the backend
+        /* tellServerToMakeAdmin(user) */
+        
+        // When completed, close the dialog
+        /* dialog.close() */
+        
+    },
+    doNothing: function() {
+        // Do nothing or some other stuffs
+    }
+}
+```
+
+__For v-confirm directive, if an "OK" callback is not provided, the default event would be triggered.__
+
+```html
+// Default Behaviour when used on links
 <a href="http://example.com" v-confirm="'This will take you to http://example.com. Proceed with caution'">Go to example.com</a>
 
 ```
+
+## Setting a dialog title (new)
+
+You can now set a dialog title by passing your message as an object instead of a string.
+The message object should contain a `title` and `body`
+
+```javascript
+let message = {
+    title: 'Vuejs Dialog Plugin',
+    body: 'A lightweight, promise based alert, prompt and confirm dialog'
+}
+
+this.$dialog.confirm(message)
+```
+
 
 ### Options
 ```javascript

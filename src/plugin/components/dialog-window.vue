@@ -9,9 +9,14 @@
                 <div class="dg-content-cont dg-content-cont--floating">
                     <div class="dg-main-content">
 
-                        <div class="dg-content-body">
-                            <div v-if="options.html" class="dg-content" v-html="options.message"></div>
-                            <div v-else="" class="dg-content">{{ options.message }}</div>
+                        <div :class="['dg-content-body', {'dg-content-body--has-title': messageHasTitle}]">
+                            <template v-if="messageHasTitle">
+                                <h6 v-if="options.html" class="dg-title" v-html="messageTitle"></h6>
+                                <h6 v-else="" class="dg-title">{{ messageTitle }}</h6>
+                            </template>
+
+                            <div v-if="options.html" class="dg-content" v-html="messageBody"></div>
+                            <div v-else="" class="dg-content">{{ messageBody }}</div>
 
                             <form v-if="isHardConfirm || isPrompt"
                                   class="dg-form"
@@ -55,6 +60,9 @@
     import OkBtn from './ok-btn.vue'
     import CancelBtn from './cancel-btn.vue'
     import {DIALOG_TYPES, ANIMATION_TYPES, CONFIRM_TYPES} from '../js/constants'
+
+    import MessageMixin from '../js/mixins/message-mixin'
+    import ButtonMixin from '../js/mixins/btn-mixin'
 
     export default {
         data: function () {
@@ -100,37 +108,11 @@
             isPrompt(){
                 return (this.options.window === DIALOG_TYPES.PROMPT)
             },
-            cancelBtnDisabled(){
-                return (this.options.window === DIALOG_TYPES.ALERT)
-            },
-            okBtnDisabled(){
-                return (this.options.window === DIALOG_TYPES.CONFIRM)
-                    && (this.options.type === CONFIRM_TYPES.HARD)
-                    && (this.input !== this.options.verification)
-            },
-            leftBtnEnabled(){
-                return (this.cancelBtnDisabled === false) || (this.options.reverse === true)
-            },
-            rightBtnEnabled(){
-                return (this.cancelBtnDisabled === false) || (this.options.reverse === false)
-            },
             leftBtnComponent(){
                 return (this.options.reverse === false) ? 'cancel-btn' : 'ok-btn'
             },
             rightBtnComponent(){
                 return (this.options.reverse === true) ? 'cancel-btn' : 'ok-btn'
-            },
-            leftBtnFocus(){
-                return !this.isHardConfirm && (this.options.reverse === true)
-            },
-            rightBtnFocus(){
-                return !this.isHardConfirm && (this.options.reverse === false)
-            },
-            leftBtnText(){
-                return this.options.reverse ? this.options.okText : this.options.cancelText
-            },
-            rightBtnText(){
-                return this.options.reverse ? this.options.cancelText : this.options.okText
             },
             hardConfirmHelpText() {
                 return this.options.verificationHelp
@@ -197,6 +179,7 @@
                 this.cancelBtnDisabled ? this.proceed() : this.cancel()
             }
         },
+        mixins: [MessageMixin, ButtonMixin],
         components: {CancelBtn, OkBtn}
     }
 </script>
