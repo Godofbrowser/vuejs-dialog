@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,700');
+//@import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,700');
 
 .dg-container * {
   box-sizing: border-box;
@@ -30,7 +30,8 @@
 
 .dg-content-cont {
   width: 100%;
-  font-family: 'Noto Sans', sans-serif;
+  //font-family: 'Noto Sans', sans-serif;
+  font-family: inherit;
 }
 
 .dg-main-content {
@@ -45,7 +46,7 @@
 
 .dg-content {
   font-size: 16px;
-  padding: 10px 0 10px 0;
+  line-height: 1.3em;
 }
 
 .dg-content-body {
@@ -137,6 +138,10 @@
 .dg-container--has-input {
   .dg-main-content {
     max-width: 450px;
+  }
+
+  .dg-content {
+    margin-bottom: 15px;
   }
 
   .dg-content-body {
