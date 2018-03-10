@@ -32,7 +32,8 @@ if (isProduction) {
             minimize: true
         }),
         new WebpackShellPlugin({
-            onBuildEnd: ['node src\\docs\\js\\copy-to-docs.js']
+            // https://github.com/1337programming/webpack-shell-plugin#api
+            onBuildExit: ['node ' + path.normalize('src/docs/js/copy-to-docs.js')]
         })
     ])
 }
