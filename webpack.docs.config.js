@@ -29,8 +29,7 @@ const DOCS = Object.assign({}, COMMON, {
         port: 9000
     },
     externals: {
-        'vue': 'Vue',
-        'vuejs-dialog': 'VuejsDialog'
+        'vue': 'Vue'
     },
     plugins: [
         extractSass,
