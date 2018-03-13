@@ -127,7 +127,7 @@
         },
         methods: {
             closeAtOutsideClick() {
-              if (this.options.clickOutsideCloses === true) {
+              if (this.options.backdropClose === true) {
                   this.cancel()
               }
             },

@@ -176,7 +176,7 @@
             },
             showBasicDialogCloseClickOutside(){
                 this.$dialog.confirm(trans('messages.basic'), {
-                    clickOutsideCloses: true
+                    backdropClose: true
                 }).then(() => {
                         this.$notify({type: 'success', text: trans('messages.click_continue')})
                     })
