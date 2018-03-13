@@ -2,7 +2,7 @@
 
 import Vue from "vue"
 import Notification from 'vue-notification'
-import VuejsDialog from 'vuejs-dialog'
+import VuejsDialog from '../../plugin/js/'
 import AppComponent from '../components/app.vue'
 
 Vue.use(Notification)
