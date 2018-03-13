@@ -52,6 +52,9 @@
                     <h4>
                         <button class="button" @click="showAnimationBounceDialog()">{{ trans('content.examples.method_usage.7') }}</button>
                     </h4>
+                    <h4>
+                        <button class="button" @click="showBasicDialogCloseClickOutside()">{{ trans('content.examples.method_usage.8') }}</button>
+                    </h4>
                 </section>
 
                 <section>
@@ -171,6 +174,17 @@
                         this.$notify({type: 'success', text: trans('messages.click_cancel')})
                     })
             },
+            showBasicDialogCloseClickOutside(){
+                this.$dialog.confirm(trans('messages.basic'), {
+                    backdropClose: true
+                }).then(() => {
+                        this.$notify({type: 'success', text: trans('messages.click_continue')})
+                    })
+                    .catch(() => {
+                        this.$notify({type: 'success', text: trans('messages.click_cancel')})
+                    })
+            },
+
             showSoftConfirmDialog(){
                 this.$dialog.confirm(trans('messages.soft'), {type: 'soft'})
                     .then(() => {

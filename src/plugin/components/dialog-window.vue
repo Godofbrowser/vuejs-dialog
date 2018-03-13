@@ -1,13 +1,14 @@
 <template>
     <div>
         <transition name="dg-backdrop" appear @after-leave="animationEnded('backdrop')">
-            <div v-if="show" class="dg-backdrop"></div>
+            <div v-if="show" class="dg-backdrop" >
+            </div>
         </transition>
 
         <transition :name="animation" @after-leave="animationEnded('content')" appear>
-            <div v-if="show" :class="['dg-container', {'dg-container--has-input': (isHardConfirm || isPrompt)}]">
+            <div v-if="show" :class="['dg-container', {'dg-container--has-input': (isHardConfirm || isPrompt)}]" @click="closeAtOutsideClick" >
                 <div class="dg-content-cont dg-content-cont--floating">
-                    <div class="dg-main-content">
+                    <div class="dg-main-content" @click.stop>
 
                         <div :class="['dg-content-body', {'dg-content-body--has-title': messageHasTitle}]">
                             <template v-if="messageHasTitle">
@@ -125,6 +126,11 @@
             this.isHardConfirm && this.$refs.inputElem.focus()
         },
         methods: {
+            closeAtOutsideClick() {
+              if (this.options.backdropClose === true) {
+                  this.cancel()
+              }
+            },
             clickRightBtn(){
                 this.options.reverse ? this.cancel() : this.proceed()
             },

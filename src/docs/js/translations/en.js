@@ -32,7 +32,8 @@ export default {
                 4: "Loading Dialog - Useful with ajax",
                 5: "Reversed Dialog - switch buttons",
                 6: "Fade Dialog - Animation",
-                7: "Bounce Dialog - Animation"
+                7: "Bounce Dialog - Animation",
+                8: 'Close when clicking outside dialog'
             },
             directive_usage: {
                 1: "Give it a string",
