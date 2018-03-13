@@ -30,10 +30,6 @@ if (isProduction) {
         }),
         new webpack.LoaderOptionsPlugin({
             minimize: true
-        }),
-        new WebpackShellPlugin({
-            // https://github.com/1337programming/webpack-shell-plugin#api
-            onBuildExit: ['node ' + path.normalize('src/docs/js/copy-to-docs.js')]
         })
     ])
 }
