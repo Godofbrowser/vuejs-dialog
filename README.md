@@ -184,6 +184,7 @@ let options = {
     verification: 'continue', // for hard confirm, user will be prompted to type this to enable the proceed button
     verificationHelp: 'Type "[+:verification]" below to confirm', // Verification help text. [+:verification] will be matched with 'options.verification' (i.e 'Type "continue" below to confirm')
     clicksCount: 3, // for soft confirm, user will be asked to click on "proceed" btn 3 times before actually proceeding
+    clickOutsideCloses: false // set to true to close the dialog when clicking outside of the dialog window, i.e. click landing on the mask 
 };
 
 this.$dialog.confirm(message, options)
