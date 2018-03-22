@@ -1,0 +1,22 @@
+{
+    "parser": "babel-eslint",
+    "extends": [
+        "standard"
+    ],
+    "plugins": [
+        "babel"
+    ],
+    "env": {
+        "es6": true
+    },
+    "rules": {
+        "semi"                 : 0,
+        "indent"               : [2, "tab"],
+        "no-tabs"              : 0,
+        "no-trailing-spaces"   : 0,
+        "key-spacing"          : 0,
+        "jsx-quotes"           : [2, "prefer-single"],
+        "max-len"              : [2, 120, 2],
+        "object-curly-spacing" : [2, "always"]
+    }
+}
