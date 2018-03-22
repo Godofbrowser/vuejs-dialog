@@ -17,6 +17,22 @@ export const ANIMATION_TYPES = {
     BOUNCE: 'dg-bounce'
 }
 
+export const CLASS_TYPES = {
+  MAIN_CONTENT: 'mainContent',
+  BODY: 'body',
+  FOOTER: 'footer',
+  OK: 'ok',
+  CANCEL: 'cancel'
+}
+
+export const CUSTOM_CLASS = {
+  [CLASS_TYPES.MAIN_CONTENT] : '',
+  [CLASS_TYPES.BODY]         : '',
+  [CLASS_TYPES.FOOTER]       : '',
+  [CLASS_TYPES.OK]           : '',
+  [CLASS_TYPES.CANCEL]       : ''
+}
+
 export const DEFAULT_OPTIONS = {
     html                 : false,
     loader               : false,
@@ -29,6 +45,7 @@ export const DEFAULT_OPTIONS = {
     message              : "Proceed with the request?",
     clicksCount          : 3,
     animation            : 'zoom',
+    customClass          : CUSTOM_CLASS,
     verification         : 'continue',
     verificationHelp     : 'Type "[+:verification]" below to confirm'
 }

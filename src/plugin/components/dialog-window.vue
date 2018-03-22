@@ -8,9 +8,9 @@
         <transition :name="animation" @after-leave="animationEnded('content')" appear>
             <div v-if="show" :class="['dg-container', {'dg-container--has-input': (isHardConfirm || isPrompt)}]" @click="closeAtOutsideClick" >
                 <div class="dg-content-cont dg-content-cont--floating">
-                    <div class="dg-main-content" @click.stop>
+                    <div class="dg-main-content" :class="customClass.mainContent" @click.stop>
 
-                        <div :class="['dg-content-body', {'dg-content-body--has-title': messageHasTitle}]">
+                        <div :class="['dg-content-body', customClass.body, {'dg-content-body--has-title': messageHasTitle}]">
                             <template v-if="messageHasTitle">
                                 <h6 v-if="options.html" class="dg-title" v-html="messageTitle"></h6>
                                 <h6 v-else="" class="dg-title">{{ messageTitle }}</h6>
@@ -34,15 +34,15 @@
                             </form>
                         </div>
 
-                        <div class="dg-content-footer">
+                        <div class="dg-content-footer" :class="customClass.footer">
 
-                            <button @click="clickLeftBtn()" :is="leftBtnComponent" :loading="loading"
+                            <button @click="clickLeftBtn()" :is="leftBtnComponent" :loading="loading" :class="customClass.cancel"
                                        :enabled="leftBtnEnabled" :options="options" :focus="leftBtnFocus">
                                 <span v-if="options.html" v-html="leftBtnText"></span>
                                 <span v-else="">{{ leftBtnText }}</span>
                             </button>
 
-                            <button :is="rightBtnComponent" @click="clickRightBtn()" :loading="loading"
+                            <button :is="rightBtnComponent" @click="clickRightBtn()" :loading="loading" :class="customClass.ok"
                                        :enabled="rightBtnEnabled" :options="options" :focus="rightBtnFocus">
                                 <span v-if="options.html" v-html="rightBtnText"></span>
                                 <span v-else="">{{ rightBtnText }}</span>
@@ -60,7 +60,7 @@
 <script>
     import OkBtn from './ok-btn.vue'
     import CancelBtn from './cancel-btn.vue'
-    import {DIALOG_TYPES, ANIMATION_TYPES, CONFIRM_TYPES} from '../js/constants'
+    import {DIALOG_TYPES, ANIMATION_TYPES, CONFIRM_TYPES, CUSTOM_CLASS} from '../js/constants'
 
     import MessageMixin from '../js/mixins/message-mixin'
     import ButtonMixin from '../js/mixins/btn-mixin'
@@ -72,6 +72,7 @@
                 show: true,
                 loading: false,
                 closed: false,
+                customClass: Object.assign({}, CUSTOM_CLASS),
                 endedAnimations: []
             }
         },
@@ -115,7 +116,7 @@
             rightBtnComponent(){
                 return (this.options.reverse === true) ? 'cancel-btn' : 'ok-btn'
             },
-            hardConfirmHelpText() {
+            hardConfirmHelpText(){
                 return this.options.verificationHelp
                     .replace(/\[\+:(\w+)]/g, (match, $1) => {
                         return this.options[$1] || match
@@ -123,6 +124,7 @@
             }
         },
         mounted () {
+            this.setCustomClasses()
             this.isHardConfirm && this.$refs.inputElem.focus()
         },
         methods: {
@@ -178,6 +180,16 @@
                     this.$emit('close', this.options.id)
                 }
 
+            },
+            setCustomClasses(){
+                if (this.options.hasOwnProperty('customClass')) {
+                    Object.keys(this.options.customClass).forEach(prop => {
+                        if (!Object.keys(CUSTOM_CLASS).includes(prop)) {
+                            console.warn(`[WARNING]: Custom class name "${prop}" could not be found!`)
+                        }
+                    });
+                }
+                this.customClass = Object.assign(this.customClass, this.options.customClass);
             }
         },
         beforeDestroy(){
