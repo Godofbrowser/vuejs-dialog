@@ -112,6 +112,15 @@
                         <button class="button" @click="showHardConfirmDialog()">{{ trans('content.examples.confirmation_types.2') }}</button>
                     </h4>
                 </section>
+
+                <section>
+                    <h2>Extending the dialog</h2>
+                    <hr/>
+
+                    <h4>
+                        <button class="button" @click="showDialogWithCustomView()">Custom View/Component</button>
+                    </h4>
+                </section>
             </main>
 
         </div>
@@ -133,6 +142,9 @@
 
 <script>
     import trans from '../js/translations'
+    import TestView from './custom-component.vue'
+
+    const DIALOG_TEST_VIEW = 'test'
 
     const exitMessage = `
 <p style="text-align: center; margin: 0;">
@@ -154,6 +166,8 @@
         },
         mounted(){
             console.log('mounted app')
+
+            this.$dialog.registerComponent(DIALOG_TEST_VIEW, TestView)
         },
         methods: {
             trans,
@@ -211,6 +225,15 @@
             },
             showAnimationFadeDialog(){
                 this.$dialog.alert(trans('messages.html'), {html: true, animation: 'fade'})
+            },
+
+            showDialogWithCustomView(){
+                this.$dialog.alert(trans('messages.html'), {
+                    view: DIALOG_TEST_VIEW,
+                    html: true,
+                    animation: 'fade',
+                    backdropClose: true
+                })
             },
 
             showLoadingDialog(){
