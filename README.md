@@ -235,6 +235,70 @@ this.$dialog.confirm($message, {
 })
 ```
 
+## What's next?
+### Custom components (coming soon!!!)
+
+```vue
+/* File: custom-component.vue */
+<template>
+    <div class="custom-view-wrapper">
+        <h2>Tell someone about this amazing plugin</h2>
+
+        <div v-if="options.html" class="dg-content" v-html="messageBody"></div>
+        <div v-else="" class="dg-content">{{ messageBody }}</div>
+
+        <ok-btn @click="share('share url')" :loading="loading" :options="options" :enabled="true">Share on facebook</ok-btn>
+        <ok-btn @click="share('share url')" :loading="loading" :options="options" :enabled="true">Share on twitter</ok-btn>
+        <ok-btn @click="share('share url')" :loading="loading" :options="options" :enabled="true">Share on linkedIn</ok-btn>
+        <cancel-btn @click="proceed()" :loading="loading" :options="options" :enabled="true">Maybe later!</cancel-btn>
+    </div>
+</template>
+
+<script>
+    import DialogMixin from 'vuejs-dialog/js/mixins/dialog-mixin'
+
+    export default {
+        mixins: [DialogMixin], // All dialog methods (proceed, cancel, etc), state variables (options, etc) and computed properties are included
+        methods: {
+            share(url) {
+                // popup share window
+            }
+        }
+    }
+</script>
+
+<style scoped="">
+    button {
+        width: 100%;
+        margin-bottom: 10px;
+        float: none;
+    }
+</style>
+```
+
+```javascript
+import TestView from './path/to/file/custom-component.vue'
+const VIEW_NAME = 'my-view'
+
+let vm = new Vue({
+    created() {
+        this.$dialog.registerComponent(VIEW_NAME, TestView)
+    },
+    methods: {
+        showCustomView(){
+            this.$dialog.alert(trans('messages.html'), {
+                view: VIEW_NAME, // can be set globally too
+                html: true,
+                animation: 'fade',
+                backdropClose: true
+            })
+        }
+    }
+})
+```
+...and you get your custom view
+![Vuejs Dialog Plugin](./src/docs/img/custom-view.png?raw=true "Vuejs Dialog Plugin custom view demo")
+
 # License
 
 [MIT](http://opensource.org/licenses/MIT)
