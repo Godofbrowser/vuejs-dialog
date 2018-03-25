@@ -242,7 +242,7 @@ this.$dialog.confirm($message, {
 /* File: custom-component.vue */
 <template>
     <div class="custom-view-wrapper">
-        <h2>Tell someone about this amazing plugin</h2>
+        <h2>Share this amazing plugin</h2>
 
         <div v-if="options.html" class="dg-content" v-html="messageBody"></div>
         <div v-else="" class="dg-content">{{ messageBody }}</div>
