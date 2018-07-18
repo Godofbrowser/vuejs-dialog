@@ -146,10 +146,10 @@
 
     const DIALOG_TEST_VIEW = 'test'
 
-    const exitMessage = `
+    const exitMessage = `\
 <p style="text-align: center; margin: 0;">
     <span class="dg-highlight-1">Thank You!</span>
-     <br/>
+     <br/><br/>
      I hope you find it useful
 </p>`
 
