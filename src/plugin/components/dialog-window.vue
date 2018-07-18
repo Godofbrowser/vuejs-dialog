@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div :class="options.customClass">
         <transition name="dg-backdrop" appear @after-leave="animationEnded('backdrop')">
             <div v-if="show" class="dg-backdrop"></div>
         </transition>
