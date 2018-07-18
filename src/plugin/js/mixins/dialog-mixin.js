@@ -4,8 +4,6 @@
  * Created by Emmy on 3/23/2018.
  */
 
-import OkBtn from '../../components/ok-btn.vue'
-import CancelBtn from '../../components/cancel-btn.vue'
 import { DIALOG_TYPES, CONFIRM_TYPES } from '../../js/constants'
 
 import MessageMixin from '../../js/mixins/message-mixin'
@@ -61,15 +59,18 @@ export default {
 		submitDialogForm () {
 			this.okBtnDisabled || this.proceed()
 		},
-		proceed () {
+		proceed (withData = null) {
 			if (this.loaderEnabled) {
 				this.switchLoadingState(true)
 				this.options.promiseResolver({
 					close: this.close,
-					loading: this.switchLoadingState
+					loading: this.switchLoadingState,
+					data: withData
 				})
 			} else {
-				this.options.promiseResolver(true)
+				this.options.promiseResolver({
+					data: withData
+				})
 				this.close()
 			}
 		},
@@ -88,6 +89,5 @@ export default {
 			this.$emit('close')
 		}
 	},
-	mixins: [MessageMixin, ButtonMixin],
-	components: { CancelBtn, OkBtn }
+	mixins: [MessageMixin, ButtonMixin]
 }

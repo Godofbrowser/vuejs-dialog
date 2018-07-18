@@ -62,9 +62,10 @@
                 return !!this.options.loader
             },
             dialogView(){
-                if (this.options.view && this.registeredViews[this.options.view])
-                    return this.registeredViews[this.options.view]
-                return DefaultView
+                const customView = this.options.view 
+                ? this.registeredViews[this.options.view] 
+                : null
+                return customView || DefaultView
             },
             isHardConfirm () {
                 return this.options.window === DIALOG_TYPES.CONFIRM &&

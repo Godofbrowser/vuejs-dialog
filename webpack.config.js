@@ -11,13 +11,16 @@ const COMMON = require('./webpack.base.config')
 
 const CONFIG = Object.assign({}, COMMON, {
 	name: 'dist',
-	entry: './src/plugin/js',
+	entry: {
+		'vuejs-dialog': './src/plugin/js',
+		'vuejs-dialog-mixin': './src/plugin/js/mixins/dialog-mixin.js'
+	},
 	output: {
 		library: 'VuejsDialog',
 		libraryTarget: 'umd',
 		path: path.resolve(__dirname, './dist'),
 		publicPath: '/dist/',
-		filename: 'vuejs-dialog.min.js'
+		filename: '[name].min.js'
 	}
 })
 

@@ -12,15 +12,19 @@
             <form v-if="isHardConfirm || isPrompt"
                   class="dg-form"
                   autocomplete="off"
-                  @submit.prevent="submitDialogForm">
+                  @submit.prevent="submitDialogForm"
+            >
                 <label for="dg-input-elem" style="font-size: 13px">{{ hardConfirmHelpText }}</label>
-                <input type="text" :placeholder="options.verification"
-                       v-model="input"
-                       autocomplete="off"
-                       id="dg-input-elem"
-                       ref="inputElem"
-                       style="width: 100%;margin-top: 10px;
-           padding: 5px 15px; font-size: 16px;border-radius: 4px; border: 2px solid #eee"/>
+                <input type="text" 
+                        :placeholder="options.verification"
+                        v-model="input"
+                        autocomplete="off"
+                        id="dg-input-elem"
+                        ref="inputElem"
+                        style="width: 100%;margin-top: 10px;
+                            padding: 5px 15px; font-size: 16px;
+                            border-radius: 4px; border: 2px solid #eee"
+                />
             </form>
         </div>
 
@@ -44,12 +48,18 @@
 </template>
 
 <script>
-    import DialogMixin from '../../js/mixins/dialog-mixin'
+import DialogMixin from "../../js/mixins/dialog-mixin";
+import OkBtn from '../../components/ok-btn.vue'
+import CancelBtn from '../../components/cancel-btn.vue'
 
-    export default {
-        data: function () {
-            return {}
-        },
-        mixins: [DialogMixin]
-    }
+export default {
+  data: function() {
+    return {};
+  },
+  mixins: [DialogMixin],
+  mounted() {
+    this.isHardConfirm && this.$refs.inputElem && this.$refs.inputElem.focus();
+  },
+  components: { CancelBtn, OkBtn }
+};
 </script>

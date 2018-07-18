@@ -75,6 +75,7 @@
 
                     <h4>
                         <button class="button" v-confirm="{
+                        loader: true,
                         message: trans('messages.directive_object'),
                         ok: clickOkHandler,
                         cancel: clickCancelHandler}"
@@ -142,6 +143,7 @@
 
 <script>
     import trans from '../js/translations'
+    import { popupWindow } from '../js/util'
     import TestView from './custom-component.vue'
 
     const DIALOG_TEST_VIEW = 'test'
@@ -228,11 +230,33 @@
             },
 
             showDialogWithCustomView(){
-                this.$dialog.alert(trans('messages.html'), {
+                this.$dialog.confirm({
+                    title: 'Show some love!',
+                    body: 'Kindly share the plugin if you consider it useful'
+                }, {
                     view: DIALOG_TEST_VIEW,
                     html: true,
                     animation: 'fade',
                     backdropClose: true
+                })
+                .then(dialog => {
+                    console.log(dialog.data)
+
+                    const ENCODED_TITLE = encodeURIComponent('A dialog plugin for VueJs')
+                    const ENCODED_URL = encodeURIComponent('https://github.com/godofbrowser/vuejs-dialog')
+
+                    let links = {
+                        facebook: `https://www.facebook.com/sharer/sharer.php?u=${ENCODED_URL}&t=${ENCODED_TITLE}`,
+                        twitter: `https://twitter.com/share?url=${ENCODED_URL}&text=${ENCODED_TITLE}`,
+                        googleplus: `https://plus.google.com/share?url=${ENCODED_URL}`,
+                        linkedin: `https://www.linkedin.com/shareArticle?mini=true&url=${ENCODED_URL}&title=${ENCODED_TITLE}`
+                    }
+
+                    const network = dialog.data
+                    
+                    if (links[network]){
+                        popupWindow(links[network], network)
+                    }
                 })
             },
 
@@ -268,7 +292,9 @@
                     this.$notify({text: trans('messages.loading_canceled')})
                 })
             },
-            clickOkHandler(){
+            clickOkHandler(dialog){
+                console.log('Dialog: ', dialog)
+                dialog.loading && dialog.close()
                 this.$notify({type: 'success', text: trans('messages.click_continue')})
             },
             clickCancelHandler(){

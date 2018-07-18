@@ -34,13 +34,19 @@ Directives.prototype.getOptions = function (binding) {
 
 Directives.prototype.getThenCallback = function (binding, el) {
 	if (binding.value && binding.value.ok) {
-		return binding.value.ok
+		return dialog => binding.value.ok({ ...dialog, node: el })
 	} else {
-		return () => {
+		return dialog => {
+			// If we got here, it means the default action is to be executed
+			// We'll then stop the loader if it's enabled and close the dialog
+			dialog.loading && dialog.close()
+
 			// Unbind to allow original event
 			el.removeEventListener('click', el.VuejsDialog.clickHandler, true)
+
 			// Trigger original event
 			clickNode(el)
+
 			// Re-bind listener
 			el.addEventListener('click', el.VuejsDialog.clickHandler, true)
 		}

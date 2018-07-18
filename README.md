@@ -18,13 +18,13 @@
 ## Installation
 
 #### HTML
-Include the script:
 
   ```html
   // Include vuejs
  <script type="text/javascript" src="./path/to/vue.min.js"></script>
  
- // Include the vuejs-dialog plugin
+ // Include vuejs-dialog plugin
+ <link href="./path/to/vuejs-dialog.min.css" rel="stylesheet">
  <script type="text/javascript" src="./path/to/vuejs-dialog.min.js"></script>
  
  <script>
@@ -32,14 +32,26 @@ Include the script:
 window.Vue.use(VuejsDialog.default)
 </script>
   ```
-#### NPM
+#### Package Manager
 ```javascript
 // installation via npm 
-npm install vuejs-dialog
+npm i -S vuejs-dialog
+
+// or
+
+// installation via yarn
+yarn add vuejs-dialog
+```
+
+```javascript
+// then
 
 // import into project
 import Vue from "vue"
 import VuejsDialog from "vuejs-dialog"
+
+// include the default style
+import 'vuejs-dialog/vuejs-dialog.min.css'
 
 // Tell Vue to install the plugin.
 Vue.use(VuejsDialog)
@@ -214,7 +226,7 @@ Vue.use(VuejsDialog, {
 
 ### CSS Override
 
-Please use basic css, ex:
+If you have included the plugin's style and wish to make a few overides, you can do so with basic css, ex:
 ```css
 .dg-btn--ok {
      border-color: green;

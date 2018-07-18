@@ -7,7 +7,27 @@
 
 <script>
     export default {
-        props: ['enabled', 'options', 'focus', 'loading'],
+        props: {
+            enabled: {
+                required: false,
+                type: Boolean,
+                'default': true
+            },
+            options: {
+                required: true,
+                type: Object
+            },
+            focus: {
+                required: false,
+                type: Boolean,
+                'default': false
+            },
+            loading: {
+                required: false,
+                type: Boolean,
+                'default': false
+            }
+        },
         mounted(){
             this.focus && this.$refs.btn.focus()
         }
