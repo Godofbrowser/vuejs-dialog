@@ -4,6 +4,7 @@
                        :options="dialog"
                        :key="dialog.id"
                        :escapeKeyClose="dialog.escapeKeyClose"
+                       :registeredViews="registeredViews"
                        @close="destroyDialog">
         </dialog-window>
     </div>
@@ -16,7 +17,8 @@
     export default {
         data: function () {
             return {
-                dialogsARR: []
+                dialogsARR: [],
+                registeredViews: {}
             }
         },
         created() {

@@ -15,16 +15,24 @@
 
 [https://godofbrowser.github.io/vuejs-dialog/](https://godofbrowser.github.io/vuejs-dialog/)
 
+## Important updates in version v1.x.x
+1. Dialog will always resolve with an object. (i.e callback for proceed always will receive an object)
+2. For directives usage, the object returned in (1) above will include a node. The node is the element the directive was bound to (see issue #5)
+3. Styles will have to be included explicitly as they have been extracted into a separate file (see issue #28)
+4. If loader is enabled globally, and a dialog is triggered via a directive without a callback, the loader is ignored for clicks on proceed
+5. Custom class injection on parent node (see issue #25)
+6. Ability to register custom views. This allows for custom logic, custom buttons, etc (see issue #13, #14, #33)
+
 ## Installation
 
 #### HTML
-Include the script:
 
   ```html
   // Include vuejs
  <script type="text/javascript" src="./path/to/vue.min.js"></script>
  
- // Include the vuejs-dialog plugin
+ // Include vuejs-dialog plugin
+ <link href="./path/to/vuejs-dialog.min.css" rel="stylesheet">
  <script type="text/javascript" src="./path/to/vuejs-dialog.min.js"></script>
  
  <script>
@@ -32,14 +40,26 @@ Include the script:
 window.Vue.use(VuejsDialog.default)
 </script>
   ```
-#### NPM
+#### Package Manager
 ```javascript
 // installation via npm 
-npm install vuejs-dialog
+npm i -S vuejs-dialog
+
+// or
+
+// installation via yarn
+yarn add vuejs-dialog
+```
+
+```javascript
+// then
 
 // import into project
 import Vue from "vue"
 import VuejsDialog from "vuejs-dialog"
+
+// include the default style
+import 'vuejs-dialog/vuejs-dialog.min.css'
 
 // Tell Vue to install the plugin.
 Vue.use(VuejsDialog)
@@ -114,7 +134,7 @@ methods: {
 }
 ```
 
-__A more practical use of ths `v-confirm` directive inside a loop__
+__A more practical use of ths `v-confirm` directive inside a loop - Solution 1__
 
 ```html
 // While looping through users
@@ -131,6 +151,41 @@ Make Admin
 ```javascript
 methods: {
     makeAdmin: function(dialog, user) {
+        // Make user admin from the backend
+        /* tellServerToMakeAdmin(user) */
+        
+        // When completed, close the dialog
+        /* dialog.close() */
+        
+    },
+    doNothing: function() {
+        // Do nothing or some other stuffs
+    }
+}
+```
+
+
+__( new ) A more practical use of ths `v-confirm` directive inside a loop - Solution 2__
+
+```html
+// While looping through users
+<button v-for="user in users"
+        :data-user="user"
+        v-confirm="{
+            loader: true,
+            ok: makeAdmin, 
+            cancel: doNothing, 
+            message: 'User will be given admin privileges. Make user an Admin?'}"
+>
+Make Admin
+</button>
+```
+```javascript
+methods: {
+    makeAdmin: function(dialog) {
+        let button = dialog.node // node is only available if triggered via a directive
+        let user = button.dataset.user
+        
         // Make user admin from the backend
         /* tellServerToMakeAdmin(user) */
         
@@ -185,6 +240,7 @@ let options = {
     verificationHelp: 'Type "[+:verification]" below to confirm', // Verification help text. [+:verification] will be matched with 'options.verification' (i.e 'Type "continue" below to confirm')
     clicksCount: 3, // for soft confirm, user will be asked to click on "proceed" btn 3 times before actually proceeding
     backdropClose: false // set to true to close the dialog when clicking outside of the dialog window, i.e. click landing on the mask 
+    customClass: '' // Custom class to be injected into the parent node for the current dialog instance
 };
 
 this.$dialog.confirm(message, options)
@@ -214,7 +270,7 @@ Vue.use(VuejsDialog, {
 
 ### CSS Override
 
-Please use basic css, ex:
+If you have included the plugin's style and wish to make a few overides, you can do so with basic css, ex:
 ```css
 .dg-btn--ok {
      border-color: green;
@@ -234,6 +290,86 @@ this.$dialog.confirm($message, {
      type: 'hard'
 })
 ```
+## More flexibility with Custom components
+
+```vue
+/* File: custom-component.vue */
+<template>
+    <div class="custom-view-wrapper">
+        <template v-if=messageHasTitle>
+            <h2 v-if="options.html" class="dg-title" v-html="messageTitle"></h2>
+            <h2 v-else class="dg-title">{{ messageTitle }}</h2>
+        </template>
+        <template v-else>
+            <h2>Share with friends</h2>
+        </template>
+
+        <div v-if="options.html" class="dg-content" v-html="messageBody"></div>
+        <div v-else class="dg-content">{{ messageBody }}</div>
+        <br/>
+
+        <ok-btn @click="handleShare('facebook')" :options="options">Facebook</ok-btn>
+        <ok-btn @click="handleShare('twitter')" :options="options">Twitter</ok-btn>
+        <ok-btn @click="handleShare('googleplus')" :options="options">Google+</ok-btn>
+        <ok-btn @click="handleShare('linkedin')" :options="options">LinkedIn</ok-btn>
+        <cancel-btn @click="handleDismiss()" :options="options">Dismiss</cancel-btn>
+    </div>
+</template>
+
+<script>
+    import DialogMixin from 'vuejs-dialog/vuejs-dialog-mixin.min.js' // Include mixin
+    import OkBtn from 'path/to/components/ok-btn.vue'
+    import CancelBtn from 'path/to/components/cancel-btn.vue'
+
+    export default {
+        mixins: [ DialogMixin ],
+        methods: {
+            handleShare(platform) {
+                this.proceed(platform) // included in DialogMixin
+            },
+            handleDismiss() {
+                this.cancel() // included in DialogMixin
+            }
+        },
+        components: { CancelBtn, OkBtn }
+    }
+</script>
+
+<style scoped="">
+    button {
+        width: 100%;
+        margin-bottom: 10px;
+        float: none;
+    }
+</style>
+
+```
+
+```javascript
+import CustomView from './path/to/file/custom-component.vue'
+const VIEW_NAME = 'my-unique-view-name'
+
+let vm = new Vue({
+    created() {
+        this.$dialog.registerComponent(VIEW_NAME, CustomView)
+    },
+    methods: {
+        showCustomView(){
+            this.$dialog.alert(trans('messages.html'), {
+                view: VIEW_NAME, // can be set globally too
+                html: true,
+                animation: 'fade',
+                backdropClose: true
+            })
+        }
+    }
+})
+```
+
+ ... and you get your custom view
+
+
+![Vuejs Dialog Plugin](./src/docs/img/custom-view.png?raw=true "Vuejs Dialog Plugin custom view demo")
 
 ## What's next?
 ### Custom components (coming soon!!!)
@@ -305,4 +441,8 @@ let vm = new Vue({
 
 ## Contributing
 
-Let's make it better :)
+* Fork it!
+* Create your feature branch: git checkout -b my-new-feature
+* Commit your changes: git commit -am 'Add some feature'
+* Push to the branch: git push origin my-new-feature
+* Submit a pull request :)

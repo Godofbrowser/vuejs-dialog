@@ -1,10 +1,6 @@
 {
-  "presets": ["env"],
-  "plugins": [
-    "transform-object-assign",
-    ["transform-runtime", {
-      "polyfill": false,
-      "regenerator": true
-    }]
+  "presets": [
+    "env",
+    "stage-2"
   ]
 }
