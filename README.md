@@ -17,11 +17,11 @@
 
 ## Important updates in version v1.x.x
 1. Dialog will always resolve with an object. (i.e callback for proceed always will receive an object)
-2. For directives usage, the object returned in (1) above will include a node. The node is the element the directive was bound to (see issue #5)
-3. Styles will have to be included explicitly as they have been extracted into a separate file (see issue #28)
+2. For directives usage, the object returned in (1) above will include a node. The node is the element the directive was bound to (see issue [#5](https://github.com/Godofbrowser/vuejs-dialog/issues/5)
+3. Styles will have to be included explicitly as they have been extracted into a separate file (see issue [#28](https://github.com/Godofbrowser/vuejs-dialog/issues/28))
 4. If loader is enabled globally, and a dialog is triggered via a directive without a callback, the loader is ignored for clicks on proceed
-5. Custom class injection on parent node (see issue #25)
-6. Ability to register custom views. This allows for custom logic, custom buttons, etc (see issue #13, #14, #33)
+5. Custom class injection on parent node (see issue [#25](https://github.com/Godofbrowser/vuejs-dialog/issues/25))
+6. Ability to register custom views. This allows for custom logic, custom buttons, etc (see issue [#13](https://github.com/Godofbrowser/vuejs-dialog/issues/13), [#14](https://github.com/Godofbrowser/vuejs-dialog/issues/14), [#33](https://github.com/Godofbrowser/vuejs-dialog/issues/33))
 
 ## Installation
 
