@@ -121,6 +121,8 @@
                     <h4>
                         <button class="button" @click="showDialogWithCustomView()">Custom View/Component</button>
                     </h4>
+
+                    <iframe width="100%" height="600" src="https://jsfiddle.net/godofbrowser/pktL3mjb/embedded/js,html,css,result/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
                 </section>
             </main>
 

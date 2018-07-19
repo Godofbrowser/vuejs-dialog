@@ -347,7 +347,8 @@ this.$dialog.confirm(message, options)
 // You can also set all your defaults at the point of installation.
 // This will be your global configuration
 
-Vue.use(VuejsDialog, { // use VuejsDialog.default if installing inside script tag
+// use VuejsDialog.main.default if including via script tag
+Vue.use(VuejsDialog, { 
     html: true, 
     loader: true,
     okText: 'Proceed',
@@ -463,6 +464,7 @@ let vm = new Vue({
 
 ![Vuejs Dialog Plugin](./src/docs/img/custom-view.png?raw=true "Vuejs Dialog Plugin custom view demo")
 
+[Here's a working fiddle](http://jsfiddle.net/godofbrowser/eywraw8t/187478/)
 
 # License
 
