@@ -464,7 +464,7 @@ let vm = new Vue({
 
 ![Vuejs Dialog Plugin](./src/docs/img/custom-view.png?raw=true "Vuejs Dialog Plugin custom view demo")
 
-[Here's a working fiddle](http://jsfiddle.net/godofbrowser/eywraw8t/187478/)
+[Here's a working fiddle for custom component/view](http://jsfiddle.net/godofbrowser/pktL3mjb/)
 
 # License
 
