@@ -119,7 +119,7 @@ Vue.dialog.confirm('Please confirm to continue')
     close: function | sometimes | A method that can be used to close the dialog if it's in a loading state
     loading: function | sometimes | A method that can be used to stop the dialog loader
     node: DOMElement | sometimes | A DOM element which the directive was bound to, when triggered via a directive
-    data: any | always | Data sent with the positive action. Useful in prompts or custom components
+    data: any | always | Data sent with the positive action. Useful in prompts or custom components where you have multiple proceed buttons
 }
 
 // Example:
