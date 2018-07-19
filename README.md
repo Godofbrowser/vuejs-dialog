@@ -65,13 +65,20 @@ import 'vuejs-dialog/vuejs-dialog.min.css'
 Vue.use(VuejsDialog)
 ```
 
-## Basic Usage
+## Basic Usage inside a vuejs application
 
 ```javascript
 // Anywhere in your Vuejs App.
 
+// Trigger an Alert dialog
+this.$dialog.alert('Request completed!')
+	.then(function (dialog) {
+		console.log('Closed')
+	})
+	
+// Trigger a confirmation dialog
 this.$dialog.confirm('Please confirm to continue')
-	.then(function () {
+	.then(function (dialog) {
 		console.log('Clicked on proceed')
 	})
 	.catch(function () {
@@ -79,10 +86,63 @@ this.$dialog.confirm('Please confirm to continue')
 	});
 ```
 
+## Basic Usage outside a vuejs application
+```javascript
+// VuejsDialog Methods are also available on the global vue
+// This makes it possible to use the plugin inside a ReactJs application
+// or just any javascript application
+// Simply include vue, vuejs-dialog, ask vue to use the plugin and that's all:
+
+Vue.dialog.alert('Request completed!')
+	.then(function (dialog) {
+		console.log('Closed')
+	})
+	
+Vue.dialog.confirm('Please confirm to continue')
+	.then(function (dialog) {
+		console.log('Clicked on proceed')
+	})
+	.catch(function () {
+		console.log('Clicked on cancel')
+	});
+```
+
+## Return value on success
+
+```javascript
+// Whenever a user clicks on proceed,
+// the promise returned by the dialog call will be 
+// resolved with a dialog object with the following shape:
+
+
+{
+    close: function | sometimes | A method that can be used to close the dialog if it's in a loading state
+    loading: function | sometimes | A method that can be used to stop the dialog loader
+    node: DOMElement | sometimes | A DOM element which the directive was bound to, when triggered via a directive
+    data: any | always | Data sent with the positive action. Useful in prompts or custom components
+}
+
+// Example:
+
+<button class="btn-danger"
+        v-confirm="{
+            loader: true,
+            ok: okCallback, 
+            cancel: cancelcallback, 
+            message: 'Some confirmation message'}"
+>
+
+okCallback: function (dialog) {
+		dialog.loaging(false) // stop the loader (you won't be needing this)
+		dialog.close() // stops loader and close the dialog
+		dialog.node.className // === "btn-danger"
+		dialog.data // === null
+}
+```
+
 
 ## Usage with ajax - Loader enabled
 ```javascript
-// Anywhere in your Vuejs App.
 
 this.$dialog.confirm("If you delete this record, it'll be gone forever.", {
     loader: true // default: false - when set to true, the proceed button shows a loader when clicked.
@@ -134,7 +194,7 @@ methods: {
 }
 ```
 
-__A more practical use of ths `v-confirm` directive inside a loop - Solution 1__
+__A more practical use of ths `v-confirm` directive with multiple triggers - Solution 1__
 
 ```html
 // While looping through users
@@ -165,7 +225,7 @@ methods: {
 ```
 
 
-__( new ) A more practical use of ths `v-confirm` directive inside a loop - Solution 2__
+__( new ) A more practical use of ths `v-confirm` directive with multiple triggers - Solution 2__
 
 ```html
 // While looping through users
@@ -222,7 +282,7 @@ this.$dialog.confirm(message)
 ```
 
 
-### Options
+## Options
 ```javascript
 // Parameters and options
 
@@ -251,7 +311,7 @@ this.$dialog.confirm(message, options)
 	    // This will be triggered when user clicks on cancel
 	});
 ```
-### Global Configuration
+## Global Configuration
 ```javascript
 // You can also set all your defaults at the point of installation.
 // This will be your global configuration
@@ -268,7 +328,7 @@ Vue.use(VuejsDialog, { // use VuejsDialog.default if installing inside script ta
 // This gives you the flexibility of overriding the global config on individual call.
 ```
 
-### CSS Override
+## CSS Override
 
 If you have included the plugin's style and wish to make a few overides, you can do so with basic css, ex:
 ```css
@@ -281,7 +341,7 @@ If you have included the plugin's style and wish to make a few overides, you can
 }
 ```
 
-### Pro tip
+## Useful tip for customization
 You can use any of the options in your verification help text. Example:
 
 ```javascript
@@ -346,15 +406,16 @@ this.$dialog.confirm($message, {
 ```
 
 ```javascript
+import Vue from 'vue'
 import CustomView from './path/to/file/custom-component.vue'
+
 const VIEW_NAME = 'my-unique-view-name'
+Vue.dialog.registerComponent(VIEW_NAME, CustomView)
 
 let vm = new Vue({
-    created() {
-        this.$dialog.registerComponent(VIEW_NAME, CustomView)
-    },
     methods: {
         showCustomView(){
+            // Note: Use confirm instead of alert if you need to handle rejection
             this.$dialog.alert(trans('messages.html'), {
                 view: VIEW_NAME, // can be set globally too
                 html: true,
