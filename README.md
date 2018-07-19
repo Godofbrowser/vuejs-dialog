@@ -22,6 +22,10 @@
 4. If loader is enabled globally, and a dialog is triggered via a directive without a callback, the loader is ignored for clicks on proceed
 5. Custom class injection on parent node (see issue [#25](https://github.com/Godofbrowser/vuejs-dialog/issues/25))
 6. Ability to register custom views. This allows for custom logic, custom buttons, etc (see issue [#13](https://github.com/Godofbrowser/vuejs-dialog/issues/13), [#14](https://github.com/Godofbrowser/vuejs-dialog/issues/14), [#33](https://github.com/Godofbrowser/vuejs-dialog/issues/33))
+7. For installation via __HTML script tag__
+   * The library has been namespaced as it has been split into two. The main library which is the plugin and the mixin which is useful in custom components
+   * To this effect, the new way to install the plugin is slightly dufferent: `window.Vue.use(VuejsDialog.main.default)` 
+   * And the mixin can be added to components like so: `mixins: [VuejsDialog.mixin.default, ...otherMixins]`
 
 ## Installation
 
@@ -37,7 +41,7 @@
  
  <script>
 // Tell Vue to install the plugin.
-window.Vue.use(VuejsDialog.default)
+window.Vue.use(VuejsDialog.main.default)
 </script>
   ```
 #### Package Manager
