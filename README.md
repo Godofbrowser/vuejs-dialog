@@ -38,6 +38,7 @@
  // Include vuejs-dialog plugin
  <link href="./path/to/vuejs-dialog.min.css" rel="stylesheet">
  <script type="text/javascript" src="./path/to/vuejs-dialog.min.js"></script>
+ <script type="text/javascript" src="./path/to/vuejs-dialog-mixin.min.js"></script> // only needed in custom components
  
  <script>
 // Tell Vue to install the plugin.
@@ -61,12 +62,38 @@ yarn add vuejs-dialog
 // import into project
 import Vue from "vue"
 import VuejsDialog from "vuejs-dialog"
+import VuejsDialogMixin from "vuejs-dialog/vuejs-dialog-mixin.min.js" // only needed in custom components
 
 // include the default style
 import 'vuejs-dialog/vuejs-dialog.min.css'
 
 // Tell Vue to install the plugin.
 Vue.use(VuejsDialog)
+```
+
+#### Webpack External
+```javascript
+// If you're including via script tag and importing as Webpack external
+// Webpack config
+{
+    // ... other webpack config
+    externals: {
+        // .. other externals if any
+        'vuejs-dialog': 'VuejsDialog'
+    }
+}
+```
+```javascript
+// then
+
+// import into project
+import Vue from "vue"
+import VuejsDialog from "vuejs-dialog"
+
+// Tell Vue to install the plugin.
+Vue.use(VuejsDialog.main.default)
+
+// mixin available at: VuejsDialog.mixin.default
 ```
 
 ## Basic Usage inside a vuejs application
