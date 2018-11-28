@@ -14,9 +14,9 @@
                   autocomplete="off"
                   @submit.prevent="submitDialogForm"
             >
-                <label for="dg-input-elem" style="font-size: 13px">{{ hardConfirmHelpText }}</label>
+                <label for="dg-input-elem" style="font-size: 13px">{{ isPrompt ? promptHelpText : hardConfirmHelpText }}</label>
                 <input type="text" 
-                        :placeholder="options.verification"
+                        :placeholder="isPrompt ? '' : options.verification"
                         v-model="input"
                         autocomplete="off"
                         id="dg-input-elem"

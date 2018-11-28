@@ -66,6 +66,11 @@ Plugin.prototype.alert = function (message = null, options = {}) {
 	return this.open(DIALOG_TYPES.ALERT, options)
 }
 
+Plugin.prototype.prompt = function (message = null, options = {}) {
+	message && (options.message = message)
+	return this.open(DIALOG_TYPES.PROMPT, options)
+}
+
 Plugin.prototype.confirm = function (message = null, options = {}) {
 	message && (options.message = message)
 	return this.open(DIALOG_TYPES.CONFIRM, options)

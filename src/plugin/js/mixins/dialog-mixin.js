@@ -44,6 +44,12 @@ export default {
 				.replace(/\[\+:(\w+)]/g, (match, $1) => {
 					return this.options[$1] || match
 				})
+		},
+		promptHelpText () {
+			return this.options.promptHelp
+				.replace(/\[\+:(\w+)]/g, (match, $1) => {
+					return this.options[$1] || match
+				})
 		}
 	},
 	mounted () {
@@ -51,13 +57,16 @@ export default {
 	},
 	methods: {
 		clickRightBtn () {
-			this.options.reverse ? this.cancel() : this.proceed()
+			this.options.reverse ? this.cancel() : this.proceed(this.getDefaultData())
 		},
 		clickLeftBtn () {
-			this.options.reverse ? this.proceed() : this.cancel()
+			this.options.reverse ? this.proceed(this.getDefaultData()) : this.cancel()
 		},
 		submitDialogForm () {
 			this.okBtnDisabled || this.proceed()
+		},
+		getDefaultData () {
+			return this.isPrompt ? this.input : null
 		},
 		proceed (withData = null) {
 			if (this.loaderEnabled) {
