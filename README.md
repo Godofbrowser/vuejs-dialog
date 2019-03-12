@@ -176,6 +176,28 @@ okCallback: function (dialog) {
 }
 ```
 
+## Prompt (collect data from user)
+
+```javascript
+this.$dialog
+  .prompt({
+    title: "Let's hear from you",
+    body: "What is the most important thing in life?",
+    promptHelp: 'Type in the box below and click "[+:okText]"'
+  })
+  .then(dialog => {
+    // Triggered when proceed button is clicked
+    // Show an alert with the user's input as the message
+    this.$dialog.alert(dialog.data || '[empty]')
+  })
+  .catch(() => {
+    // Triggered when dialog is dismissed by user
+
+    console.log('Prompt dismissed');
+  });
+```
+
+
 ## Usage with ajax - Loader enabled
 
 ```javascript
