@@ -214,9 +214,9 @@
         this.$dialog.alert(trans('messages.alert'))
       },
       showPromptDialog () {
-        this.$dialog.prompt({title: 'Let\'s hear from you', body: trans('messages.prompt')})
+        this.$dialog.prompt({title: 'Let\'s hear from you', body: trans('messages.prompt'), loader: true})
           .then((dialog) => {
-            dialog.data && this.$dialog.alert(dialog.data)
+            this.$dialog.alert(dialog.data || '[empty]')
           })
       },
       showBasicDialog () {

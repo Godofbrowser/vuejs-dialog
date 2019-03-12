@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const isProduction = process.env.NODE_ENV === 'production'
 const DEFAULT_FILENAME = 'vuejs-dialog'
 const MAIN_ENTRY_NAME = 'main'
+const MIXIN_ENTRY_NAME = 'mixin'
 
 const extractCss = new MiniCssExtractPlugin({
 	filename: DEFAULT_FILENAME + '.min.css'
@@ -14,7 +15,7 @@ const CONFIG = Object.assign({}, COMMON, {
 	name: 'dist',
 	entry: {
 		[MAIN_ENTRY_NAME]: './src/plugin/js',
-		'mixin': './src/plugin/js/mixins/dialog-mixin.js'
+		[MIXIN_ENTRY_NAME]: './src/plugin/js/mixins/dialog-mixin.js'
 	},
 	output: {
 		library: ['VuejsDialog', '[name]'],
