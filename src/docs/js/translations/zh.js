@@ -33,8 +33,8 @@ export default {
         5: '反转对话框 - 开关按钮',
         6: '淡化对话框 - 动画',
         7: '反弹对话框 - 动画',
-        8: 'Close when clicking outside dialog',
-        9: 'Prompt - collect input'
+        8: '单击外部对话框时关闭',
+        9: '提示 - 收集输入'
       },
       directive_usage: {
         1: '给它一个字符串',
@@ -50,7 +50,7 @@ export default {
 
   messages: {
     alert: '这是一个警报对话框。 点击下面的按钮关闭。',
-    prompt: 'What is the most important thing in life?',
+    prompt: '生命中最重要的是什么？',
     html: `此对话框启用了<b class="dg-highlight-1">超文本标记语言</b>。 点击下面的按钮关闭。`,
     basic: '这是一个基本的确认对话框。 点击任一按钮立即关闭对话框',
     soft: '这是一个软确认对话框。 需要多次点击才能继续。',

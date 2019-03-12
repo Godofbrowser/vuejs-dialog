@@ -50,7 +50,7 @@ export default {
 
   messages: {
     alert: 'Este es un cuadro de diálogo de alerta. Haga clic en el botón de abajo para cerrar.',
-    prompt: 'What is the most important thing in life?',
+    prompt: '¿Qué es lo más importante en la vida?',
     html: `This dialog has <b class="dg-highlight-1">HTML</b> enabled. Click the button below to close.`,
     basic: 'Este es un diálogo de confirmación básico. Al hacer clic en cualquiera de los botones se descarta el cuadro de diálogo al instante',
     soft: 'Este es un diálogo de confirmación suave. Se necesitan varios clics para continuar.',
