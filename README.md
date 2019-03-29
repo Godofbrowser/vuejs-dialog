@@ -64,7 +64,7 @@ yarn add vuejs-dialog
 // import into project
 import Vue from 'vue';
 import VuejsDialog from 'vuejs-dialog';
-import VuejsDialogMixin from 'vuejs-dialog/vuejs-dialog-mixin.min.js'; // only needed in custom components
+import VuejsDialogMixin from 'vuejs-dialog/dist/vuejs-dialog-mixin.min.js'; // only needed in custom components
 
 // include the default style
 import 'vuejs-dialog/dist/vuejs-dialog.min.css';
@@ -358,7 +358,7 @@ let options = {
     verification: 'continue', // for hard confirm, user will be prompted to type this to enable the proceed button
     verificationHelp: 'Type "[+:verification]" below to confirm', // Verification help text. [+:verification] will be matched with 'options.verification' (i.e 'Type "continue" below to confirm')
     clicksCount: 3, // for soft confirm, user will be asked to click on "proceed" btn 3 times before actually proceeding
-    backdropClose: false // set to true to close the dialog when clicking outside of the dialog window, i.e. click landing on the mask
+    backdropClose: false, // set to true to close the dialog when clicking outside of the dialog window, i.e. click landing on the mask
     customClass: '' // Custom class to be injected into the parent node for the current dialog instance
 };
 
