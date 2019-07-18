@@ -63,7 +63,7 @@ export default {
 			this.options.reverse ? this.proceed(this.getDefaultData()) : this.cancel()
 		},
 		submitDialogForm () {
-			this.okBtnDisabled || this.proceed()
+			this.okBtnDisabled || this.proceed(this.getDefaultData())
 		},
 		getDefaultData () {
 			return this.isPrompt ? this.input : null
