@@ -2,7 +2,7 @@
  * Created by Emmy on 10/11/2017.
  */
 
-import Plugin from '../../../src/plugin/js/index'
+import Plugin from '../../../src/plugin/js'
 import { clickNode } from '../../../src/plugin/js/utilities'
 import { getElem } from './helpers'
 import { createLocalVue } from '@vue/test-utils'
