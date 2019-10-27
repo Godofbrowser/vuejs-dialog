@@ -169,7 +169,7 @@ Vue.dialog
 >
 
 okCallback: function (dialog) {
-		dialog.loaging(false) // stop the loader (you won't be needing this)
+		dialog.loading(false) // stop the loader (you won't be needing this)
 		dialog.close() // stops loader and close the dialog
 		dialog.node.className // === "btn-danger"
 		dialog.data // === null
