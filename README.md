@@ -183,6 +183,7 @@ this.$dialog
   .prompt({
     title: "Let's hear from you",
     body: "What is the most important thing in life?",
+  }, {
     promptHelp: 'Type in the box below and click "[+:okText]"'
   })
   .then(dialog => {
