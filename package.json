@@ -1,6 +1,6 @@
 {
   "name": "vuejs-dialog",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "A lightweight, promise based alert, prompt and confirm dialog",
   "main": "dist/vuejs-dialog.min.js",
   "directories": {
@@ -69,7 +69,7 @@
     "mini-css-extract-plugin": "^0.4.1",
     "mocha": "^4.0.1",
     "mocha-webpack": "^0.7.0",
-    "node-sass": "^4.9.2",
+    "node-sass": "^4.14.1",
     "postcss-loader": "^2.1.6",
     "promise-polyfill": "^6.0.2",
     "sass-loader": "^6.0.6",
