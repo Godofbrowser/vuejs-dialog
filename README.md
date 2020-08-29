@@ -5,7 +5,7 @@
 [![npm version](https://badge.fury.io/js/vuejs-dialog.svg)](https://badge.fury.io/js/vuejs-dialog)
 [![Build Status](https://travis-ci.org/Godofbrowser/vuejs-dialog.svg?branch=master)](https://travis-ci.org/Godofbrowser/vuejs-dialog)
 [![Scrutinizer](https://img.shields.io/scrutinizer/g/Godofbrowser/vuejs-dialog.svg?branch=master)](https://scrutinizer-ci.com/g/Godofbrowser/vuejs-dialog/?branch=master)
-[![npm](https://img.shields.io/npm/dt/vuejs-dialog.svg)]()
+[![npm](https://img.shields.io/npm/dt/vuejs-dialog.svg)](https://github.com/Godofbrowser/vuejs-dialog/archive/master.zip)
 
 ![Vuejs Dialog Plugin](./src/docs/img/html-enabled.png?raw=true 'Vuejs Dialog Plugin example')
 ![Vuejs Dialog Plugin](./src/docs/img/demo.gif?raw=true 'Vuejs Dialog Plugin usage demo')
