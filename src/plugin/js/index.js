@@ -26,7 +26,7 @@ Plugin.prototype.mountIfNotMounted = function () {
 		let node = document.createElement('div')
 		document.querySelector('body').appendChild(node)
 
-		let Vm = new DialogConstructor()
+		let Vm = new DialogConstructor(this.globalOptions.forwardPlugin)
 
 		Vm.registeredViews = this.registeredComponents()
 
