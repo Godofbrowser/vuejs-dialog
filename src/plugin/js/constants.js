@@ -18,12 +18,17 @@ export const ANIMATION_TYPES = {
 }
 
 export const CLASS_TYPES = {
-	MAIN_CONTENT: 'mainContent',
-	BODY: 'body',
-	TITLE: 'title',
-	FOOTER: 'footer',
-	OK_BTN: 'okBtn',
-	CANCEL_BTN: 'cancelBtn'
+	ROOT_CLASS: 'rootClass',
+	CONTAINER_CLASS: 'containerClass',
+	CONTENT_CLASS: 'contentClass',
+	MAIN_CONTENT: 'mainContent'
+}
+
+export const CUSTOM_CLASS = {
+	[CLASS_TYPES.ROOT_CLASS] : '',
+	[CLASS_TYPES.CONTAINER_CLASS] : '',
+	[CLASS_TYPES.CONTENT_CLASS] : '',
+	[CLASS_TYPES.MAIN_CONTENT] : ''
 }
 
 export const DEFAULT_OPTIONS = {
@@ -39,7 +44,7 @@ export const DEFAULT_OPTIONS = {
 	message              : 'Proceed with the request?',
 	clicksCount          : 3,
 	animation            : 'zoom',
-	customClass          : '',
+	customClass          : CUSTOM_CLASS,
 	verification         : 'continue',
 	verificationHelp     : 'Type "[+:verification]" below to confirm',
 	promptHelp      	 : 'Type in the box below and click "[+:okText]"'

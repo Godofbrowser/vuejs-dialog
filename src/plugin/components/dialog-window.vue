@@ -1,13 +1,13 @@
 <template>
-    <div :class="options.customClass">
+    <div :class="customClass.rootClass">
         <transition name="dg-backdrop" appear @after-leave="animationEnded('backdrop')">
             <div v-if="show" class="dg-backdrop"></div>
         </transition>
 
         <transition :name="animation" @after-leave="animationEnded('content')" appear>
-            <div v-if="show" :class="['dg-container', {'dg-container--has-input': (isHardConfirm || isPrompt)}]" @click="closeAtOutsideClick" >
-                <div class="dg-content-cont dg-content-cont--floating">
-                    <div class="dg-main-content" @click.stop>
+            <div v-if="show" :class="['dg-container', customClass.containerClass, {'dg-container--has-input': (isHardConfirm || isPrompt)}]" @click="closeAtOutsideClick" >
+                <div :class="['dg-content-cont', 'dg-content-cont--floating', customClass.contentClass]">
+                    <div :class="['dg-main-content', customClass.mainContent]" @click.stop>
                         <component :is="dialogView" :options="options" @close="close"></component>
                     </div>
                 </div>
@@ -18,14 +18,15 @@
 
 <script>
     import DefaultView from './views/default-view.vue'
-    import {DIALOG_TYPES, ANIMATION_TYPES, CONFIRM_TYPES} from '../js/constants'
+    import {DIALOG_TYPES, ANIMATION_TYPES, CONFIRM_TYPES, CUSTOM_CLASS} from '../js/constants'
 
     export default {
         data: function () {
             return {
                 show: true,
                 closed: false,
-                endedAnimations: []
+                endedAnimations: [],
+                customClass: Object.assign({}, CUSTOM_CLASS),
             }
         },
         props: {
@@ -111,7 +112,20 @@
                     this.options.promiseRejecter(false)
                     this.$emit('close', this.options.id)
                 }
+            },
+            setCustomClasses(){
+                if (this.options.hasOwnProperty('customClass')) {
+                    Object.keys(this.options.customClass).forEach(prop => {
+                        if (!Object.keys(CUSTOM_CLASS).includes(prop)) {
+                            console.warn(`[WARNING]: Custom class name "${prop}" could not be found!`)
             }
+                    });
+                }
+                this.customClass = Object.assign(this.customClass, this.options.customClass);
+            }
+        },
+        mounted () {
+            this.setCustomClasses()
         },
         beforeDestroy(){
             if(this.closed === false){
