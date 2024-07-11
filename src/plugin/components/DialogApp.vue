@@ -15,7 +15,7 @@ import DialogWindow from './DialogWindow.vue'
 import {firstIndex} from '../utilities'
 import {defineComponent} from "vue";
 
-const deleteByIndex = (arr, idx) => arr.filter(i => i !== idx);
+const deleteByIndex = (arr, idx) => arr.filter((_, i) => i !== idx);
 
 export default defineComponent({
   data: function () {
