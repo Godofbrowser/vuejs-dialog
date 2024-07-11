@@ -44,7 +44,7 @@
                       :is="leftBtnComponent"
                       :loading="loading"
                       :class="customClass.cancel"
-                      :enabled="leftBtnEnabled"
+                      :visible="leftBtnVisible"
                       :options="options"
                       :focus="leftBtnFocus"
               >
@@ -56,7 +56,7 @@
                       :is="rightBtnComponent"
                       :loading="loading"
                       :class="customClass.ok"
-                      :enabled="rightBtnEnabled"
+                      :visible="rightBtnVisible"
                       :options="options"
                       :focus="rightBtnFocus"
               >
@@ -168,10 +168,10 @@ export default defineComponent({
           (this.options.type === CONFIRM_TYPES.HARD) &&
           (this.input !== this.options.verification)
     },
-    leftBtnEnabled () {
+    leftBtnVisible () {
       return (this.cancelBtnDisabled === false) || (this.options.reverse === true)
     },
-    rightBtnEnabled () {
+    rightBtnVisible () {
       return (this.cancelBtnDisabled === false) || (this.options.reverse === false)
     },
     leftBtnFocus () {

@@ -1,5 +1,5 @@
 <template>
-  <button v-if="enabled" :class="['dg-btn', 'dg-btn--ok', {'dg-btn--loading': loading}, {'dg-pull-right': !options.reverse}]"
+  <button v-if="visible" :class="['dg-btn', 'dg-btn--ok', {'dg-btn--loading': loading}, {'dg-pull-right': !options.reverse}]"
           @click.prevent="proceed()" ref="btn" :disabled="is_disabled">
         <span class="dg-btn-content">
             <slot></slot>
@@ -21,7 +21,27 @@ export default defineComponent({
       clicks_count: 0
     }
   },
-  props: ['enabled', 'options', 'focus', 'loading'],
+  props: {
+    visible: {
+      required: false,
+      type: Boolean,
+      'default': true
+    },
+    options: {
+      required: true,
+      type: Object
+    },
+    focus: {
+      required: false,
+      type: Boolean,
+      'default': false
+    },
+    loading: {
+      required: false,
+      type: Boolean,
+      'default': false
+    }
+  },
   mounted(){
     this.focus && this.$refs.btn.focus()
   },
