@@ -10,6 +10,9 @@ import {defineComponent} from "vue";
 
 export default defineComponent({
   name: "CancelButton",
+  emits: {
+    click: () => true,
+  },
   props: {
     visible: {
       required: false,

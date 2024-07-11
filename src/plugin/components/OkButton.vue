@@ -21,6 +21,9 @@ export default defineComponent({
       clicks_count: 0
     }
   },
+  emits: {
+    click: () => true,
+  },
   props: {
     visible: {
       required: false,
