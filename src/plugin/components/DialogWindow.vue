@@ -40,7 +40,7 @@
             </div>
 
             <div class="dg-content-footer" :class="customClass.footer">
-              <button @click="clickLeftBtn()"
+              <component @click="clickLeftBtn()"
                       :is="leftBtnComponent"
                       :loading="loading"
                       :class="customClass.cancel"
@@ -50,9 +50,9 @@
               >
                 <span v-if="options.html" v-html="leftBtnText"></span>
                 <span v-else>{{ leftBtnText }}</span>
-              </button>
+              </component>
 
-              <button @click="clickRightBtn()"
+              <component @click="clickRightBtn()"
                       :is="rightBtnComponent"
                       :loading="loading"
                       :class="customClass.ok"
@@ -62,7 +62,7 @@
               >
                 <span v-if="options.html" v-html="rightBtnText"></span>
                 <span v-else>{{ rightBtnText }}</span>
-              </button>
+              </component>
 
               <div class="dg-clear"></div>
             </div>
@@ -83,6 +83,8 @@ import {
   DIALOG_TYPES,
   CUSTOM_CLASS
 } from "../constants";
+// import {MessageMixin} from "@/plugin/mixins/MessageMixin";
+// import {ButtonMixin} from "@/plugin/mixins/ButtonMixin";
 
 export default defineComponent({
   name: "DialogWindow",
@@ -131,17 +133,60 @@ export default defineComponent({
       return (this.options.window === DIALOG_TYPES.PROMPT)
     },
     leftBtnComponent(){
-      return (this.options.reverse === false) ? 'cancel-btn' : 'ok-btn'
+      return (this.options.reverse === false) ? CancelBtn : OkBtn
     },
     rightBtnComponent(){
-      return (this.options.reverse === true) ? 'cancel-btn' : 'ok-btn'
+      return (this.options.reverse === true) ? CancelBtn : OkBtn
     },
     hardConfirmHelpText(){
       return this.options.verificationHelp
           .replace(/\[\+:(\w+)]/g, (match, $1) => {
             return this.options[$1] || match
           })
+    },
+
+    // Refactored from MessageMixin
+    messageHasTitle(){
+      let m = this.options.message
+      return (typeof m === 'object' && m !== null) && m.title
+    },
+    messageTitle(){
+      return this.messageHasTitle ? this.options.message.title : null
+    },
+    messageBody(){
+      let m = this.options.message
+      return (typeof m === 'string') ? m : (m.body || '')
+    },
+    // END - Refactored from MessageMixin
+
+    // Refactored from ButtonMixin
+    cancelBtnDisabled () {
+      return (this.options.window === DIALOG_TYPES.ALERT)
+    },
+    okBtnDisabled () {
+      return (this.options.window === DIALOG_TYPES.CONFIRM) &&
+          (this.options.type === CONFIRM_TYPES.HARD) &&
+          (this.input !== this.options.verification)
+    },
+    leftBtnEnabled () {
+      return (this.cancelBtnDisabled === false) || (this.options.reverse === true)
+    },
+    rightBtnEnabled () {
+      return (this.cancelBtnDisabled === false) || (this.options.reverse === false)
+    },
+    leftBtnFocus () {
+      return !this.isHardConfirm && (this.options.reverse === true)
+    },
+    rightBtnFocus () {
+      return !this.isHardConfirm && (this.options.reverse === false)
+    },
+    leftBtnText () {
+      return this.options.reverse ? this.options.okText : this.options.cancelText
+    },
+    rightBtnText () {
+      return this.options.reverse ? this.options.cancelText : this.options.okText
     }
+    // END - Refactored from ButtonMixin
   },
   mounted () {
     this.setCustomClasses()
@@ -216,7 +261,7 @@ export default defineComponent({
       this.cancelBtnDisabled ? this.proceed() : this.cancel()
     }
   },
-  mixins: [MessageMixin, ButtonMixin],
+  // mixins: [MessageMixin, ButtonMixin],
   components: {CancelBtn, OkBtn}
 })
 </script>

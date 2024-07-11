@@ -5,13 +5,14 @@
             <slot></slot>
             <span v-if="soft_confirm">({{ clicks_remaining }})</span>
         </span>
-    <span is="btn-loader" v-if="loading"></span>
+    <component :is="'BtnLoader'" v-if="loading"></component>
   </button>
 </template>
 
 <script>
 import BtnLoader from './ButtonLoader.vue'
 import {defineComponent} from "vue";
+import {CONFIRM_TYPES} from "@/plugin/constants";
 
 export default defineComponent({
   name: "OkButton",
