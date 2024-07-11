@@ -74,6 +74,11 @@ export default defineComponent({
       let dialogIndex = (-1 + this.dialogsARR.length)
 
       if(dialogIndex > -1){
+        // necessary for macOS Fullscreen mode,
+        // else the browser exits fullscreen.
+        // However, we only do this if open dialog > 0.
+        e.preventDefault();
+
         // this.$set(this.dialogsARR[dialogIndex], 'escapeKeyClose', true)
         this.dialogsARR[dialogIndex]['escapeKeyClose'] = true;
       }
