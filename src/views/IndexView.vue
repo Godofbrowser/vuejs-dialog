@@ -1,33 +1,43 @@
 <template>
   <div class="index">
     <h1 style="text-align: center;margin-bottom: 35px;margin-top: 35px;">Index page</h1>
-    <div style="display: flex; justify-content: space-around;">
-    <button class="dg-btn" @click="testBtnHandler('alert')">Click Alert</button>
-    <button class="dg-btn" @click="testBtnHandler('confirm')">Click Confirm</button>
-    <button class="dg-btn" @click="testBtnHandler('prompt')">Click Prompt</button>
-      <button class="dg-btn" @click="testBtnHandler('loading')">Click Confirm:loading</button>
-      <button class="dg-btn" @click="testBtnHandler('soft')">Click Confirm:soft</button>
-      <button class="dg-btn" @click="testBtnHandler('hard')">Click Confirm:hard</button>
+    <div style="width: 100%;display: grid; grid-gap: 15px; grid-template-columns: repeat(auto-fill, 200px);justify-content: center">
+      <button class="dg-btn" @click="testBtnHandler('alert')">Click Alert</button>
+      <button class="dg-btn" @click="testBtnHandler('confirm')">Click Confirm</button>
+      <button class="dg-btn" @click="testBtnHandler('soft')">Click Confirm | soft</button>
+      <button class="dg-btn" @click="testBtnHandler('loading')">Click Confirm | loading</button>
+      <button class="dg-btn" @click="testBtnHandler('hard')">Click Confirm | hard</button>
+      <button class="dg-btn" @click="testBtnHandler('prompt')">Click Prompt</button>
+    </div>
+    <hr style="margin: 35px 0;" />
+    <div style="width: 100%;display: grid; grid-gap: 15px; grid-template-columns: repeat(auto-fill, 200px);justify-content: center">
+      <button class="dg-btn" v-confirm="'Show some alert!'">Click Alert</button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-export default {
+import {defineComponent} from "vue";
+
+export default defineComponent({
   methods: {
     testBtnHandler(type: 'alert' | 'confirm' | 'loading' | 'prompt' | 'soft' | 'hard') {
       console.log('Clicked on the button! - ', type)
       this[type]();
     },
     alert() {
-      this.$dialog.alert('Are you sure?')
+      this.$dialog.alert('Hello world!')
     },
     confirm() {
       this.$dialog.confirm('If you delete this record, it\'ll be gone forever.')
     },
     soft() {
-      this.$dialog.confirm('If you delete this record, it\'ll be gone forever.', {
-        type: 'soft'
+      this.$dialog.confirm({
+        title: "Confirm Delete",
+        body: 'If you delete this record, it\'ll be gone forever.',
+      }, {
+        type: 'soft',
+        animation: 'bounce',
       })
     },
     hard() {
@@ -51,12 +61,17 @@ export default {
             title: "Let's hear from you",
             body: "What is the most important thing in life?",
           }, {
-            promptHelp: 'Type in the box below and click "[+:okText]"'
+            promptHelp: 'Type in the box below and click "[+:okText]"',
+            loader: true,
           })
           .then(dialog => {
             // Triggered when proceed button is clicked
-            // Show an alert with the user's input as the message
-            this.$dialog.alert(dialog.data || '[empty]')
+
+            setTimeout(() => {
+              dialog.close();
+              // Show an alert with the user's input as the message
+              this.$dialog.alert(dialog.data || '[empty]')
+            }, 2500);
           })
           .catch(() => {
             // Triggered when dialog is dismissed by user
@@ -64,7 +79,7 @@ export default {
           });
     },
   }
-}
+})
 
 </script>
 
