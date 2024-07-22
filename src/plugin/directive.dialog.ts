@@ -3,7 +3,7 @@
 import { noop, clickNode, cloneObj } from './utilities'
 import { CONFIRM_TYPES } from './constants'
 
-const Directives = function (app) {
+const DirectiveDialog = function (app) {
     Object.defineProperties(this, {
         Vue: { get: () => app },
         confirmDefinition: {
@@ -12,21 +12,14 @@ const Directives = function (app) {
     })
 }
 
-Directives.prototype.getConfirmDirective = function (binding) {
+DirectiveDialog.prototype.getConfirmMessage = function (binding) {
     if (binding.value && binding.value.message) {
         return binding.value.message
     }
     return typeof binding.value === 'string' ? binding.value : null
 }
 
-Directives.prototype.getConfirmMessage = function (binding) {
-    if (binding.value && binding.value.message) {
-        return binding.value.message
-    }
-    return typeof binding.value === 'string' ? binding.value : null
-}
-
-Directives.prototype.getOptions = function (binding) {
+DirectiveDialog.prototype.getOptions = function (binding) {
     const options = typeof binding.value === 'object' ? cloneObj(binding.value) : {}
 
     delete options['ok']
@@ -39,7 +32,7 @@ Directives.prototype.getOptions = function (binding) {
     return options
 }
 
-Directives.prototype.getThenCallback = function (binding, el) {
+DirectiveDialog.prototype.getThenCallback = function (binding, el) {
     if (binding.value && binding.value.ok) {
         return dialog => binding.value.ok({ ...dialog, node: el })
     } else {
@@ -60,14 +53,14 @@ Directives.prototype.getThenCallback = function (binding, el) {
     }
 }
 
-Directives.prototype.getCatchCallback = function (binding) {
+DirectiveDialog.prototype.getCatchCallback = function (binding) {
     if (binding.value && binding.value.cancel) {
         return binding.value.cancel
     }
     return noop
 }
 
-Directives.prototype.clickHandler = function (event, el, binding) {
+DirectiveDialog.prototype.clickHandler = function (event, el, binding) {
     event.preventDefault()
     event.stopImmediatePropagation()
 
@@ -82,7 +75,7 @@ Directives.prototype.clickHandler = function (event, el, binding) {
         .catch(catchCallback)
 }
 
-Directives.prototype.defineConfirm = function () {
+DirectiveDialog.prototype.defineConfirm = function () {
     type BindFn = (el: unknown, binding: unknown) => void
     const DirectiveDefinition: {bind: BindFn, unbind: BindFn} = {}
 
@@ -101,4 +94,4 @@ Directives.prototype.defineConfirm = function () {
     return DirectiveDefinition
 }
 
-export default Directives
+export default DirectiveDialog
