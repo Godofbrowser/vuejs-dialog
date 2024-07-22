@@ -2,6 +2,7 @@
   "extends": "@vue/tsconfig/tsconfig.dom.json",
   "include": [
     "env.d.ts",
+    "src/**/*.d.ts",
     "src/**/*",
     "src/**/*.vue",
     "node_modules/@vue/runtime-core/dist/runtime-core.d.ts"
