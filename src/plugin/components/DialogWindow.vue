@@ -28,20 +28,24 @@
                     autocomplete="off"
                     @submit.prevent="submitDialogForm"
               >
-                <label for="dg-input-elem" style="font-size: 13px;">{{ hardConfirmHelpText }}</label>
+                <label for="dg-input-elem" style="font-size: 13px">{{ isPrompt ? promptHelpText : hardConfirmHelpText }}</label>
                 <input type="text"
-                       :placeholder="options.verification"
+                       :placeholder="isPrompt ? '' : options.verification"
                        v-model="input"
                        autocomplete="off"
                        id="dg-input-elem"
                        ref="inputElem"
-                       style="width: 100%;margin-top: 10px;padding: 5px 15px; font-size: 16px;border-radius: 4px; border: 2px solid #eee;" />
+                       style="width: 100%;margin-top: 10px;
+                            padding: 5px 15px; font-size: 16px;
+                            border-radius: 4px; border: 2px solid #eee"
+                />
               </form>
             </div>
 
             <div class="dg-content-footer" :class="customClass.footer">
               <component @click="clickLeftBtn()"
                       :is="leftBtnComponent"
+                      :btn-state="leftBtnState"
                       :loading="loading"
                       :class="customClass.cancel"
                       :visible="leftBtnVisible"
@@ -53,7 +57,8 @@
               </component>
 
               <component @click="clickRightBtn()"
-                      :is="rightBtnComponent"
+                      :is="rightBtnState.component"
+                      :btn-state="rightBtnState"
                       :loading="loading"
                       :class="customClass.ok"
                       :visible="rightBtnVisible"
@@ -73,7 +78,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import {defineComponent} from "vue";
 import OkBtn from './OkButton.vue';
 import CancelBtn from './CancelButton.vue';
@@ -83,6 +88,7 @@ import {
   DIALOG_TYPES,
   CUSTOM_CLASS
 } from "../constants";
+import type {ButtonStateInterface} from "@/plugin/interface";
 // import {MessageMixin} from "@/plugin/mixins/MessageMixin";
 // import {ButtonMixin} from "@/plugin/mixins/ButtonMixin";
 
@@ -144,6 +150,12 @@ export default defineComponent({
             return this.options[$1] || match
           })
     },
+    promptHelpText () {
+      return this.options.promptHelp
+          .replace(/\[\+:(\w+)]/g, (match, $1) => {
+            return this.options[$1] || match
+          })
+    },
 
     // Refactored from MessageMixin
     messageHasTitle(){
@@ -154,8 +166,7 @@ export default defineComponent({
       return this.messageHasTitle ? this.options.message.title : null
     },
     messageBody(){
-      let m = this.options.message
-      return (typeof m === 'string') ? m : (m.body || '')
+      return this.messageHasTitle ? this.options.message.body : this.options.message
     },
     // END - Refactored from MessageMixin
 
@@ -185,12 +196,37 @@ export default defineComponent({
     },
     rightBtnText () {
       return this.options.reverse ? this.options.cancelText : this.options.okText
-    }
+    },
     // END - Refactored from ButtonMixin
+
+    btnState(): Pick<ButtonStateInterface, 'loading' | 'options'> {
+      return {
+        loading: this.loading,
+        options: this.options,
+      }
+    },
+    rightBtnState(): ButtonStateInterface {
+      const { reverse } = this.options;
+      return {
+        ...this.btnState,
+        component: reverse ? CancelBtn : OkBtn,
+        disabled: this.okBtnDisabled,
+        visible: (this.options.window !== DIALOG_TYPES.ALERT) || !reverse
+      }
+    },
+    leftBtnState(): ButtonStateInterface {
+      const { reverse } = this.options;
+      return {
+        ...this.btnState,
+        component: !reverse ? CancelBtn : OkBtn,
+        disabled: this.cancelBtnDisabled,
+        visible: !this.cancelBtnDisabled || reverse,
+      }
+    }
   },
   mounted () {
     this.setCustomClasses()
-    this.isHardConfirm && this.$refs.inputElem.focus()
+    ;(this.isHardConfirm || this.isPrompt) && this.$refs.inputElem && this.$refs.inputElem.focus()
   },
   methods: {
     closeAtOutsideClick() {
@@ -198,24 +234,30 @@ export default defineComponent({
         this.cancel()
       }
     },
-    clickRightBtn(){
-      this.options.reverse ? this.cancel() : this.proceed()
+    clickRightBtn () {
+      this.options.reverse ? this.cancel() : this.proceed(this.getDefaultData())
     },
-    clickLeftBtn(){
-      this.options.reverse ? this.proceed() : this.cancel()
+    clickLeftBtn () {
+      this.options.reverse ? this.proceed(this.getDefaultData()) : this.cancel()
     },
-    submitDialogForm(){
-      this.okBtnDisabled || this.proceed()
+    submitDialogForm () {
+      this.okBtnDisabled || this.proceed(this.getDefaultData())
     },
-    proceed(){
+    getDefaultData () {
+      return this.isPrompt ? this.input : null
+    },
+    proceed(withData = null){
       if (this.loaderEnabled) {
         this.switchLoadingState(true)
         this.options.promiseResolver({
           close: this.close,
-          loading: this.switchLoadingState
+          loading: this.switchLoadingState,
+          data: withData
         })
       } else {
-        this.options.promiseResolver(true)
+        this.options.promiseResolver({
+          data: withData
+        })
         this.close()
       }
     },
