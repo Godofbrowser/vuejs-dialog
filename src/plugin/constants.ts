@@ -1,4 +1,5 @@
 // constants
+export const DIRECTIVE_ATTRIBUTE_KEY = '__VUEJS_DIALOG__'
 export const DIALOG_TYPES = {
 	ALERT: 'alert', // ex: Congrats! record created
 	CONFIRM: 'confirm', // ex: Please confirm delete
