@@ -12,7 +12,7 @@ interface DialogPluginOptions extends Omit<DialogWindowOptionsInterface, 'id'>{}
 const DialogPlugin = {
     install(app: App, options: DialogPluginOptions) {
         const DirectivesObj = new DirectiveDialog(app)
-        app.directive('confirm', DirectivesObj.confirmDefinition)
+        app.directive('confirm', DirectivesObj.defineConfirm())
 
         const dialog = new PromiseDialog(app, options)
 
