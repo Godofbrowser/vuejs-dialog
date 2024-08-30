@@ -15,7 +15,7 @@ interface DialogPluginOptions extends Omit<DialogWindowOptionsInterface, 'id'>{}
 
 
 export class PromiseDialog {
-    private dgApp: ComponentInstance<typeof DialogComponent>;
+    private dgAppComponentInstance: ComponentInstance<typeof DialogComponent>;
 
     private mounted = false;
 
@@ -35,7 +35,7 @@ export class PromiseDialog {
             localOptions.promiseResolver = resolve
             localOptions.promiseRejecter = reject
 
-            this.dgApp.commit(mergeObjs(this.globalOptions, localOptions))
+            this.dgAppComponentInstance.commit(mergeObjs(this.globalOptions, localOptions))
         })
     }
 
@@ -63,10 +63,21 @@ export class PromiseDialog {
     private mountIfNotMounted(): void {
         if (this.mounted) return
 
-        this.dgApp = (() => {
+        this.dgAppComponentInstance = (() => {
+            const connectAppContext = true
             const dialogApp = createApp(DialogComponent)
             const node = document.createElement('div')
             document.querySelector('body').appendChild(node)
+
+            if (connectAppContext) {
+                dialogApp.config.globalProperties = this.app.config.globalProperties
+                dialogApp._context.components = this.app._context.components
+                dialogApp._context.directives = this.app._context.directives
+                dialogApp._context.mixins = this.app._context.mixins
+                dialogApp._context.provides = this.app._context.provides
+            }
+
+
             return dialogApp.mount(node) as ComponentInstance<DialogComponent>
         })()
 

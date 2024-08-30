@@ -11,7 +11,8 @@
     </div>
     <hr style="margin: 35px 0;" />
     <div style="width: 100%;display: grid; grid-gap: 15px; grid-template-columns: repeat(auto-fill, 200px);justify-content: center">
-      <button class="dg-btn" v-confirm="'Show some alert!'">Click Alert</button>
+      <button class="dg-btn" v-confirm="'Please confirm!'">Click Directive</button>
+      <a href="https://example.com" v-confirm:soft="'Visit external link?'">Example website</a>
     </div>
   </div>
 </template>

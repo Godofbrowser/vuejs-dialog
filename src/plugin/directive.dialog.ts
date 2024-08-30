@@ -1,16 +1,14 @@
-// Directives
-
 import { noop, clickNode, cloneObj } from './utilities'
-import { CONFIRM_TYPES } from './constants'
+import {CONFIRM_TYPES, DIRECTIVE_ATTRIBUTE_KEY} from './constants'
+
 
 const DirectiveDialog = function (app) {
     Object.defineProperties(this, {
-        Vue: { get: () => app },
-        confirmDefinition: {
-            get: this.defineConfirm
-        }
+        app: { get: () => app },
     })
 }
+
+DirectiveDialog.prototype.shouldIgnoreClick = false
 
 DirectiveDialog.prototype.getConfirmMessage = function (binding) {
     if (binding.value && binding.value.message) {
@@ -40,15 +38,9 @@ DirectiveDialog.prototype.getThenCallback = function (binding, el) {
             // If we got here, it means the default action is to be executed
             // We'll then stop the loader if it's enabled and close the dialog
             dialog.loading && dialog.close()
-
-            // Unbind to allow original event
-            el.removeEventListener('click', el.VuejsDialog.clickHandler, true)
-
-            // Trigger original event
+            this.shouldIgnoreClick = true
             clickNode(el)
-
-            // Re-bind listener
-            el.addEventListener('click', el.VuejsDialog.clickHandler, true)
+            this.shouldIgnoreClick = false
         }
     }
 }
@@ -61,6 +53,7 @@ DirectiveDialog.prototype.getCatchCallback = function (binding) {
 }
 
 DirectiveDialog.prototype.clickHandler = function (event, el, binding) {
+    if (this.shouldIgnoreClick) return
     event.preventDefault()
     event.stopImmediatePropagation()
 
@@ -69,7 +62,7 @@ DirectiveDialog.prototype.clickHandler = function (event, el, binding) {
     const thenCallback = this.getThenCallback(binding, el)
     const catchCallback = this.getCatchCallback(binding)
 
-    this.Vue.dialog
+    this.app.config.globalProperties.$dialog
         .confirm(confirmMessage, options)
         .then(thenCallback)
         .catch(catchCallback)
@@ -77,18 +70,18 @@ DirectiveDialog.prototype.clickHandler = function (event, el, binding) {
 
 DirectiveDialog.prototype.defineConfirm = function () {
     type BindFn = (el: unknown, binding: unknown) => void
-    const DirectiveDefinition: {bind: BindFn, unbind: BindFn} = {}
+    const DirectiveDefinition: {mounted: BindFn, unmounted: BindFn} = {
+        mounted: (el, binding) => {
+            el[DIRECTIVE_ATTRIBUTE_KEY] = el[DIRECTIVE_ATTRIBUTE_KEY] || {}
 
-    DirectiveDefinition.bind = (el, binding) => {
-        el.VuejsDialog = el.VuejsDialog || {}
+            el[DIRECTIVE_ATTRIBUTE_KEY].clickHandler = event => this.clickHandler(event, el, binding)
 
-        el.VuejsDialog.clickHandler = event => this.clickHandler(event, el, binding)
-
-        el.addEventListener('click', el.VuejsDialog.clickHandler, true)
-    }
-
-    DirectiveDefinition.unbind = (el) => {
-        el.removeEventListener('click', el.VuejsDialog.clickHandler, true)
+            el.addEventListener('click', el[DIRECTIVE_ATTRIBUTE_KEY].clickHandler, true)
+        },
+        unmounted(el) {
+            el.removeEventListener('click', el[DIRECTIVE_ATTRIBUTE_KEY].clickHandler, true)
+            delete el[DIRECTIVE_ATTRIBUTE_KEY]
+        }
     }
 
     return DirectiveDefinition
