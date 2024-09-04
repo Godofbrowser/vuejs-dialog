@@ -12,13 +12,13 @@
     <hr style="margin: 35px 0;" />
     <div style="width: 100%;display: grid; grid-gap: 15px; grid-template-columns: repeat(auto-fill, 200px);justify-content: center">
       <button class="dg-btn" v-confirm="'Please confirm!'">Click Directive</button>
-      <a href="https://example.com" v-confirm:soft="'Visit external link?'">Example website</a>
+      <a href="https://example.com" v-confirm:soft="message.visitExternal">Example website</a>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue";
+import {defineComponent, nextTick, ref} from "vue";
 
 export default defineComponent({
   methods: {
@@ -79,6 +79,21 @@ export default defineComponent({
             console.log('Prompt dismissed');
           });
     },
+  },
+  setup() {
+    const message = ref({
+      visitExternal: 'Visit external link?'
+    })
+    setTimeout(() => {
+      message.value = {
+        visitExternal: 'Visit this external link?'
+      }
+      nextTick(() => {
+        console.log('#'.repeat(45), '[message.value.visitExternal]', message.value.visitExternal)
+      })
+    }, 5000)
+
+    return { message }
   }
 })
 
