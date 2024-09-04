@@ -1,0 +1,46 @@
+{
+  "hash": "bfb66526",
+  "configHash": "19639bd6",
+  "lockfileHash": "7c2dadde",
+  "browserHash": "b713dcf1",
+  "optimized": {
+    "@vue/devtools-api": {
+      "src": "../../../../node_modules/@vue/devtools-api/lib/esm/index.js",
+      "file": "@vue_devtools-api.js",
+      "fileHash": "ea5bbcad",
+      "needsInterop": false
+    },
+    "@vuepress/shared": {
+      "src": "../../../../node_modules/@vuepress/shared/dist/index.js",
+      "file": "@vuepress_shared.js",
+      "fileHash": "97dc66c7",
+      "needsInterop": false
+    },
+    "vue": {
+      "src": "../../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
+      "file": "vue.js",
+      "fileHash": "4cdfe8a8",
+      "needsInterop": false
+    },
+    "vue-router": {
+      "src": "../../../../node_modules/vue-router/dist/vue-router.esm-bundler.js",
+      "file": "vue-router.js",
+      "fileHash": "f248fa86",
+      "needsInterop": false
+    },
+    "promise-polyfill": {
+      "src": "../../../../node_modules/promise-polyfill/src/index.js",
+      "file": "promise-polyfill.js",
+      "fileHash": "9f151d03",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-UKCZNIRO": {
+      "file": "chunk-UKCZNIRO.js"
+    },
+    "chunk-V7ROJKYW": {
+      "file": "chunk-V7ROJKYW.js"
+    }
+  }
+}
