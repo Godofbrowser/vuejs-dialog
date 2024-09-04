@@ -12,7 +12,7 @@
 <script>
 import BtnLoader from './ButtonLoader.vue'
 import {defineComponent} from "vue";
-import {CONFIRM_TYPES} from "@/plugin/constants";
+import {CONFIRM_TYPES} from "../constants";
 
 export default defineComponent({
   name: "OkButton",
