@@ -12,7 +12,8 @@
     <hr style="margin: 35px 0;" />
     <div style="width: 100%;display: grid; grid-gap: 15px; grid-template-columns: repeat(auto-fill, 200px);justify-content: center">
       <button class="dg-btn" v-confirm="'Please confirm!'">Click Directive</button>
-      <a href="https://example.com" v-confirm:soft="message.visitExternal">Example website</a>
+      <a href="https://example.com" v-confirm:soft="'Visit external link?'">Example website</a>
+      To see how many seconds have elapsed, click <a href="javascript:" v-confirm="`${secondsElapsed} Seconds`">here</a>
     </div>
   </div>
 </template>
@@ -81,19 +82,13 @@ export default defineComponent({
     },
   },
   setup() {
-    const message = ref({
-      visitExternal: 'Visit external link?'
-    })
-    setTimeout(() => {
-      message.value = {
-        visitExternal: 'Visit this external link?'
-      }
-      nextTick(() => {
-        console.log('#'.repeat(45), '[message.value.visitExternal]', message.value.visitExternal)
-      })
-    }, 5000)
-
-    return { message }
+    const secondsElapsed = ref(0)
+    const tick = () => {
+      secondsElapsed.value += 1
+      setTimeout(() => tick(), 1000)
+    }
+    tick()
+    return { secondsElapsed }
   }
 })
 
