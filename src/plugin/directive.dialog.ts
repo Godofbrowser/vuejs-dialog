@@ -3,12 +3,15 @@ import {CONFIRM_TYPES, DIRECTIVE_ATTRIBUTE_KEY} from './constants'
 
 
 const DirectiveDialog = function (app) {
+    this.shouldIgnoreClick = false
+    this.bindingOptions = {
+
+    }
+
     Object.defineProperties(this, {
         app: { get: () => app },
     })
 }
-
-DirectiveDialog.prototype.shouldIgnoreClick = false
 
 DirectiveDialog.prototype.getConfirmMessage = function (binding) {
     if (binding.value && binding.value.message) {
@@ -70,15 +73,20 @@ DirectiveDialog.prototype.clickHandler = function (event, el, binding) {
 
 DirectiveDialog.prototype.defineConfirm = function () {
     type BindFn = (el: unknown, binding: unknown) => void
-    const DirectiveDefinition: {mounted: BindFn, unmounted: BindFn} = {
+    type UpdateFn = (el: unknown, binding: unknown, vnode: unknown, prevVnode: unknown) => void
+    const DirectiveDefinition: {mounted: BindFn, unmounted: BindFn, updated: UpdateFn} = {
         mounted: (el, binding) => {
             el[DIRECTIVE_ATTRIBUTE_KEY] = el[DIRECTIVE_ATTRIBUTE_KEY] || {}
-
             el[DIRECTIVE_ATTRIBUTE_KEY].clickHandler = event => this.clickHandler(event, el, binding)
 
             el.addEventListener('click', el[DIRECTIVE_ATTRIBUTE_KEY].clickHandler, true)
         },
-        unmounted(el) {
+        updated: (el, binding, vnode, prevVnode) => {
+            el.removeEventListener('click', el[DIRECTIVE_ATTRIBUTE_KEY].clickHandler, true)
+            el[DIRECTIVE_ATTRIBUTE_KEY].clickHandler = event => this.clickHandler(event, el, binding)
+            el.addEventListener('click', el[DIRECTIVE_ATTRIBUTE_KEY].clickHandler, true)
+        },
+        unmounted: (el) => {
             el.removeEventListener('click', el[DIRECTIVE_ATTRIBUTE_KEY].clickHandler, true)
             delete el[DIRECTIVE_ATTRIBUTE_KEY]
         }
