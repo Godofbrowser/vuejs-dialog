@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import VueHomeView from '../views/VueHomeView.vue'
 import IndexView from '../views/IndexView.vue'
 
 const router = createRouter({
@@ -11,9 +10,9 @@ const router = createRouter({
       component: IndexView
     },
     {
-      path: '/vue',
-      name: 'vue',
-      component: VueHomeView
+      path: '/comp',
+      name: 'comp',
+      component: () => import('../views/CompView.vue')
     },
     {
       path: '/about',

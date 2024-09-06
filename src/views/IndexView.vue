@@ -2,24 +2,25 @@
   <div class="index">
     <h1 style="text-align: center;margin-bottom: 35px;margin-top: 35px;">Index page</h1>
     <div style="width: 100%;display: grid; grid-gap: 15px; grid-template-columns: repeat(auto-fill, 200px);justify-content: center">
-      <button class="dg-btn" @click="testBtnHandler('alert')">Click Alert</button>
-      <button class="dg-btn" @click="testBtnHandler('confirm')">Click Confirm</button>
-      <button class="dg-btn" @click="testBtnHandler('soft')">Click Confirm | soft</button>
-      <button class="dg-btn" @click="testBtnHandler('loading')">Click Confirm | loading</button>
-      <button class="dg-btn" @click="testBtnHandler('hard')">Click Confirm | hard</button>
-      <button class="dg-btn" @click="testBtnHandler('prompt')">Click Prompt</button>
+      <button class="dg-btn" @click="testBtnHandler('alert')">Alert</button>
+      <button class="dg-btn" @click="testBtnHandler('confirm')">Confirm</button>
+      <button class="dg-btn" @click="testBtnHandler('prompt')">Prompt</button>
+      <button class="dg-btn" @click="testBtnHandler('soft')">Confirm | soft</button>
+      <button class="dg-btn" @click="testBtnHandler('loading')">Confirm | loading</button>
+      <button class="dg-btn" @click="testBtnHandler('hard')">Confirm | hard</button>
+      <button class="dg-btn" @click="openDialog()">Open from setup</button>
     </div>
     <hr style="margin: 35px 0;" />
     <div style="width: 100%;display: grid; grid-gap: 15px; grid-template-columns: repeat(auto-fill, 200px);justify-content: center">
-      <button class="dg-btn" v-confirm="'Please confirm!'">Click Directive</button>
-      <a href="https://example.com" v-confirm:soft="'Visit external link?'">Example website</a>
-      To see how many seconds have elapsed, click <a href="javascript:" v-confirm="`${secondsElapsed} Seconds`">here</a>
+      <div><button class="dg-btn" v-confirm="'Please confirm!'">Directive</button></div>
+      <div><a href="https://example.com" v-confirm:soft="'Visit external link?'">Example website</a></div>
+      <div>To see how many seconds have elapsed, click <a href="javascript:" v-confirm="`${secondsElapsed} Seconds`">here</a></div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import {defineComponent, nextTick, ref} from "vue";
+import {defineComponent, inject, ref} from "vue";
 
 export default defineComponent({
   methods: {
@@ -28,7 +29,12 @@ export default defineComponent({
       this[type]();
     },
     alert() {
-      this.$dialog.alert('Hello world!')
+      this.$dialog.alert({
+        title: 'Request failed',
+        body: 'The requested resource is no longer available. It may have been moved or deleted',
+      }, {
+        okText: 'Dismiss'
+      })
     },
     confirm() {
       this.$dialog.confirm('If you delete this record, it\'ll be gone forever.')
@@ -82,13 +88,15 @@ export default defineComponent({
     },
   },
   setup() {
+    const dialog = inject('$dialog')
+    const openDialog = () => dialog.alert('Hello world!')
     const secondsElapsed = ref(0)
     const tick = () => {
       secondsElapsed.value += 1
       setTimeout(() => tick(), 1000)
     }
     tick()
-    return { secondsElapsed }
+    return { secondsElapsed, openDialog }
   }
 })
 
@@ -97,11 +105,7 @@ export default defineComponent({
 <style>
 @media (min-width: 1024px) {
   .index {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    max-width: 700px;
   }
 
   .dg-btn {
