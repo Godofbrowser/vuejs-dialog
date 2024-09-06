@@ -1,4 +1,3 @@
-// vite.config.js
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
 import viteConfig from "./vite.config";
@@ -14,7 +13,7 @@ export default mergeConfig(
     defineConfig({
         build: {
             copyPublicDir: false,
-            outDir: 'dist-lib',
+            outDir: 'dist',
             minify: true,
             lib: {
                 // Could also be a dictionary or array of multiple entry points
