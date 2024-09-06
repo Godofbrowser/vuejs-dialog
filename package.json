@@ -35,6 +35,7 @@
     "@vue/test-utils": "^2.4.5",
     "@vue/tsconfig": "^0.5.1",
     "@vuepress/bundler-vite": "^2.0.0-rc.15",
+    "@vuepress/plugin-shiki": "^2.0.0-rc.42",
     "@vuepress/theme-default": "^2.0.0-rc.42",
     "eslint": "^8.49.0",
     "eslint-plugin-vue": "^9.17.0",
