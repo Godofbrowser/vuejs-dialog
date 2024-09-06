@@ -11,5 +11,38 @@ export default defineUserConfig({
     description: 'A lightweight, promise based alert, prompt and confirm dialog',
     repo: 'godofbrowser/vuejs-dialog',
     bundler: viteBundler(),
-    theme: defaultTheme(),
+    plugins: [
+        // https://ecosystem.vuejs.press/plugins/markdown/prismjs.html
+        // https://ecosystem.vuejs.press/plugins/markdown/shiki.html
+        shikiPlugin({
+            // options
+            defaultLang: 'ts',
+            langs: ['ts', 'js', 'json', 'vue', 'md', 'bash', 'diff'],
+        }),
+        // mdEnhancePlugin({
+        //     // your options
+        // }),
+    ],
+    theme: defaultTheme({
+        docsDir: '/docs/content',
+        sidebar: [
+            {
+                text: 'Getting started',
+                collapsible: false,
+                link:  '/',
+                children: [
+                    '/README.md'
+                ]
+            },
+            '/content/features/README.md',
+            {
+                text: 'Advanced',
+                collapsible: false,
+                link:  '/content/customization/README.md',
+                children: [
+                    '/content/customization/README.md'
+                ]
+            }
+        ]
+    }),
 })
