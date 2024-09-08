@@ -96,8 +96,8 @@ export default {
 </template>
 <script setup>
     import {inject} from "vue";
-    const dialog = inject('$dialog')
-    const openDialog = () => dialog.alert('Hello world!')
+    const $dialog = inject('$dialog')
+    const openDialog = () => $dialog.alert('Hello world!')
     return { openDialog }
 </script>
 ```
@@ -108,24 +108,3 @@ export default {
     <button v-confirm="'Hello world!'">Open dialog</button>
 </template>
 ```
-
-## Example use cases
-Below are some practical example use cases that you may find useful.
-
-### Quick alert after an event occurs
-
-
-### Confirming CRUD operations
-
-
-### Confirming link clicks
-
-
-### Confirming form submission
-
-One plus one equals: {{ 1 + 1 }}
-
-<span v-for="i in 3"> span: {{ i }} </span>
-
-<button class="dg-btn" v-confirm="'Please confirm!'">Click Directive</button>
-
