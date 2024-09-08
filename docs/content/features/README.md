@@ -3,7 +3,7 @@
 ## Alert
 An alert dialog can be triggered using the `$dialog.alert()` method. This method returns a promise which resolves when the dialog is dismissed.
 
-<FeaturesExampleAlert />
+<UIExamplesWrapper><FeaturesExampleAlert /></UIExamplesWrapper>
 @[code](../../components/examples/FeaturesExampleAlert.vue)
 
 
@@ -14,36 +14,30 @@ In this section we shall explore how to create a basic confirm dialog as well as
 
 
 ### Basic confirm dialog
-
-
-<FeaturesExampleConfirm />
+<UIExamplesWrapper><FeaturesExampleConfirm /></UIExamplesWrapper>
 @[code](../../components/examples/FeaturesExampleConfirm.vue)
 
 
 ### Soft confirm dialog
-<FeaturesExampleConfirmSoft />
+<UIExamplesWrapper><FeaturesExampleConfirmSoft /></UIExamplesWrapper>
 @[code](../../components/examples/FeaturesExampleConfirmSoft.vue)
 
 
 ### Hard confirm dialog
-<FeaturesExampleConfirmHard />
+<UIExamplesWrapper><FeaturesExampleConfirmHard /></UIExamplesWrapper>
 @[code](../../components/examples/FeaturesExampleConfirmHard.vue)
 
 
 ## Prompt
 The `$dialog.prompt()` method creates a prompt dialog. Use the prompt dialog to ask user directly for input.
 
-<FeaturesExamplePrompt />
+<UIExamplesWrapper><FeaturesExamplePrompt /></UIExamplesWrapper>
 @[code](../../components/examples/FeaturesExamplePrompt.vue)
 
 
+
 ## Confirm directive
-Sample code block
-```ts title=".vuepress/config.ts"
-this.$dialog.alert({
-    title: 'Request failed',
-    body: 'The requested resource is no longer available. It may have been moved or deleted',
-}, {
-    okText: 'Dismiss'
-})
-```
+Add the `v-confirm` directive to any element to instantly cause it to trigger a confirm dialog. This dialog upon confirmation will trigger the default action or the provided callback when available.
+
+<UIExamplesWrapper><FeaturesExampleDirective /></UIExamplesWrapper>
+@[code](../../components/examples/FeaturesExampleDirective.vue)

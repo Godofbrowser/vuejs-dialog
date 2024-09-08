@@ -7,16 +7,18 @@ export default defineClientConfig({
     enhance({ app, router, siteData }) {
         const registerComponent = (fileName) => app.component(
             fileName,
-            defineAsyncComponent(() => import((`../components/examples/${fileName}.vue`)))
+            defineAsyncComponent(() => import(`../components/examples/${fileName}.vue`))
         )
 
         app.use(DialogPlugin, {})
         registerComponent('UIExamplesButton')
+        registerComponent('UIExamplesWrapper')
         registerComponent('FeaturesExampleAlert')
         registerComponent('FeaturesExampleConfirm')
         registerComponent('FeaturesExampleConfirmSoft')
         registerComponent('FeaturesExampleConfirmHard')
         registerComponent('FeaturesExamplePrompt')
+        registerComponent('FeaturesExampleDirective')
     },
     setup() {},
     rootComponents: [],

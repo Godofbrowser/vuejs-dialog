@@ -3,8 +3,6 @@
 </template>
 
 <script setup>
-import {ref} from 'vue'
-
 defineEmits({
   click: () => true,
 })
@@ -32,5 +30,8 @@ button {
   appearance: none;
   font-size: 16px;
   font-weight: 700;
+
+  color: white;
+  background-color: var(--vp-c-accent);
 }
 </style>
