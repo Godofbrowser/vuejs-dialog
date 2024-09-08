@@ -24,25 +24,11 @@ export default defineUserConfig({
         // }),
     ],
     theme: defaultTheme({
-        docsDir: '/docs/content',
         sidebar: [
-            {
-                text: 'Getting started',
-                collapsible: false,
-                link:  '/',
-                children: [
-                    '/README.md'
-                ]
-            },
-            '/content/features/README.md',
-            {
-                text: 'Advanced',
-                collapsible: false,
-                link:  '/content/customization/README.md',
-                children: [
-                    '/content/customization/README.md'
-                ]
-            }
+            '/index.md',
+            '/features.md',
+            '/digging-deeper.md',
+            '/example-use-cases.md',
         ]
     }),
 })
