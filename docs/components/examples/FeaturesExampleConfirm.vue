@@ -12,7 +12,7 @@
   const $dialog = inject('$dialog')
   const openDialog = () => $dialog.confirm({
     title: 'Confirm example',
-    body: 'The requested resource is no longer available. It may have been moved or deleted',
+    body: 'The is a low risk operation. Single click required to confirm.',
   }, {
     cancelText: 'No',
     okText: 'Yes'
