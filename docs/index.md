@@ -108,3 +108,7 @@ export default {
     <button v-confirm="'Hello world!'">Open dialog</button>
 </template>
 ```
+
+## Typescript support
+
+// Todo:
