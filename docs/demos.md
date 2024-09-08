@@ -1,4 +1,4 @@
-# Example use cases
+# Live Demos
 Below are some practical example use cases that you may find useful.
 
 ## Quick alert after an event occurs
