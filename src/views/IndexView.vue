@@ -8,19 +8,19 @@
       <button class="dg-btn" @click="testBtnHandler('soft')">Confirm | soft</button>
       <button class="dg-btn" @click="testBtnHandler('loading')">Confirm | loading</button>
       <button class="dg-btn" @click="testBtnHandler('hard')">Confirm | hard</button>
-      <button class="dg-btn" @click="openDialog()">Open from setup</button>
+
     </div>
     <hr style="margin: 35px 0;" />
     <div style="width: 100%;display: grid; grid-gap: 15px; grid-template-columns: repeat(auto-fill, 200px);justify-content: center">
       <div><button class="dg-btn" v-confirm="'Please confirm!'">Directive</button></div>
       <div><a href="https://example.com" v-confirm:soft="'Visit external link?'">Example website</a></div>
-      <div>To see how many seconds have elapsed, click <a href="javascript:" v-confirm="`${secondsElapsed} Seconds`">here</a></div>
+
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import {defineComponent, inject, ref} from "vue";
+import {defineComponent} from "vue";
 
 export default defineComponent({
   methods: {
@@ -56,10 +56,11 @@ export default defineComponent({
     loading() {
       this.$dialog.confirm('If you delete this record, it\'ll be gone forever.', {
         loader: true
-      }).then((dialog) => {
+      }).then((context) => {
+        if (context.canceled) return
         setTimeout(() => {
           console.log('Loading action completed ');
-          dialog.close();
+          context.close();
         }, 2500);
       })
     },
@@ -72,37 +73,23 @@ export default defineComponent({
             promptHelp: 'Type in the box below and click "[+:okText]"',
             loader: true,
           })
-          .then(dialog => {
-            // Triggered when proceed button is clicked
+          .then(context => {
+            // Triggered when dialog is dismissed
+            if (context.canceled) return
 
             setTimeout(() => {
-              dialog.close();
+              context.close();
               // Show an alert with the user's input as the message
-              this.$dialog.alert(dialog.data || '[empty]')
+              this.$dialog.alert(context.data || '[empty]')
             }, 2500);
           })
-          .catch(() => {
-            // Triggered when dialog is dismissed by user
-            console.log('Prompt dismissed');
-          });
     },
   },
-  setup() {
-    const dialog = inject('$dialog')
-    const openDialog = () => dialog.alert('Hello world!')
-    const secondsElapsed = ref(0)
-    const tick = () => {
-      secondsElapsed.value += 1
-      setTimeout(() => tick(), 1000)
-    }
-    tick()
-    return { secondsElapsed, openDialog }
-  }
 })
 
 </script>
 
-<style>
+<style lang="scss" scoped>
 @media (min-width: 1024px) {
   .index {
     max-width: 700px;

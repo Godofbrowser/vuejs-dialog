@@ -9,10 +9,11 @@
   </button>
 </template>
 
-<script>
+<script lang="ts">
 import BtnLoader from './ButtonLoader.vue'
-import {defineComponent} from "vue";
+import {defineComponent, PropType} from "vue";
 import {CONFIRM_TYPES} from "../constants";
+import {ButtonStateInterface, DialogWindowOptions} from "@/plugin/interface.js";
 
 export default defineComponent({
   name: "OkButton",
@@ -32,7 +33,7 @@ export default defineComponent({
     },
     options: {
       required: true,
-      type: Object
+      type: Object as PropType<DialogWindowOptions>,
     },
     focus: {
       required: false,
@@ -46,7 +47,7 @@ export default defineComponent({
     },
     btnState: {
       required: true,
-      type: Object,
+      type: Object as PropType<ButtonStateInterface>,
       'default': {
         disabled: true,
         visible: true,

@@ -69,6 +69,35 @@ app.mount('#app')
 <!--// Tell Vue to install the plugin.-->
 <!--window.Vue.use(VuejsDialog.main.default)-->
 <!--</script>-->
+
+
+// <link href="./path/to/vuejs-dialog.min.css" rel="stylesheet">
+// <script src="https://unpkg.com/vue@3.5.4/dist/vue.global.js"></script>
+// <script src="../vuejs-dialog.umd.js"></script>
+//
+// ...then...
+//
+// <div id="app">{{ message }}</div>
+// <script>
+// // Create Vue 3 app
+// const app = Vue.createApp({
+//     data() {
+//         return {
+//             message: 'Hello Vue 3!',
+//         };
+//     },
+// });
+//
+// app.use(window.VuejsDialog.PromiseDialog, {
+//     message: {
+//         title: 'Quick one',
+//         body: 'Please confirm that you wish to proceed'
+//     }
+// })
+//
+// // Mount the app to the DOM element
+// app.mount('#app');
+// </script>
 ```
 
 ## Opening a dialog
