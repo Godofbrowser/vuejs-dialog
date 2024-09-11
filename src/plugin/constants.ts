@@ -43,7 +43,7 @@ export const DEFAULT_OPTIONS = {
     cancelText           : "Close",
     type                 : CONFIRM_TYPES.BASIC,
     window               : DIALOG_TYPES.CONFIRM,
-    message              : "Proceed with the request?",
+    message              : "Please confirm to proceed",
     clicksCount          : 3,
     animation            : 'zoom',
     customClass          : CUSTOM_CLASS,

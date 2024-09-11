@@ -79,7 +79,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue";
+import {defineComponent, PropType} from "vue";
 import OkBtn from './OkButton.vue';
 import CancelBtn from './CancelButton.vue';
 import {
@@ -88,9 +88,7 @@ import {
   DIALOG_TYPES,
   CUSTOM_CLASS
 } from "../constants";
-import type {ButtonStateInterface} from "@/plugin/interface";
-// import {MessageMixin} from "@/plugin/mixins/MessageMixin";
-// import {ButtonMixin} from "@/plugin/mixins/ButtonMixin";
+import type {ButtonStateInterface, DialogWindowOptions} from "@/plugin/interface";
 
 export default defineComponent({
   name: "DialogWindow",
@@ -105,8 +103,12 @@ export default defineComponent({
     }
   },
   props: {
+    id: {
+      type: String,
+      required: true
+    },
     options: {
-      type: Object,
+      type: Object as PropType<DialogWindowOptions>,
       required: true
     },
     escapeKeyClose: {
@@ -129,7 +131,7 @@ export default defineComponent({
           : ANIMATION_TYPES.ZOOM
     },
     loaderEnabled(){
-      return !!this.options.loader
+      return this.options.loader
     },
     isHardConfirm(){
       return this.options.window === DIALOG_TYPES.CONFIRM
@@ -139,10 +141,10 @@ export default defineComponent({
       return (this.options.window === DIALOG_TYPES.PROMPT)
     },
     leftBtnComponent(){
-      return (this.options.reverse === false) ? CancelBtn : OkBtn
+      return !this.options.reverse ? CancelBtn : OkBtn
     },
     rightBtnComponent(){
-      return (this.options.reverse === true) ? CancelBtn : OkBtn
+      return this.options.reverse ? CancelBtn : OkBtn
     },
     hardConfirmHelpText(){
       return this.options.verificationHelp
@@ -158,15 +160,14 @@ export default defineComponent({
     },
 
     // Refactored from MessageMixin
-    messageHasTitle(){
-      let m = this.options.message
-      return (typeof m === 'object' && m !== null) && m.title
+    messageHasTitle(): boolean {
+      return Boolean(this.options.message?.title)
     },
-    messageTitle(){
+    messageTitle(): string | null {
       return this.messageHasTitle ? this.options.message.title : null
     },
     messageBody(){
-      return this.messageHasTitle ? this.options.message.body : this.options.message
+      return this.options.message.body
     },
     // END - Refactored from MessageMixin
 
@@ -180,16 +181,16 @@ export default defineComponent({
           (this.input !== this.options.verification)
     },
     leftBtnVisible () {
-      return (this.cancelBtnDisabled === false) || (this.options.reverse === true)
+      return !this.cancelBtnDisabled || this.options.reverse
     },
     rightBtnVisible () {
-      return (this.cancelBtnDisabled === false) || (this.options.reverse === false)
+      return !this.cancelBtnDisabled || !this.options.reverse
     },
     leftBtnFocus () {
-      return !this.isHardConfirm && (this.options.reverse === true)
+      return !this.isHardConfirm && this.options.reverse
     },
     rightBtnFocus () {
-      return !this.isHardConfirm && (this.options.reverse === false)
+      return !this.isHardConfirm && !this.options.reverse
     },
     leftBtnText () {
       return this.options.reverse ? this.options.okText : this.options.cancelText
@@ -230,7 +231,7 @@ export default defineComponent({
   },
   methods: {
     closeAtOutsideClick() {
-      if (this.options.backdropClose === true) {
+      if (this.options.backdropClose) {
         this.cancel()
       }
     },
@@ -251,7 +252,6 @@ export default defineComponent({
         this.switchLoadingState(true)
         this.options.promiseResolver({
           close: this.close,
-          loading: this.switchLoadingState,
           data: withData
         })
       } else {
@@ -262,8 +262,7 @@ export default defineComponent({
       }
     },
     cancel(){
-      if (this.loading === true)
-        return
+      if (this.loading) return
       this.close()
     },
     switchLoadingState(loading = null){
@@ -283,15 +282,15 @@ export default defineComponent({
       if(this.endedAnimations.indexOf('backdrop') !== -1
           && this.endedAnimations.indexOf('content') !== -1
       ){
-        this.options.promiseRejecter(false)
-        this.$emit('close', this.options.id)
+        this.options.promiseResolver({ canceled: true })
+        this.$emit('close', this.id)
       }
     },
     setCustomClasses(){
       if (Object.prototype.hasOwnProperty.call(this.options, 'customClass')) {
         Object.keys(this.options.customClass).forEach(prop => {
           if (!Object.keys(CUSTOM_CLASS).includes(prop)) {
-            console.warn(`[WARNING]: Custom class name "${prop}" could not be found!`)
+            console.warn(`[WARNING]: Custom class name "${prop}" is not recognized!`)
           }
         });
       }
@@ -299,15 +298,10 @@ export default defineComponent({
     }
   },
   beforeUnmount(){
-    if(this.closed === false){
+    if(!this.closed){
       this.cancelBtnDisabled ? this.proceed() : this.cancel()
     }
   },
-  // mixins: [MessageMixin, ButtonMixin],
   components: {CancelBtn, OkBtn}
 })
 </script>
-
-<style scoped>
-
-</style>
