@@ -4,12 +4,13 @@
 
 <script setup>
   import {inject} from 'vue'
+  import {injectionKey} from "../../../src/plugin/index.ts";
 
   defineOptions({
     name: "FeaturesExampleConfirm"
   })
 
-  const $dialog = inject('$dialog')
+  const $dialog = inject(injectionKey)
   const openDialog = () => $dialog.confirm({
     title: 'Confirm example',
     body: 'The is a low risk operation. Single click required to confirm.',

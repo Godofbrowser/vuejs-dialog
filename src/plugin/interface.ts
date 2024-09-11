@@ -1,3 +1,9 @@
+export type MessageWithTitle = {
+    title: string;
+    body: string;
+}
+
+export type Message = MessageWithTitle | String;
 
 export interface ButtonStateInterface {
     loading: boolean;
@@ -14,15 +20,37 @@ export enum DialogTypeEnum {
     prompt = 'prompt',
 }
 
-export interface DialogWindowOptionsInterface {
-    id: string;
-    message: string;
+export enum ConfirmTypeEnum {
+    basic = 'basic',
+    soft = 'soft',
+    hard = 'hard',
+}
+
+export interface DialogOptions {
+    message: MessageWithTitle;
+    html: boolean;
+    loader: boolean;
+    reverse: boolean;
+    backdropClose: boolean;
+    okText: string;
+    cancelText: string;
+    type: ConfirmTypeEnum,
+    clicksCount: number;
+    animation: 'zoom' | 'bounce' | 'fade';
+    customClass: {[k: string]: string};
+    verification: string;
+    verificationHelp: string;
+    promptHelp: string;
+}
+
+export type DialogResolverPayload = {
+    data: string;
+    close?: () => void;
+    node?: HTMLElement;
+} | { canceled: boolean; }
+
+export interface DialogWindowOptions extends DialogOptions {
+    message: MessageWithTitle;
     window: DialogTypeEnum;
-    promiseResolver: (payload?: {
-        data: string;
-        node?: HTMLElement;
-        setLoading: (value: boolean) => void;
-        close: (isLoading: boolean) => void;
-    }) => void;
-    promiseRejecter: () => void;
+    promiseResolver: (payload?: DialogResolverPayload) => void;
 }

@@ -2,6 +2,7 @@
   <div>
     <DialogWindow v-for="dialog in dialogsARR"
                    :options="dialog"
+                   :id="dialog.id"
                    :key="dialog.id"
                    :escapeKeyClose="dialog.escapeKeyClose"
                    :registeredViews="registeredViews"
@@ -14,13 +15,17 @@
 import DialogWindow from './DialogWindow.vue'
 import {firstIndex} from '../utilities'
 import {defineComponent} from "vue";
+import {DialogWindowOptions} from "@/plugin/interface";
 
 const deleteByIndex = (arr, idx) => arr.filter((_, i) => i !== idx);
 
 export default defineComponent({
   data: function () {
     return {
-      dialogsARR: [],
+      dialogsARR: [] as (DialogWindowOptions & {
+        id: string;
+        escapeKeyClose: boolean;
+      })[],
       registeredViews: {}
     }
   },
@@ -49,10 +54,10 @@ export default defineComponent({
     }
   },
   methods: {
-    commit(data){
-      console.log('#'.repeat(45), ' data: ', data)
-      data.escapeKeyClose = false
-      this.dialogsARR.push(data)
+    commit(data: DialogWindowOptions){
+      const id = 'dialog.' + Date.now()
+      this.dialogsARR.push({...data, id, escapeKeyClose: false})
+      return id
     },
     forceCloseAll() {
       this.dialogsARR.forEach((d, idx) => {
@@ -74,12 +79,11 @@ export default defineComponent({
       let dialogIndex = (-1 + this.dialogsARR.length)
 
       if(dialogIndex > -1){
-        // necessary for macOS Fullscreen mode,
+        // Necessary for macOS Fullscreen mode,
         // else the browser exits fullscreen.
-        // However, we only do this if open dialog > 0.
+        // However, we only do this if total open dialog is > 0.
         e.preventDefault();
 
-        // this.$set(this.dialogsARR[dialogIndex], 'escapeKeyClose', true)
         this.dialogsARR[dialogIndex]['escapeKeyClose'] = true;
       }
     }

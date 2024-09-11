@@ -3,12 +3,13 @@ import './assets/main.css'
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import dialogPlugin from './plugin/index'
+import { PromiseDialog } from '@/plugin/promise.dialog'
+
 
 const app = createApp(App)
 
 app.use(router)
-app.use(dialogPlugin)
+app.use(PromiseDialog)
 
 app.mount('#app')
 
