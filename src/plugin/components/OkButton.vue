@@ -13,7 +13,7 @@
 import BtnLoader from './ButtonLoader.vue'
 import {defineComponent, PropType} from "vue";
 import {CONFIRM_TYPES} from "../constants";
-import {ButtonStateInterface, DialogWindowOptions} from "@/plugin/interface.js";
+import {ButtonStateInterface, DialogWindowOptions} from "../../plugin/interface.js";
 
 export default defineComponent({
   name: "OkButton",
