@@ -10,6 +10,7 @@ export default defineUserConfig({
     title: 'Vuejs Dialog',
     description: 'A lightweight, promise based alert, prompt and confirm dialog',
     repo: 'godofbrowser/vuejs-dialog',
+    base: process.env.NODE_ENV === 'production' ? '/vuejs-dialog/' : '/',
     bundler: viteBundler(),
     plugins: [
         // https://ecosystem.vuejs.press/plugins/markdown/prismjs.html
