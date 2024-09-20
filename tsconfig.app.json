@@ -5,7 +5,7 @@
     "src/**/*.d.ts",
     "src/**/*",
     "src/**/*.vue",
-    "node_modules/@vue/runtime-core/dist/runtime-core.d.ts"
+    "node_modules/.pnpm/@vue+runtime-core@3.5.3/node_modules/@vue/runtime-core/dist/runtime-core.d.ts"
   ],
   "exclude": ["src/**/__tests__/*"],
   "compilerOptions": {

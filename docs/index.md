@@ -127,7 +127,6 @@ export default {
     import {inject} from "vue";
     const $dialog = inject('$dialog')
     const openDialog = () => $dialog.alert('Hello world!')
-    return { openDialog }
 </script>
 ```
 

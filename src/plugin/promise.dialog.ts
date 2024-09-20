@@ -20,6 +20,9 @@ export class PromiseDialog {
     private dgApp: App;
     private dgAppComponentInstance: ComponentInstance<DialogComponent>;
 
+    /**
+     * @internal
+     */
     private mounted = false;
 
 
@@ -63,6 +66,10 @@ export class PromiseDialog {
         })
     }
 
+
+    /**
+     * @internal
+     */
     private mountIfNotMounted(): void {
         if (this.mounted) return
 
@@ -97,9 +104,6 @@ export class PromiseDialog {
      */
     private static dialogInstance: PromiseDialog
 
-    /**
-     * @internal
-     */
     public static install(app: App<Element>, options?: DialogPluginOptions) {
         if (PromiseDialog.dialogInstance) {
             PromiseDialog.dialogInstance.destroy()
