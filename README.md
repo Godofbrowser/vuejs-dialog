@@ -14,9 +14,22 @@ The content below is for the Vue3 compatible version of vuejs-dialog, you can fi
 | Vue 2       | [1.x](https://github.com/Godofbrowser/vuejs-dialog/tree/v1.x)   |
 | Vue 3       | [2.x](https://github.com/Godofbrowser/vuejs-dialog/tree/master) |
 
-## Recommended IDE Setup
+## Installing the release candidate (vue3)
 
-- [Documentation](https://example.com/)
-- [Live Demos](https://example.com/)
-- [2.x](https://github.com/Godofbrowser/vuejs-dialog/tree/master)
-- Older Vue2 compatible version [here](https://github.com/Godofbrowser/vuejs-dialog/tree/v1.x)
+To install the Vue3 compatible version while it's not released officially yet, please use either of the command below with the "next" tag.
+
+```shell
+npm install --save vuejs-dialog@next
+```
+```shell
+pnpm add vuejs-dialog@next
+```
+```shell
+pnpm add vuejs-dialog@next
+```
+
+## Links
+
+- [Documentation](https://godofbrowser.github.io/vuejs-dialog/)
+- [Live Demos](https://godofbrowser.github.io/vuejs-dialog/demos)
+
