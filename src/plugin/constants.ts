@@ -48,5 +48,6 @@ export const DEFAULT_OPTIONS = {
     animation            : 'zoom',
     customClass          : CUSTOM_CLASS,
     verification         : 'continue',
-    verificationHelp     : 'Type "[+:verification]" below to confirm'
+    verificationHelp     : 'Type "[+:verification]" below to confirm',
+    promptHelp      	 : 'Type in the box below and click "[+:okText]"'
 }
