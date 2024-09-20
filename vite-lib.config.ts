@@ -2,7 +2,7 @@ import { resolve } from 'path';
 import { defineConfig } from 'vite';
 import viteConfig from "./vite.config";
 import {mergeConfig} from "vitest/config";
-// import dtsPlugin from "vite-plugin-dts";
+import dtsPlugin from "vite-plugin-dts";
 import pkg from './package.json'
 
 const packageName = pkg.name;
@@ -31,7 +31,6 @@ export default mergeConfig(
                         vue: 'Vue',
                     },
                     assetFileNames: (assetInfo) => {
-                        // console.log('#'.repeat(45), ' assetInfo: ', assetInfo)
                         if (assetInfo.name == "style.css") return packageName +".min.css";
                         return assetInfo.name;
                     },
@@ -39,13 +38,10 @@ export default mergeConfig(
             },
         },
         plugins: [
-            // dtsPlugin({
-            //     rollupTypes: true,
-            //     copyDtsFiles: true,
-            //     beforeWriteFile(filePath, content) {
-            //         return { filePath, content }
-            //     }
-            // }),
+            dtsPlugin({
+                rollupTypes: true,
+                copyDtsFiles: true,
+            }),
         ]
     }
 ))

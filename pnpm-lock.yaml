@@ -9,7 +9,7 @@ importers:
   .:
     dependencies:
       vue:
-        specifier: ^3.4.21
+        specifier: ^3.0.0
         version: 3.5.3(typescript@5.4.5)
     devDependencies:
       '@rushstack/eslint-patch':
