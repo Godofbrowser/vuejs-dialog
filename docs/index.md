@@ -139,4 +139,26 @@ export default {
 
 ## Typescript support
 
-// Todo:
+Typescript is supported out of the box using (SFC: be sure to add the `lang="ts"` to your script tag):
+
+- The provide/inject pattern for the composition API `const $dialog = inject(injectionKey)`
+- Type augmentation for the options API `this.$dialog.alert('Hello!')`
+- Type augmentation for the directives API `v-confirm="'Hello!'"`
+
+```vue title="App.vue"
+<template>
+    <button @click="openDialog">Open dialog</button>
+</template>
+<script lang="ts" setup>
+    import {inject} from "vue";
+    import {injectionKey} from 'vuejs-dialog'
+    
+    const $dialog = inject(injectionKey)
+    const openDialog = () => $dialog.alert('Hello world!')
+</script>
+```
+
+
+::: info
+You may want to look at the [module resolution option](https://devblogs.microsoft.com/typescript/announcing-typescript-5-0/#--moduleresolution-bundler) (introduced in Typescript 5.0) if you are experiencing [issues](https://stackoverflow.com/questions/75870063/vscode-and-typescript-5-moduleresolution-bundler) with typescript especially if your config is set to "bundler"
+:::
