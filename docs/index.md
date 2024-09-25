@@ -125,7 +125,7 @@ export default {
 </template>
 <script setup>
     import {inject} from "vue";
-    const $dialog = inject('$dialog')
+    const $dialog = inject(Symbol.for('$dialog'))
     const openDialog = () => $dialog.alert('Hello world!')
 </script>
 ```
@@ -144,19 +144,6 @@ Typescript is supported out of the box using (SFC: be sure to add the `lang="ts"
 - The provide/inject pattern for the composition API `const $dialog = inject(injectionKey)`
 - Type augmentation for the options API `this.$dialog.alert('Hello!')`
 - Type augmentation for the directives API `v-confirm="'Hello!'"`
-
-```vue title="App.vue"
-<template>
-    <button @click="openDialog">Open dialog</button>
-</template>
-<script lang="ts" setup>
-    import {inject} from "vue";
-    import {injectionKey} from 'vuejs-dialog'
-    
-    const $dialog = inject(injectionKey)
-    const openDialog = () => $dialog.alert('Hello world!')
-</script>
-```
 
 
 ::: info
