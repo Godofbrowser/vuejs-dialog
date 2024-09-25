@@ -1,11 +1,12 @@
+import {Directive} from "vue";
 import { noop, clickNode, cloneObj } from './utilities'
 import {CONFIRM_TYPES, DIRECTIVE_ATTRIBUTE_KEY} from './constants'
-import type PromiseDialog from './promise.dialog'
+import type { PromiseDialog } from './promise.dialog'
+import type {DialogResolverPayload} from "./interface";
 
 
 export class ConfirmDirective {
     shouldIgnoreClick = false
-    bindingOptions = {}
 
     constructor(private readonly dialog: PromiseDialog) {}
 
@@ -33,10 +34,10 @@ export class ConfirmDirective {
         if (binding?.value && binding.value.ok) {
             return dialog => binding.value.ok({ ...dialog, node: el })
         }
-        return dialog => {
+        return (dialog: DialogResolverPayload) => {
             // If we got here, it means the default action is to be executed
-            // We'll then stop the loader if it's enabled and close the dialog
-            dialog.loading && dialog.close()
+            // We'll then close the dialog even if it has loading enabled
+            dialog.close && dialog.close()
             this.shouldIgnoreClick = true
             clickNode(el)
             this.shouldIgnoreClick = false
@@ -67,7 +68,7 @@ export class ConfirmDirective {
             })
     }
 
-    public static createInstaller(dialog: PromiseDialog) {
+    public static createInstaller(dialog: PromiseDialog): Directive {
         const directive = new ConfirmDirective(dialog)
         return {
             mounted: (el, binding) => {

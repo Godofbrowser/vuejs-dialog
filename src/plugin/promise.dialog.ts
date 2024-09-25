@@ -14,11 +14,11 @@ import {ConfirmDirective} from "./directive.dialog";
 interface DialogPluginOptions extends Omit<DialogWindowOptions, 'id'>{}
 
 export const propertyKey = '$dialog'
-export const injectionKey: InjectionKey<PromiseDialog> = Symbol(propertyKey)
+export const injectionKey: InjectionKey<PromiseDialog> = Symbol.for(propertyKey)
 
 export class PromiseDialog {
     private dgApp: App;
-    private dgAppComponentInstance: ComponentInstance<DialogComponent>;
+    private dgAppComponentInstance: ComponentInstance<typeof DialogComponent>;
 
     /**
      * @internal
@@ -86,7 +86,7 @@ export class PromiseDialog {
         }
 
         this.dgApp = dialogApp
-        this.dgAppComponentInstance = dialogApp.mount(node) as ComponentInstance<DialogComponent>
+        this.dgAppComponentInstance = dialogApp.mount(node) as ComponentInstance<typeof DialogComponent>
         this.mounted = true
     }
 

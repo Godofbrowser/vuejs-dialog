@@ -44,10 +44,11 @@ export interface DialogOptions {
 }
 
 export type DialogResolverPayload = {
-    data: string;
+    canceled: boolean;
+    data?: string;
     close?: () => void;
     node?: HTMLElement;
-} | { canceled: boolean; }
+}
 
 export interface DialogWindowOptions extends DialogOptions {
     message: MessageWithTitle;
