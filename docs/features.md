@@ -1,4 +1,4 @@
-# Features
+# Basic Features
 
 [[toc]]
 
