@@ -7,6 +7,10 @@
 [![Scrutinizer](https://img.shields.io/scrutinizer/g/Godofbrowser/vuejs-dialog.svg?branch=master)](https://scrutinizer-ci.com/g/Godofbrowser/vuejs-dialog/?branch=master)
 [![npm](https://img.shields.io/npm/dt/vuejs-dialog.svg)](https://github.com/Godofbrowser/vuejs-dialog/archive/master.zip)
 
+![Vuejs Dialog Plugin](./docs/.vuepress/public/images/html-enabled.png?raw=true 'Vuejs Dialog Plugin example')
+![Vuejs Dialog Plugin](./docs/.vuepress/public/images//demo.gif?raw=true 'Vuejs Dialog Plugin usage demo')
+
+
 The content below is for the Vue3 compatible version of vuejs-dialog, you can find the Vue2 compatible version [here](https://github.com/Godofbrowser/vuejs-dialog/tree/v1.x)
 
 | Vue Version | Plugin Version                                                  |
