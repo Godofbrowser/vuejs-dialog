@@ -11,7 +11,7 @@ Vuejs-dialog is a vue plugin that's designed to serve as a replacement to the na
   <CodeGroupItem title="pnpm">
 
 ```shell title="installation via pnpm"
-pnpm add vuejs-dialog
+pnpm add vuejs-dialog@next
 ```
 
   </CodeGroupItem>
@@ -19,7 +19,7 @@ pnpm add vuejs-dialog
   <CodeGroupItem title="yarn">
 
 ```shell title="installation via yarn"
-yarn add vuejs-dialog
+yarn add vuejs-dialog@next
 ```
 
   </CodeGroupItem>
@@ -27,7 +27,7 @@ yarn add vuejs-dialog
   <CodeGroupItem title="npm" active>
 
 ```bash{2} title="installation via npm"
-npm i -S vuejs-dialog
+npm i -S vuejs-dialog@next
 ```
 
   </CodeGroupItem>
@@ -55,49 +55,41 @@ app.mount('#app')
 
 ### Script tag
 
+View it on [jsfiddle](https://jsfiddle.net/godofbrowser/rhxkz14f/3/)
+
 ```html
-// Todo: update for vue3
-<!--// Include vuejs-->
-<!--<script type="text/javascript" src="./path/to/vue.min.js"></script>-->
+<head>
+    <!--// Include vuejs-->
+    <link href="https://unpkg.com/vuejs-dialog@next/dist/vuejs-dialog.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/vue@3.5.4/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/vuejs-dialog@next/dist/vuejs-dialog.umd.js"></script>
+</head>
+<body>
+    <div id="app">
+        <button @click="$dialog.alert(message)">
+            {{ message }}
+        </button>
+    </div>
+    <script>
+        // Create Vue 3 app
+        const app = window.Vue.createApp({
+            data() {
+                return {
+                    message: 'Hello Vue 3!',
+                };
+            },
+        });
 
-<!--// Include vuejs-dialog plugin-->
-<!--<link href="./path/to/vuejs-dialog.min.css" rel="stylesheet">-->
-<!--<script type="text/javascript" src="./path/to/vuejs-dialog.min.js"></script>-->
-<!--<script type="text/javascript" src="./path/to/vuejs-dialog-mixin.min.js"></script> // only needed in custom components-->
+        app.use(window.VuejsDialog.PromiseDialog, {
+            animation: 'bounce'
+        })
 
-<!--<script>-->
-<!--// Tell Vue to install the plugin.-->
-<!--window.Vue.use(VuejsDialog.main.default)-->
-<!--</script>-->
+        // Mount the app to the DOM element
+        app.mount('#app');
+    </script>
+</body>
 
 
-// <link href="./path/to/vuejs-dialog.min.css" rel="stylesheet">
-// <script src="https://unpkg.com/vue@3.5.4/dist/vue.global.js"></script>
-// <script src="../vuejs-dialog.umd.js"></script>
-//
-// ...then...
-//
-// <div id="app">{{ message }}</div>
-// <script>
-// // Create Vue 3 app
-// const app = Vue.createApp({
-//     data() {
-//         return {
-//             message: 'Hello Vue 3!',
-//         };
-//     },
-// });
-//
-// app.use(window.VuejsDialog.PromiseDialog, {
-//     message: {
-//         title: 'Quick one',
-//         body: 'Please confirm that you wish to proceed'
-//     }
-// })
-//
-// // Mount the app to the DOM element
-// app.mount('#app');
-// </script>
 ```
 
 ## Opening a dialog
