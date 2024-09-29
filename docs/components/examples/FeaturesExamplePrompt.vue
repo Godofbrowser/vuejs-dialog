@@ -16,9 +16,10 @@
     body: 'What is the most important thing in life?',
   }, {
     cancelText: 'Dismiss',
-    okText: 'Yes',
+    okText: 'Done',
     promptHelp: 'Type in the box below and click "[+:okText]"'
   }).then(result => {
-    console.log({ result })
+    if (result.canceled) return;
+    $dialog.alert(JSON.stringify(result))
   })
 </script>

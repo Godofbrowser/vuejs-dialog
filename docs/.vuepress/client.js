@@ -19,6 +19,8 @@ export default defineClientConfig({
         registerComponent('FeaturesExampleConfirmHard')
         registerComponent('FeaturesExamplePrompt')
         registerComponent('FeaturesExampleDirective')
+        registerComponent('OptionsExampleAnimation')
+        registerComponent('OptionsExampleLoader')
     },
     setup() {},
     rootComponents: [],
