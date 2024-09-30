@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="generator" content="VuePress 2.0.0-rc.16" />
+    <style>
+      :root {
+        --vp-c-bg: #fff;
+      }
+
+      [data-theme='dark'] {
+        --vp-c-bg: #1b1b1f;
+      }
+
+      html,
+      body {
+        background-color: var(--vp-c-bg);
+      }
+    </style>
+    <script>
+      const userMode = localStorage.getItem('vuepress-color-scheme')
+      const systemDarkMode =
+        'matchMedia' in window
+          ? window.matchMedia('(prefers-color-scheme: dark)').matches
+          : false
+
+      if (userMode === 'light') {
+        document.documentElement.dataset.theme = 'light'
+      } else if (userMode === 'dark' || systemDarkMode) {
+        document.documentElement.dataset.theme = 'dark'
+      }
+    </script>
+    <title>Vuejs Dialog (Vue3)</title><meta name="description" content="A lightweight, promise based alert, prompt and confirm dialog">
+    <link rel="preload" href="/vuejs-dialog/assets/style-wYx0t1CQ.css" as="style"><link rel="stylesheet" href="/vuejs-dialog/assets/style-wYx0t1CQ.css">
+    <link rel="modulepreload" href="/vuejs-dialog/assets/app-9X5ADZux.js"><link rel="modulepreload" href="/vuejs-dialog/assets/404.html-DNDM97Yr.js">
+    <link rel="prefetch" href="/vuejs-dialog/assets/1.x.html-BxkEB38l.js" as="script"><link rel="prefetch" href="/vuejs-dialog/assets/demos.html-B08LFgmw.js" as="script"><link rel="prefetch" href="/vuejs-dialog/assets/digging-deeper.html-DyzGZSo2.js" as="script"><link rel="prefetch" href="/vuejs-dialog/assets/features.html-DCe5cTOh.js" as="script"><link rel="prefetch" href="/vuejs-dialog/assets/index.html-giGAdf1V.js" as="script"><link rel="prefetch" href="/vuejs-dialog/assets/FeaturesExampleAlert-j2qm5sVm.js" as="script"><link rel="prefetch" href="/vuejs-dialog/assets/FeaturesExampleConfirm-CLInWT9s.js" as="script"><link rel="prefetch" href="/vuejs-dialog/assets/FeaturesExampleConfirmHard-tXB-9J3x.js" as="script"><link rel="prefetch" href="/vuejs-dialog/assets/FeaturesExampleConfirmSoft-DABZVs-C.js" as="script"><link rel="prefetch" href="/vuejs-dialog/assets/FeaturesExampleDirective-ch_B0_Gf.js" as="script"><link rel="prefetch" href="/vuejs-dialog/assets/FeaturesExamplePrompt-C96KI4tu.js" as="script"><link rel="prefetch" href="/vuejs-dialog/assets/OptionsExampleAnimation-ZM3z4KtR.js" as="script"><link rel="prefetch" href="/vuejs-dialog/assets/OptionsExampleLoader-CSA0oFT0.js" as="script"><link rel="prefetch" href="/vuejs-dialog/assets/UIExamplesButton-B8m88Q87.js" as="script"><link rel="prefetch" href="/vuejs-dialog/assets/UIExamplesWrapper-CJEla7bH.js" as="script"><link rel="prefetch" href="/vuejs-dialog/assets/setupDevtools-7MC2TMWH-4cS3OIKh.js" as="script">
+  </head>
+  <body>
+    <div id="app"><!--[--><div class="vp-theme-container" vp-container data-v-e1a8ec4c><main class="page" data-v-e1a8ec4c><div class="theme-default-content" vp-content data-v-e1a8ec4c><h1 data-v-e1a8ec4c>404</h1><blockquote data-v-e1a8ec4c>There&#39;s nothing here.</blockquote><a class="route-link" href="/vuejs-dialog/" data-v-e1a8ec4c>Take me home</a></div></main></div><!--[--><!----><!--]--><!--]--></div>
+    <script type="module" src="/vuejs-dialog/assets/app-9X5ADZux.js" defer></script>
+  </body>
+</html>
