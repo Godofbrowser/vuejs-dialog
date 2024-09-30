@@ -7,9 +7,8 @@ import {shikiPlugin} from "@vuepress/plugin-shiki";
 // Ref (default theme): https://ecosystem.vuejs.press/themes/default/markdown.html
 
 export default defineUserConfig({
-    title: 'Vuejs Dialog',
+    title: 'Vuejs Dialog (Vue3)',
     description: 'A lightweight, promise based alert, prompt and confirm dialog',
-    repo: 'godofbrowser/vuejs-dialog',
     base: process.env.NODE_ENV === 'production' ? '/vuejs-dialog/' : '/',
     bundler: viteBundler(),
     plugins: [
@@ -25,11 +24,22 @@ export default defineUserConfig({
         // }),
     ],
     theme: defaultTheme({
+        repo: 'godofbrowser/vuejs-dialog',
+        docsDir: 'docs',
+        docsBranch: 'dev',
+        navbar: [
+            { text: 'Versions', children: [
+                    { text: '2.x (vue3)', link: '/index.md' },
+                    { text: '1.x (vue2)', link: '/1.x.md' }
+                ]
+            },
+        ],
         sidebar: [
             '/index.md',
             '/features.md',
             '/digging-deeper.md',
-            '/demos.md',
+            // '/demos.md',
+            '/1.x.md',
         ]
     }),
 })
