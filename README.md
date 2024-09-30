@@ -35,5 +35,6 @@ pnpm add vuejs-dialog@next
 ## Links
 
 - [Documentation](https://godofbrowser.github.io/vuejs-dialog/)
-- [Live Demos](https://godofbrowser.github.io/vuejs-dialog/demos)
+- [Features](https://godofbrowser.github.io/vuejs-dialog/features)
+- [v1.x (vue2) documentation](https://godofbrowser.github.io/vuejs-dialog/1.x)
 
