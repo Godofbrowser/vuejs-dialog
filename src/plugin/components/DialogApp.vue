@@ -13,9 +13,9 @@
 
 <script lang="ts">
 import DialogWindow from './DialogWindow.vue'
-import {firstIndex} from '../utilities'
+import {firstIndex} from '../utilities.ts'
 import {defineComponent} from "vue";
-import {DialogWindowOptions} from "../interface";
+import {DialogWindowOptions} from "../interface.ts";
 
 const deleteByIndex = (arr, idx) => arr.filter((_, i) => i !== idx);
 

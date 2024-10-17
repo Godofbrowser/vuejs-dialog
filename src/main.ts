@@ -3,7 +3,7 @@ import './assets/main.css'
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import { PromiseDialog } from '@/plugin/promise.dialog'
+import { PromiseDialog } from '@/plugin/promise.dialog.ts'
 
 
 const app = createApp(App)
