@@ -1,6 +1,6 @@
 import {defineAsyncComponent} from "vue";
 import { defineClientConfig } from 'vuepress/client'
-import {PromiseDialog} from "../../src/plugin/index";
+import VuejsDialog from "../../src/plugin/index.ts";
 
 
 export default defineClientConfig({
@@ -10,7 +10,7 @@ export default defineClientConfig({
             defineAsyncComponent(() => import(`../components/examples/${fileName}.vue`))
         )
 
-        app.use(PromiseDialog)
+        app.use(VuejsDialog)
         registerComponent('UIExamplesButton')
         registerComponent('UIExamplesWrapper')
         registerComponent('FeaturesExampleAlert')

@@ -1,14 +1,14 @@
 'use strict'
 
 import DialogComponent from './components/DialogApp.vue'
-import { DEFAULT_OPTIONS } from './constants'
-import { mergeObjs } from './utilities'
+import { DEFAULT_OPTIONS } from './constants.ts'
+import { mergeObjs } from './utilities.ts'
 import { createApp, type InjectionKey } from "vue";
 
 import type {App, ComponentInstance} from "vue";
 import type {DialogWindowOptions, Message, DialogResolverPayload} from "./interface";
-import {DialogTypeEnum} from "./interface";
-import {ConfirmDirective} from "./directive.dialog";
+import {DialogTypeEnum} from "./interface.ts";
+import {ConfirmDirective} from "./directive.dialog.ts";
 
 
 interface DialogPluginOptions extends Omit<DialogWindowOptions, 'id'>{}

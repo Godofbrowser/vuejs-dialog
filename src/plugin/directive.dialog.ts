@@ -1,8 +1,8 @@
 import type {Directive, DirectiveBinding} from "vue";
-import { noop, clickNode, cloneObj } from './utilities'
-import {CONFIRM_TYPES, DIRECTIVE_ATTRIBUTE_KEY} from './constants'
-import type { PromiseDialog } from './promise.dialog'
-import type {DialogOptions, DialogResolverPayload} from "./interface";
+import { noop, clickNode, cloneObj } from './utilities.ts'
+import {CONFIRM_TYPES, DIRECTIVE_ATTRIBUTE_KEY} from './constants.ts'
+import type { PromiseDialog } from './promise.dialog.ts'
+import type {DialogOptions, DialogResolverPayload} from "./interface.ts";
 
 
 type Binding = DirectiveBinding<DialogOptions | string>

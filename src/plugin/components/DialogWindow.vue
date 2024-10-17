@@ -87,8 +87,8 @@ import {
   CONFIRM_TYPES,
   DIALOG_TYPES,
   CUSTOM_CLASS
-} from "../constants";
-import type {ButtonStateInterface, DialogWindowOptions} from "@/plugin/interface";
+} from "../constants.ts";
+import type {ButtonStateInterface, DialogWindowOptions} from "@/plugin/interface.ts";
 
 export default defineComponent({
   name: "DialogWindow",

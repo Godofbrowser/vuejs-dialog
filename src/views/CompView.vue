@@ -10,7 +10,7 @@
 
 <script lang="ts" setup>
 import {inject, ref} from "vue";
-import { injectionKey } from "@/plugin/promise.dialog";
+import { injectionKey } from "@/plugin/promise.dialog.ts";
 
 const $dialog = inject(injectionKey)
 const secondsElapsed = ref(0)

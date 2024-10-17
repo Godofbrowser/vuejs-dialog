@@ -1,5 +1,5 @@
-import {PromiseDialog} from "./promise.dialog";
-import {ConfirmDirective} from './directive.dialog'
+import {PromiseDialog} from "./promise.dialog.ts";
+import {ConfirmDirective} from './directive.dialog.ts'
 
 declare module 'vue' {
     export interface ComponentCustomProperties {
