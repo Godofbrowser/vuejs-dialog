@@ -42,6 +42,9 @@ importers:
       '@vuepress/bundler-vite':
         specifier: ^2.0.0-rc.15
         version: 2.0.0-rc.15(@types/node@20.16.5)(sass@1.78.0)(typescript@5.4.5)
+      '@vuepress/plugin-google-analytics':
+        specifier: 2.0.0-rc.54
+        version: 2.0.0-rc.54(vuepress@2.0.0-rc.15(@vuepress/bundler-vite@2.0.0-rc.15(@types/node@20.16.5)(sass@1.78.0)(typescript@5.4.5))(typescript@5.4.5)(vue@3.5.3(typescript@5.4.5)))
       '@vuepress/plugin-shiki':
         specifier: ^2.0.0-rc.42
         version: 2.0.0-rc.42(typescript@5.4.5)(vuepress@2.0.0-rc.15(@vuepress/bundler-vite@2.0.0-rc.15(@types/node@20.16.5)(sass@1.78.0)(typescript@5.4.5))(typescript@5.4.5)(vue@3.5.3(typescript@5.4.5)))
@@ -969,6 +972,11 @@ packages:
     resolution: {integrity: sha512-Lw3yhfsHmryuyKzNQiSCAmPihN6qU5tdSKvt31TG/T6ubSjn2mzBtH4Fqm0DNntjOJH3eSd6VTtcAPhrx3TXYQ==}
     peerDependencies:
       vuepress: 2.0.0-rc.15
+
+  '@vuepress/plugin-google-analytics@2.0.0-rc.54':
+    resolution: {integrity: sha512-sp9xPpHDHvT8xVrkyn+LCra4VrPJciwC/xL7hMOfKdrkCYlXXGUTz9UXlRWjco3BJunfbxWZECC0Yfolu5qwOw==}
+    peerDependencies:
+      vuepress: 2.0.0-rc.18
 
   '@vuepress/plugin-links-check@2.0.0-rc.42':
     resolution: {integrity: sha512-nytHpytb7Ytwnp5UrspmOGnp/htKX5xyfYN2FuAEYxXUW5Ysmv5s+urQowO5E/XmcPCL4EnxNMEl3fDjmBLg9Q==}
@@ -3917,6 +3925,10 @@ snapshots:
   '@vuepress/plugin-git@2.0.0-rc.42(vuepress@2.0.0-rc.15(@vuepress/bundler-vite@2.0.0-rc.15(@types/node@20.16.5)(sass@1.78.0)(typescript@5.4.5))(typescript@5.4.5)(vue@3.5.3(typescript@5.4.5)))':
     dependencies:
       execa: 9.3.1
+      vuepress: 2.0.0-rc.15(@vuepress/bundler-vite@2.0.0-rc.15(@types/node@20.16.5)(sass@1.78.0)(typescript@5.4.5))(typescript@5.4.5)(vue@3.5.3(typescript@5.4.5))
+
+  '@vuepress/plugin-google-analytics@2.0.0-rc.54(vuepress@2.0.0-rc.15(@vuepress/bundler-vite@2.0.0-rc.15(@types/node@20.16.5)(sass@1.78.0)(typescript@5.4.5))(typescript@5.4.5)(vue@3.5.3(typescript@5.4.5)))':
+    dependencies:
       vuepress: 2.0.0-rc.15(@vuepress/bundler-vite@2.0.0-rc.15(@types/node@20.16.5)(sass@1.78.0)(typescript@5.4.5))(typescript@5.4.5)(vue@3.5.3(typescript@5.4.5))
 
   '@vuepress/plugin-links-check@2.0.0-rc.42(typescript@5.4.5)(vuepress@2.0.0-rc.15(@vuepress/bundler-vite@2.0.0-rc.15(@types/node@20.16.5)(sass@1.78.0)(typescript@5.4.5))(typescript@5.4.5)(vue@3.5.3(typescript@5.4.5)))':
