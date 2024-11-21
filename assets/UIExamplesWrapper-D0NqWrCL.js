@@ -1,0 +1,1 @@
+import{_ as r,o as s,c as a,l as o}from"./app-CKN5vlat.js";const t={},c={class:"examples-wrapper"};function l(e,p){return s(),a("div",c,[o(e.$slots,"default")])}const _=r(t,[["render",l],["__file","UIExamplesWrapper.vue"]]);export{_ as default};
